@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define TAM 40
+
+//Imprima a lista de aniversariante ordenado por matricula
 
 typedef struct{
     float p1;
@@ -8,51 +11,61 @@ typedef struct{
     float t1;
     float t2;
     float t3;
+    float media;
 } tNotas;
 
 typedef struct{
+    int dia;
+    int mes;
+    int ano;
+} tAniversario;
+
+typedef struct{
+    int dia;
+    int mes;
+    int ano;
+} tIngresso;
+
+typedef struct{
     int matricula;
-    char nome[16];
-    int idade;
+    char nome[50];
     tNotas notas;
-    float media;
+    tAniversario niver;
+    tIngresso ingresso;
     int situacao;
 } tAluno;
 
-void leia_matricula(tAluno*);
+int leia_matricula(tAluno*);
 float calcula_media(tAluno);
 int situacao_final(float);
-void ordena_matriculas(tAluno *);
-int qtd_matriculas(tAluno *);
-void printa_alunos(tAluno *);
-
+void ordena_matriculas(tAluno *, int);
+void printa_alunos(tAluno *, int);
 
 int main()
 {
-    tAluno aluno[40];
+    tAluno aluno[TAM];
+    int qtd;
 
-    leia_matricula(aluno);
-    ordena_matriculas(aluno);
-    printa_alunos(aluno);
+    qtd = leia_matricula(aluno);
+    ordena_matriculas(aluno, qtd);
+    printa_alunos(aluno, qtd);
 
     return 0;
 }
 
-void leia_matricula(tAluno *aluno)
+int leia_matricula(tAluno *aluno)
 {
-    for(int num = 0; num < 40; num++)
+    int num;
+    for(num = 0; ; num++)
     {
+        printf("Nome: ");
+        scanf("%[^\n]", aluno[num].nome);
+
         printf("Matricula: ");
         scanf("%d", &aluno[num].matricula);
 
         if(aluno[num].matricula == 0)
             break;
-
-        printf("Nome: ");
-        scanf("%s", aluno[num].nome);
-
-        printf("Idade: ");
-        scanf("%d", &aluno[num].idade);
 
         printf("Nota P1: ");
         scanf("%f", &aluno[num].notas.p1);
@@ -69,9 +82,17 @@ void leia_matricula(tAluno *aluno)
         printf("Nota T3: ");
         scanf("%f", &aluno[num].notas.t3);
 
-        aluno[num].media = calcula_media(aluno[num]);
-        aluno[num].situacao = situacao_final(aluno[num].media);        
+        printf("Aniversário: ");
+        scanf("%d/%d/%d", &aluno[num].niver.dia, &aluno[num].niver.mes, &aluno[num].niver.ano);
+
+        printf("Ingresso: ");
+        scanf("%d/%d/%d%*c", &aluno[num].ingresso.dia, &aluno[num].ingresso.mes, &aluno[num].ingresso.ano);
+
+        aluno[num].notas.media = calcula_media(aluno[num]);
+        aluno[num].situacao = situacao_final(aluno[num].notas.media);        
     }
+
+    return num;
 }
 
 float calcula_media(tAluno aluno)
@@ -89,13 +110,11 @@ int situacao_final(float media)
         return 0;
 }
 
-void ordena_matriculas(tAluno * aluno)
+void ordena_matriculas(tAluno * aluno, int qtd_alunos)
 {
-    int qtd_alunos;
     tAluno temp;
     char nome_temp[16];
-    qtd_alunos = qtd_matriculas(aluno);
-    
+
     for(int i = 0; i < qtd_alunos - 1; i++)
     {
         for(int j = i; j < qtd_alunos; j++)
@@ -105,33 +124,19 @@ void ordena_matriculas(tAluno * aluno)
                 temp = aluno[j];
                 aluno[j] = aluno[i];
                 aluno[i] = temp;
-                printf("%s %s\n\n", aluno[i].nome, aluno[j].nome);
             }
         }
     }
 }
 
-int qtd_matriculas(tAluno * aluno)
+void printa_alunos(tAluno *aluno, int qtd_alunos)
 {
-    int i;
-    for(i = 1; ; i++)
-    {
-        if(aluno[i].matricula == 0)
-            break;
-    }
-    return i;
-}
-
-void printa_alunos(tAluno *aluno)
-{
-    int qtd_alunos = qtd_matriculas(aluno);
-
     if(qtd_alunos == 0)
         exit(1);
 
     for(int i = 0; i < qtd_alunos; i++)
     {
-        printf("\nAluno: %s\nMatricula: %d\nIdade: %d\nMedia Parcial: %.2f\nPrecisa de prova final?: ", aluno[i].nome, aluno[i].matricula, aluno[i].idade, aluno[i].media);
+        printf("\nAluno: %s\nMedia Parcial: %.2f\nPrecisa de prova final?: ", aluno[i].nome, aluno[i].notas.media);
 
         if(aluno[i].situacao == 1)
             printf("Não \n");
@@ -139,3 +144,4 @@ void printa_alunos(tAluno *aluno)
             printf("Sim \n");
     }
 }
+
