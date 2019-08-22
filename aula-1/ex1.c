@@ -4,12 +4,16 @@
 #define MAX_ALUNOS 100
 #define MAX_NOME 50
 
+//Informacao sobre datas
 typedef struct{
     int dia;
     int mes;
     int ano;
 } tData;
 
+tData leia_data();
+
+//Informacao sobre alunos
 typedef struct{
     int matricula;
     char nome[MAX_NOME];
@@ -19,16 +23,7 @@ typedef struct{
     int situacao;
 } tAluno;
 
-//Funcoes para leitura
-tData leia_data();
 int leia_matricula(tAluno []);
-
-//Funcao para modo
-void selecao(tAluno[], int, tData);
-int apresenta_pergunta();
-void seleciona_modo(tAluno [], int, int, tData);
-
-void imprime_informacoes(tAluno);
 
 //Funcoes ordenacao
 void ordena_nome(tAluno [], int);
@@ -37,10 +32,15 @@ void ordena_ingresso(tAluno [], int);
 void ordena_cr(tAluno [], int);
 
 //Funcoes de apresentacao
+void imprime_informacoes(tAluno);
 void apresenta_informacoes(tAluno [], int);
 void apresenta_aniversariantes(tAluno [], tData, int);
 void apresenta_excelentes(tAluno [], int);
 
+//Funcao para modo
+void selecao(tAluno[], int, tData);
+int apresenta_pergunta();
+void seleciona_modo(tAluno [], int, int, tData);
 
 int main()
 {
@@ -54,49 +54,6 @@ int main()
     selecao(aluno, qtd, hoje);
 
     return 0;
-}
-
-void selecao(tAluno aluno[], int qtd_aluno, tData hoje)
-{
-    int entrada;
-
-    entrada = apresenta_pergunta();
-    seleciona_modo(aluno, qtd_aluno, entrada, hoje);
-
-}
-
-int apresenta_pergunta()
-{
-    int entrada; 
-
-    printf("\nEscolha um mode de apresentação:\n");
-    printf("1: Todos alunos por ordem de matricula\n");
-    printf("2: Todos alunos por ordem alfabetica\n");
-    printf("3: Informação dos aniversariantes\n");
-    printf("4: Informação dos excelentes\n");
-    scanf("%d", &entrada);
-
-    return entrada;
-}
-
-void seleciona_modo(tAluno aluno[], int qtd_alunos, int entrada, tData hoje)
-{
-    switch(entrada)
-    {
-        case 1: ordena_matricula(aluno, qtd_alunos);
-                apresenta_informacoes(aluno, qtd_alunos);
-                break;
-        case 2: ordena_nome(aluno, qtd_alunos);
-                apresenta_informacoes(aluno, qtd_alunos);
-                break;
-        case 3: ordena_matricula(aluno, qtd_alunos);
-                apresenta_aniversariantes(aluno, hoje, qtd_alunos);
-                break;
-        case 4: ordena_matricula(aluno, qtd_alunos);
-                apresenta_excelentes(aluno, qtd_alunos);
-                break;
-        default: break;
-    }
 }
 
 tData leia_data()
@@ -123,11 +80,11 @@ int leia_matricula(tAluno aluno[])
         scanf("%f%*c", &aluno[num].cr);
 
         printf("Aniversário: ");
-        scanf("%d/%d/%d%*c", &aluno[num].niver.dia, &aluno[num].niver.mes, &aluno[num].niver.ano);
+        aluno[num].niver = leia_data();
 
         printf("Ingresso: ");
-        scanf("%d/%d/%d%*c", &aluno[num].ingresso.dia, &aluno[num].ingresso.mes, &aluno[num].ingresso.ano); 
-        
+        aluno[num].ingresso = leia_data();
+
         printf("Matricula: ");
         scanf("%d%*c", &aluno[num + 1].matricula);     
     }
@@ -138,7 +95,6 @@ int leia_matricula(tAluno aluno[])
 void ordena_nome(tAluno aluno[], int qtd_alunos)
 {
     tAluno temp;
-    char nome_temp[16];
 
     for(int i = 0; i < qtd_alunos - 1; i++)
     {
@@ -174,6 +130,22 @@ void ordena_matricula(tAluno aluno[], int qtd_alunos)
 
 void ordena_ingresso(tAluno aluno[], int qtd_alunos)
 {
+    tAluno temp;
+
+    for(int i = 0; i < qtd_alunos - 1; i++)
+    {
+        for(int j = 0; j < qtd_alunos - 1; j++)
+        {
+            if(aluno[i].ingresso.ano < aluno[j].ingresso.ano || 
+              (aluno[i].ingresso.ano == aluno[j].ingresso.ano && aluno[i].ingresso.mes < aluno[j].ingresso.mes) || 
+              (aluno[i].ingresso.ano == aluno[j].ingresso.ano && aluno[i].ingresso.mes == aluno[j].ingresso.mes && aluno[i].ingresso.dia < aluno[j].ingresso.dia)) 
+            {
+                temp = aluno[j];
+                aluno[j] = aluno[j + 1];
+                aluno[j + 1] = temp;
+            }
+        }
+    }    
 }
 
 void ordena_cr(tAluno aluno[], int qtd_alunos)
@@ -230,5 +202,48 @@ void apresenta_excelentes(tAluno aluno[], int qtd_aluno)
     {
         if(aluno[i].cr >= 8)
             imprime_informacoes(aluno[i]);
+    }
+}
+
+void selecao(tAluno aluno[], int qtd_aluno, tData hoje)
+{
+    int entrada;
+
+    entrada = apresenta_pergunta();
+    seleciona_modo(aluno, qtd_aluno, entrada, hoje);
+
+}
+
+int apresenta_pergunta()
+{
+    int entrada; 
+
+    printf("\nEscolha um mode de apresentação:\n");
+    printf("1: Todos alunos por ordem de matricula\n");
+    printf("2: Todos alunos por ordem alfabetica\n");
+    printf("3: Informação dos aniversariantes\n");
+    printf("4: Informação dos excelentes\n");
+    scanf("%d", &entrada);
+
+    return entrada;
+}
+
+void seleciona_modo(tAluno aluno[], int qtd_alunos, int entrada, tData hoje)
+{
+    switch(entrada)
+    {
+        case 1: ordena_matricula(aluno, qtd_alunos);
+                apresenta_informacoes(aluno, qtd_alunos);
+                break;
+        case 2: ordena_nome(aluno, qtd_alunos);
+                apresenta_informacoes(aluno, qtd_alunos);
+                break;
+        case 3: ordena_matricula(aluno, qtd_alunos);
+                apresenta_aniversariantes(aluno, hoje, qtd_alunos);
+                break;
+        case 4: ordena_matricula(aluno, qtd_alunos);
+                apresenta_excelentes(aluno, qtd_alunos);
+                break;
+        default: break;
     }
 }
