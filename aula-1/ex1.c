@@ -185,25 +185,7 @@ void apresenta_informacoes(tAluno aluno[], int qtd_alunos)
     }
 }
 
-void apresenta_aniversariantes(tAluno aluno[], tData hoje, int qtd_alunos)
-{
-    printf("Aniversariantes: \n\n");
-
-    for(int i = 0; i < qtd_alunos; i++)
-    {
-        if(hoje.dia == aluno[i].niver.dia && hoje.mes == aluno[i].niver.mes)
-            imprime_informacoes(aluno[i]);
-    }
-}
-
-void apresenta_excelentes(tAluno aluno[], int qtd_aluno)
-{   
-    for(int i = 0; i < qtd_aluno; i++)
-    {
-        if(aluno[i].cr >= 8)
-            imprime_informacoes(aluno[i]);
-    }
-}
+c
 
 void selecao(tAluno aluno[], int qtd_aluno, tData hoje)
 {
