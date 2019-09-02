@@ -4,4 +4,5 @@ gcc -c data.c -std=c11
 gcc -std=c11 -o ccomp ccomp.c *.o
 gcc -std=c11 -o ccomp ccomp.c data.o aluno.o turma.o
 
+maneira mais rapido: 
 gcc -o ccomp -std=c11 *.c

@@ -12,7 +12,6 @@
         int situacao;
     } tAluno;
 
-    int leia_matricula();
     tAluno leia_aluno();
     void imprime_informacoes(tAluno);
     int compara_nomes(tAluno, tAluno);

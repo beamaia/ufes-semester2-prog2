@@ -11,5 +11,6 @@
     int igualdade_data(tData, tData);
     int menor_data(tData, tData);
     void apresenta_data(tData);
+    void pergunta_data();
     
 #endif

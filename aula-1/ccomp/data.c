@@ -8,6 +8,11 @@ tData leia_data()
     return data;   
 }
 
+void pergunta_data()
+{
+    printf("Insira a data:\n");
+}
+
 int igualdade_data(tData data1, tData data2)
 {
     return data1.dia == data2.dia && data1.mes == data2.mes;

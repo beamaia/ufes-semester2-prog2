@@ -3,19 +3,12 @@
 #include "aluno.h"
 #include "data.h"
 
-int leia_matricula()
-{
-    int matricula;
-
-    printf("Matricula: ");
-    scanf("%d", &matricula);   
-
-    return matricula;
-}
-
 tAluno leia_aluno()
 {
     tAluno aluno;
+
+    printf("Matricula: ");
+    scanf("%d%*c", &aluno.matricula);
 
     printf("Nome: ");
     scanf("%[^\n]", aluno.nome);
