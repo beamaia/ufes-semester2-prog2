@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "turma.h": "c"
+        "turma.h": "c",
+        "stdio.h": "c"
     }
 }

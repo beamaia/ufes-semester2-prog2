@@ -12,13 +12,13 @@
         int situacao;
     } tAluno;
 
-    tAluno leia_aluno();
-    void imprime_informacoes(tAluno);
-    int compara_nomes(tAluno, tAluno);
-    int compara_matriculas(int, int);
-    int compara_cr(int, int);
+    void leia_aluno(tAluno *);
+    void imprime_informacoes(tAluno *);
+    int compara_nomes(tAluno *, tAluno *);
+    int compara_matriculas(tAluno *, tAluno *);
+    int compara_cr(tAluno *, tAluno *);
     int aluno_aniversariante(tData, tData);
-    int tem_aniversario(tAluno, tData);
-    int aluno_excelente(tAluno);
-    int nao_tem_aluno(tAluno);
+    int tem_aniversario(tAluno *, tData);
+    int aluno_excelente(tAluno *);
+    int nao_tem_aluno(tAluno *);
 #endif

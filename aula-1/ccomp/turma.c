@@ -3,71 +3,71 @@
 #include "aluno.h"
 #include "data.h"
 
-tTurma leia_turma()
+void leia_turma(tTurma * ccomp)
 {
-    tTurma ccomp;
     int i;
 
     for(i = 0; i < MAX_ALUNOS; i++)
     {
 
-        ccomp.aluno[i] = leia_aluno();
-
-        if(nao_tem_aluno(ccomp.aluno[i]))
+        leia_aluno(&ccomp->aluno[i]);
+        if(nao_tem_aluno(&ccomp->aluno[i]))
             break;
     }
-
-    ccomp.qtd_alunos = i;
-    return ccomp;
-
+    ccomp->qtd_alunos = i;
 }
 
-tTurma troca_alunos(tTurma ccomp, int j)
+void troca_alunos(tTurma * ccomp, int j)
 {
     tAluno temp;
-    temp = ccomp.aluno[j];
-    ccomp.aluno[j] = ccomp.aluno[j + 1];
-    ccomp.aluno[j + 1] = temp;
-    return ccomp;
+    temp = ccomp->aluno[j];
+    ccomp->aluno[j] = ccomp->aluno[j + 1];
+    ccomp->aluno[j + 1] = temp;
 }
 
-tTurma ordena_nome(tTurma ccomp)
+void ordena(tTurma * ccomp, int (*compar)(tAluno *, tAluno *)) 
 {
-    for(int i = 0; i < ccomp.qtd_alunos - 1; i++)
-        for(int j = 0; j < ccomp.qtd_alunos - 1 - i; j++)
-            if(compara_nomes(ccomp.aluno[j], ccomp.aluno[j + 1]))
-                ccomp = troca_alunos(ccomp, j);
-    
-    return ccomp;
+    for(int i = 0; i < ccomp->qtd_alunos - 1; i++)
+        for(int j = 0; j < ccomp->qtd_alunos - 1 - i; j++) 
+            if((*compar)(&ccomp->aluno[j], &ccomp->aluno[j + 1]))
+                troca_alunos(ccomp, j);
 }
 
-void apresenta_turma(tTurma ccomp)
+void apresenta_turma(tTurma * ccomp)
 {
     printf("\n");
-    for(int i = 0; i < ccomp.qtd_alunos; i++)
+    for(int i = 0; i < ccomp->qtd_alunos; i++)
     {
-        imprime_informacoes(ccomp.aluno[i]);
+        imprime_informacoes(&ccomp->aluno[i]);
     }
 }
 
-void apresenta_aniversariantes(tTurma ccomp, tData hoje)
+void apresenta_aniversariantes(tTurma * ccomp, tData hoje)
 {
-    printf("\nAniversariantes: \n\n");
+    printf("\n\n\n**************");
+    printf("\nAniversariantes:");
 
-    for(int i = 0; i < ccomp.qtd_alunos; i++)
+    for(int i = 0; i < ccomp->qtd_alunos; i++)
     {
-        if(tem_aniversario(ccomp.aluno[i], hoje))
-            imprime_informacoes(ccomp.aluno[i]);
+        if(tem_aniversario(&ccomp->aluno[i], hoje))
+            imprime_informacoes(&ccomp->aluno[i]);
     }
+
+    printf("\n\n**************");
+
 }
 
-void apresenta_excelentes(tTurma ccomp)
+void apresenta_excelentes(tTurma * ccomp)
 {   
-    printf("\nExcelentes: \n\n");
+    printf("\n\n\n**************");
+    printf("\nExcelentes:");
 
-    for(int i = 0; i < ccomp.qtd_alunos; i++)
+    for(int i = 0; i < ccomp->qtd_alunos; i++)
     {
-        if(aluno_excelente(ccomp.aluno[i]))
-            imprime_informacoes(ccomp.aluno[i]);
+        if(aluno_excelente(&ccomp->aluno[i]))
+            imprime_informacoes(&ccomp->aluno[i]);
     }
+
+    printf("\n\n**************");
+
 }

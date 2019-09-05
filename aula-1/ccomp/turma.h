@@ -9,11 +9,11 @@
     int qtd_alunos;
     } tTurma;
 
-    tTurma leia_turma();
-    tTurma troca_alunos(tTurma, int);
-    tTurma ordena_nome(tTurma);
-    void apresenta_turma(tTurma);
-    void apresenta_aniversariantes(tTurma, tData hoje);
-    void apresenta_excelentes(tTurma);
+    void leia_turma(tTurma *);
+    void ordena(tTurma * ccomp, int (*compar)(tAluno *, tAluno *));
+    void troca_alunos(tTurma*, int);
+    void apresenta_turma(tTurma *);
+    void apresenta_aniversariantes(tTurma *, tData hoje);
+    void apresenta_excelentes(tTurma *);
 
 #endif

@@ -7,7 +7,7 @@
         int ano;
     } tData;
 
-    tData leia_data();
+    void leia_data(tData *);
     int igualdade_data(tData, tData);
     int menor_data(tData, tData);
     void apresenta_data(tData);

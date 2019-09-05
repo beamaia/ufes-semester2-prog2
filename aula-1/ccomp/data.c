@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include "data.h"
 
-tData leia_data()
+void leia_data(tData * data)
 {
-    tData data;
-    scanf("%d/%d/%d%*c", &data.dia, &data.mes, &data.ano);
-    return data;   
+    scanf("%d/%d/%d%*c", &data->dia, &data->mes, &data->ano);
 }
 
 void pergunta_data()
