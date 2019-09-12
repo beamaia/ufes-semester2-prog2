@@ -6,7 +6,7 @@
 
 void main()
 {
-    tPlanta planta;
+    tPlant planta;
     leia_planta(&planta);
     ordena(&planta, compara_perimetro);
     apresenta_planta(&planta);

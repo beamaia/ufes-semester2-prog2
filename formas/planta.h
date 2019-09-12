@@ -7,12 +7,12 @@
     #define _PLANTA
     #define QTD_COM 100
 
-    typedef struct{
-        tComodo comodos[100];
+    typedef struct planta{
+        tComodo comodo[QTD_COM];
         int qtd_comodos;
-    } tPlanta;
+    } tPlant;
 
-    void leia_planta(tPlanta *);
-    void apresenta_planta(tPlanta *);
-    void ordena(tPlanta *,  int(*compara)(tComodo *, tComodo *));
+    void leia_planta(tPlant *);
+    void apresenta_planta(tPlant *);
+    void ordena(tPlant *,  int(*compara)(tComodo *, tComodo *));
 #endif

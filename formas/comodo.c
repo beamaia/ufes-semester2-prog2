@@ -8,7 +8,7 @@
 
 char leia_tag(tComodo * com)
 {
-    scanf("%c " &com->tag);
+    scanf("%c ", &com->tag);
     return com->tag;
 }
 
@@ -49,8 +49,8 @@ void apresenta_forma(tForma * f, char tag)
 void apresenta_comodo(tComodo * com)
 {
     apresenta_forma(&com->forma, com->tag);
-    printf("Area: %d", com->area);
-    printf("Perimetro: %d\n", &com->perimetro);
+    printf("Area: %f", com->area);
+    printf("Perimetro: %f\n", com->perimetro);
 }
 
 float area_comodo(tForma * f, char tag)
@@ -79,13 +79,13 @@ float perimetro_comodo(tForma * f, char tag)
     switch(tag)
     {
         case 'c':
-            area = area_circulo(&f->c);
+            perimetro = perimetro_circulo(&f->c);
             break; 
         case 't':
-            area = area_triangulo(&f->t);
+            perimetro = perimetro_triangulo(&f->t);
             break;
         case 'r':
-            area = area_retangulo(&f->r);
+            perimetro = area_retangulo(&f->r);
             break;
         default: break;
     } 

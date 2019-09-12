@@ -10,7 +10,7 @@ void leia_triangulo(tTriangulo *t)
     leia_ponto(&t->v2);
     leia_ponto(&t->v3);
     printf("Digite base e altura: \n");
-    scanf("%f%f" &t->base, &t->altura);
+    scanf("%f%f", &t->base, &t->altura);
 }
 
 float area_triangulo(tTriangulo * t)

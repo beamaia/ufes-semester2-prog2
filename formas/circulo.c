@@ -2,6 +2,7 @@
 #include <math.h>
 #include "ponto.h"
 #include "circulo.h"
+#define PI 3.14
 
 void leia_circulo(tCirculo *c)
 {
@@ -13,12 +14,12 @@ void leia_circulo(tCirculo *c)
 
 float area_circulo(tCirculo *c)
 {
-    return (M_PI * pow(c->raio,2));
+    return (PI * pow(c->raio,2));
 }
 
 float perimetro_circulo(tCirculo *c)
 {
-    return (2 * M_PI * (c->raio));
+    return (2 * PI * (c->raio));
 }
 
 void apresenta_circulo(tCirculo *c)

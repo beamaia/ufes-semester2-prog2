@@ -6,14 +6,15 @@
 #include "comodo.h"
 #include "planta.h"
 
-void leia_planta(tPlanta * p)
+void leia_planta(tPlant * p)
 {
     char tag;
+    int i;
     tag = leia_tag(&p->comodo[0]);
 
-    for(int i = 0; i < 100 && tag != '0'; i++)
+    for(i = 0; i < 100 && tag != '0'; i++)
     {
-        leia_comodo(&p->comodo[i]);
+        leia_comodo(&p->comodo[i].forma, p->comodo->tag);
         area_perimetro(&p->comodo[i]);
         if(i + 1 < 100)
         {
@@ -24,14 +25,14 @@ void leia_planta(tPlanta * p)
     p->qtd_comodos = i;
 }
 
-void apresenta_planta(tPlanta * p)
+void apresenta_planta(tPlant * p)
 {
     char tag;
     tag = leia_tag(&p->comodo[0]);
 
     for(int i = 0; i < 100 && tag != '0'; i++)
     {
-        apresenta_comodo(&p->comodo[i])
+        apresenta_comodo(&p->comodo[i]);
         if(i + 1 < 100)
         {
             tag = leia_tag(&p->comodo[i +1]);
@@ -39,7 +40,7 @@ void apresenta_planta(tPlanta * p)
     }    
 }
 
-void ordena(tPlanta * p,  int(*compara)(tComodo *, tComodo *))
+void ordena(tPlant * p,  int(*compara)(tComodo *, tComodo *))
 {
     tComodo aux;
 
