@@ -4,11 +4,11 @@
 
     typedef struct{
         tPonto v1, v2, v3;
-        int base, altura;
+        float base, altura;
     } tTriangulo;
 
     void leia_triangulo(tTriangulo *);
-    int area_triangulo(tTriangulo *);
-    int perimetro_triangulo(tTriangulo *);
+    float area_triangulo(tTriangulo *);
+    float perimetro_triangulo(tTriangulo *);
     void apresenta_triangulo(tTriangulo *);   
 #endif

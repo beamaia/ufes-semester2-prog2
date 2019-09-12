@@ -7,5 +7,5 @@
 
     void leia_ponto(tPonto *);
     void apresenta_ponto(tPonto *);
-    int distancia(tPonto *, tPonto *);
+    float distancia(tPonto *, tPonto *);
 #endif

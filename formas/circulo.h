@@ -4,11 +4,11 @@
 
     typedef struct{
         tPonto origem;
-        int raio;
+        float raio;
     } tCirculo;
 
     void leia_circulo(tCirculo *);
-    int area_circulo(tCirculo *);
-    int perimetro_circulo(tCirculo *);
+    float area_circulo(tCirculo *);
+    float perimetro_circulo(tCirculo *);
     void apresenta_circulo(tCirculo *);
 #endif

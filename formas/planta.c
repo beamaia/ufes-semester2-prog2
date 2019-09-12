@@ -3,8 +3,52 @@
 #include "retangulo.h"
 #include "circulo.h"
 #include "triangulo.h"
+#include "comodo.h"
 #include "planta.h"
 
-leia_planta(tPlanta *);
-apresenta_planta(tPlanta *);
-ordena(tPlanta *,  int(*compara)(tComodo *, tComodo *));
+void leia_planta(tPlanta * p)
+{
+    char tag;
+    tag = leia_tag(&p->comodo[0]);
+
+    for(int i = 0; i < 100 && tag != '0'; i++)
+    {
+        leia_comodo(&p->comodo[i]);
+        area_perimetro(&p->comodo[i]);
+        if(i + 1 < 100)
+        {
+            tag = leia_tag(&p->comodo[i +1]);
+        }
+    }
+
+    p->qtd_comodos = i;
+}
+
+void apresenta_planta(tPlanta * p)
+{
+    char tag;
+    tag = leia_tag(&p->comodo[0]);
+
+    for(int i = 0; i < 100 && tag != '0'; i++)
+    {
+        apresenta_comodo(&p->comodo[i])
+        if(i + 1 < 100)
+        {
+            tag = leia_tag(&p->comodo[i +1]);
+        }
+    }    
+}
+
+void ordena(tPlanta * p,  int(*compara)(tComodo *, tComodo *))
+{
+    tComodo aux;
+
+    for(int i = 0; i < p->qtd_comodos - 1; i++)
+        for(int j = 0; j < p->qtd_comodos - 1 - i; j++) 
+            if((*compara)(&p->comodo[j], &p->comodo[j + 1]))
+            {
+                aux = p->comodo[j];
+                p->comodo[j + 1] = p->comodo[j];
+                p->comodo[j] = aux; 
+            }
+}

@@ -13,14 +13,17 @@
 
     typedef struct{
         tForma forma;
-        int area, perimetro;
+        float area, perimetro;
         char tag;
     } tComodo;
 
-    void leia_comodo(tComodo *);
-    void apresenta_comodo(tComodo *);
-    void area_comodo(tComodo *);
-    void perimetro_comodo(tComodo *);
+    char leia_tag(tComodo *);
+    void leia_comodo(tForma *, char);
+    void apresenta_forma(tForma *, char);
+    void apresenta_comodo(tComodo *)
+    float area_comodo(tForma *, char);
+    void perimetro_comodo(tForma *, char);
+    void area_perimetro(tComodo *);
     int compara_area(tComodo *, tComodo *);
     int compara_perimetro(tComodo *, tComodo *);
 #endif

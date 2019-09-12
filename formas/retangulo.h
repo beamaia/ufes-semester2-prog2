@@ -4,12 +4,12 @@
 
     typedef struct{
         tPonto inf_dir, sup_esq;
-        int base, altura;
+        float base, altura;
     } tRetangulo;
 
     void leia_retangulo(tRetangulo *);
-    int area_retangulo(tRetangulo *);
-    int perimetro_retangulo(tRetangulo *);
+    float area_retangulo(tRetangulo *);
+    float perimetro_retangulo(tRetangulo *);
     void apresenta_retangulo(tRetangulo *);
     int base_retangulo(tPonto *, tPonto *);
     int altura_retangulo(tPonto *, tPonto *);
