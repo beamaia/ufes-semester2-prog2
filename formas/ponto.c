@@ -4,7 +4,7 @@
 
 void leia_ponto(tPonto *p)
 {
-    scanf("%d%d", &p->x, &p->y);
+    scanf("%d%*c%d%*c", &p->x, &p->y);
 }
 
 void apresenta_ponto(tPonto *p)

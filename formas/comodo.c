@@ -8,7 +8,7 @@
 
 char leia_tag(tComodo * com)
 {
-    scanf("%c ", &com->tag);
+    scanf("%c", &com->tag);
     return com->tag;
 }
 
@@ -49,8 +49,8 @@ void apresenta_forma(tForma * f, char tag)
 void apresenta_comodo(tComodo * com)
 {
     apresenta_forma(&com->forma, com->tag);
-    printf("Area: %f", com->area);
-    printf("Perimetro: %f\n", com->perimetro);
+    printf("Area: %.2f ", com->area);
+    printf("Perimetro: %.2f\n", com->perimetro);
 }
 
 float area_comodo(tForma * f, char tag)

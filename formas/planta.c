@@ -16,6 +16,7 @@ void leia_planta(tPlant * p)
     {
         leia_comodo(&p->comodo[i].forma, p->comodo->tag);
         area_perimetro(&p->comodo[i]);
+
         if(i + 1 < 100)
         {
             tag = leia_tag(&p->comodo[i +1]);
@@ -52,4 +53,4 @@ void ordena(tPlant * p,  int(*compara)(tComodo *, tComodo *))
                 p->comodo[j + 1] = p->comodo[j];
                 p->comodo[j] = aux; 
             }
-}
+}   

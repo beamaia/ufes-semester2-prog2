@@ -9,7 +9,7 @@ void leia_circulo(tCirculo *c)
     printf("\nDigite o ponto de origem:\n");
     leia_ponto(&c->origem);
     printf("Digite o tamanho do raio:\n ");
-    scanf("%f", &c->raio);
+    scanf("%f%*c", &c->raio);
 }
 
 float area_circulo(tCirculo *c)
@@ -25,7 +25,7 @@ float perimetro_circulo(tCirculo *c)
 void apresenta_circulo(tCirculo *c)
 {
     printf("Forma: Circular ");
-    printf("Raio: %f ", c->raio);
+    printf("Raio: %.2f ", c->raio);
     printf("Origem: ");
     apresenta_ponto(&c->origem);
 }

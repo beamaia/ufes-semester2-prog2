@@ -5,7 +5,7 @@
 
 void leia_retangulo(tRetangulo *r)
 {
-    printf("\nDigite os pontos do canto inferior e do canto superior: \n");
+    printf("Digite os pontos do canto inferior e do canto superior: \n");
     leia_ponto(&r->inf_dir);
     leia_ponto(&r->sup_esq);
     r->base = base_retangulo(&r->inf_dir, &r->sup_esq);
