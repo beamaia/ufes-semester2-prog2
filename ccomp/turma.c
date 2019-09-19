@@ -83,10 +83,6 @@ void apresenta_binario(tTurma ccomp)
 {
     FILE * turma;
     turma = fopen("binario", "wb");
-    fwrite("\n", sizeof(char), 1, turma);
-    for(int i = 0; i < ccomp.qtd_alunos; i++)
-    {
-        fwrite(&ccomp.aluno[i], sizeof(tAluno), 1, turma);
-    }
+    fwrite(&ccomp, sizeof(tTurma), 1, turma);
     fclose(turma);
 }
