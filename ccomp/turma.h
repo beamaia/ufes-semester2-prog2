@@ -15,5 +15,7 @@
     void apresenta_turma(tTurma *);
     void apresenta_aniversariantes(tTurma *, tData hoje);
     void apresenta_excelentes(tTurma *);
+    void apresenta_binario(tTurma);
+
 
 #endif

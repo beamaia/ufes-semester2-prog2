@@ -28,7 +28,11 @@ int menor_data(tData data1, tData data2)
         return 0;   
 }
 
-void apresenta_data(tData data)
+void apresenta_data(tData data, FILE * arq)
 {
-    printf("%02d/%02d/%02d",data.dia, data.mes, data.ano);
+    fwrite(&data.dia, sizeof(int), 1, arq);
+    fwrite("/", sizeof(char), 1, arq);
+    fwrite(&data.mes, sizeof(int), 1, arq);
+    fwrite("/", sizeof(char), 1, arq);
+    fwrite(&data.ano, sizeof(int), 1, arq);
 }

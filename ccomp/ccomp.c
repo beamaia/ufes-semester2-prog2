@@ -11,5 +11,6 @@ void main()
     leia_data(&hoje);
     tTurma ccomp;
     leia_turma(&ccomp);
-    escolha(&ccomp, hoje);
+    // escolha(&ccomp, hoje);
+    apresenta_binario(ccomp);
 }

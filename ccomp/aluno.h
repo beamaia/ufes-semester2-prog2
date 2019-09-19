@@ -2,7 +2,7 @@
     #define _ALUNO
     #define MAX_NOME 50
     #include "data.h"
-
+    #include <stdio.h>
     typedef struct{
         int matricula;
         char nome[MAX_NOME];
@@ -13,7 +13,7 @@
     } tAluno;
 
     void leia_aluno(tAluno *);
-    void imprime_informacoes(tAluno *);
+    void imprime_informacoes(tAluno *, FILE *);
     int compara_nomes(tAluno *, tAluno *);
     int compara_matriculas(tAluno *, tAluno *);
     int compara_cr(tAluno *, tAluno *);

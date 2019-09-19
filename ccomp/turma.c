@@ -35,39 +35,58 @@ void ordena(tTurma * ccomp, int (*compar)(tAluno *, tAluno *))
 
 void apresenta_turma(tTurma * ccomp)
 {
-    printf("\n");
+    FILE * turma;
+    turma = fopen("turma", "wb");
+    fwrite("\n", sizeof(char), 1, turma);
     for(int i = 0; i < ccomp->qtd_alunos; i++)
     {
-        imprime_informacoes(&ccomp->aluno[i]);
+        imprime_informacoes(&ccomp->aluno[i], turma);
     }
+    fclose(turma);
 }
 
 void apresenta_aniversariantes(tTurma * ccomp, tData hoje)
 {
+    FILE * aniversario;
+    aniversario = fopen("aniversario", "wb");
     printf("\n\n\n**************");
     printf("\nAniversariantes:");
 
     for(int i = 0; i < ccomp->qtd_alunos; i++)
     {
         if(tem_aniversario(&ccomp->aluno[i], hoje))
-            imprime_informacoes(&ccomp->aluno[i]);
+            imprime_informacoes(&ccomp->aluno[i], aniversario);
     }
 
     printf("\n\n**************");
-
+    fclose(aniversario);
 }
 
 void apresenta_excelentes(tTurma * ccomp)
 {   
+    FILE * excelentes;
+    excelentes = fopen("excelentes", "wb");
     printf("\n\n\n**************");
     printf("\nExcelentes:");
 
     for(int i = 0; i < ccomp->qtd_alunos; i++)
     {
         if(aluno_excelente(&ccomp->aluno[i]))
-            imprime_informacoes(&ccomp->aluno[i]);
+            imprime_informacoes(&ccomp->aluno[i], excelentes);
     }
 
     printf("\n\n**************");
+    fclose(excelentes);
+}
 
+void apresenta_binario(tTurma ccomp)
+{
+    FILE * turma;
+    turma = fopen("binario", "wb");
+    fwrite("\n", sizeof(char), 1, turma);
+    for(int i = 0; i < ccomp.qtd_alunos; i++)
+    {
+        fwrite(&ccomp.aluno[i], sizeof(tAluno), 1, turma);
+    }
+    fclose(turma);
 }

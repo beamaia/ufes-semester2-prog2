@@ -29,15 +29,18 @@ void leia_aluno(tAluno * aluno)
     scanf("%f%*c", &aluno->cr);
 }
 
-void imprime_informacoes(tAluno * aluno)
+void imprime_informacoes(tAluno * aluno, FILE * turma)
 {
-    printf("\n\nAluno: %s\n", aluno->nome);                                                                        
-    printf("Matricula: %d\n", aluno->matricula);
-    printf("CR: %.2f\n", aluno->cr);
-    printf("Aniversário: ");
-    apresenta_data(aluno->niver);
-    printf("\nIngresso: ");
-    apresenta_data(aluno->ingresso);
+    fwrite("\n\nAluno: ", sizeof(char), 9, turma);
+    fwrite(aluno->nome, sizeof(char), 50, turma);
+    fwrite("\nMatricula: ", sizeof(char), 12, turma);
+    fwrite(&aluno->matricula, sizeof(int), 1, turma);
+    fwrite("\nCR: ", sizeof(char), 4, turma);
+    fwrite(&aluno->cr, sizeof(float), 1, turma);
+    fwrite("\nAniversario: ", sizeof(char), 14, turma);
+    //apresenta_data(aluno->niver, turma);
+    fwrite("\nIngresso: ", sizeof(char), 14, turma);
+    //apresenta_data(aluno->ingresso, turma);
 }
 
 int compara_nomes(tAluno *aluno1, tAluno *aluno2)
