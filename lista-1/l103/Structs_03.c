@@ -1,13 +1,13 @@
 #include <stdio.h>
-#include <stdlib.h>
+
 /* 
    Racional de qualquer numero da forma p/q, sendo p inteiro e q inteiro nao nulo. Vamos
    convencionar que o campo q de todo racional eh estritamente positivo e que o maximo 
-   divisor comum dos campos p e q eh 1.   
+   divisor comum dos campos p e q eh 1.
 */
 
 typedef struct {
-   int p, q, sinal;
+   int p, q;
 } racional;
 
 int divisivel(int num, int div)
@@ -22,21 +22,29 @@ int num_maior(int n1, int n2)
 
 int limite_min(int a, int b)
 {
-   if(num_maior(a, b))
-      return b;
+   int x = a, y = b;
+
+   if(a < 0)
+      x = a*-1;
+   if(b < 0)
+      y = b *-1;
+
+   if(num_maior(x, y))
+      return x;
    else
-      return a;
+      return y;
 }
 
 racional reduz (int a, int b) 
 {
+   int lim = limite_min(a, b);
+
    if(b < 0)
    {
       b = b * -1;
       a = a * -1;
    }
 
-   int lim = limite_min(a, b);
    for(int i = lim; i >= 2; i--)
    {
       if(divisivel(a, i) && divisivel(b, i))
@@ -52,13 +60,21 @@ racional reduz (int a, int b)
    return r;
 }
 
+racional soma (racional x, racional y) {
+	
+	racional s; 
+   s.q = x.q * y.q;
+   s.p = (x.p * y.q) + (y.p * x.q);
+   s = reduz(s.p, s.q);
+   return s;	
+}
+
 int main()
 {
-   racional r;
+   racional r1, r2, s;
    
-   scanf("%d%d", &r.p, &r.q);
-   r = reduz(r.p, r.q);
-   printf("(%d/%d)", r.p, r.q);
+   scanf("%d%d%d%d", &r1.p, &r1.q, &r2.p, &r2.q);
+   s = soma(r1, r2);
+   printf("(%d/%d)", s.p, s.q);
    return 0;
-   
 }
