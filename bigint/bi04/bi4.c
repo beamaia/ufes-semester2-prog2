@@ -10,7 +10,6 @@ void torna_int(int * vet, tIntGrande n)
     int i;
     for(i = 0; i < strlen(n.num) + 1; i++)
     {
-        printf("a");
         if(i == strlen(n.num))
             vet[i] = -1;
         else
@@ -22,9 +21,9 @@ void torna_int(int * vet, tIntGrande n)
 int len_vet(int * vet)
 {
     int len, i;
-    for(i = 1; ;i++)
+    for(i = 1; i < 100 ;i++)
     {
-        if(i == -1)
+        if(vet[i] == -1)
             return i;
     }
 }
@@ -90,16 +89,13 @@ int main()
 {
     tIntGrande n1, n2;
     scanf("%s %s", n1.num, n2.num);
-    printf("%s %s", n1.num, n2.num);
-
+    
     int vet1[100], vet2[100], vetsoma[100], len;
     torna_int(vet1, n1);
     torna_int(vet2, n2);
     soma_vets(vet1, vet2, vetsoma);
-
-    printf("\n1: %d, 2:%d \n", len_vet(vet1), len_vet(vet2));
-    // transforma_soma(vetsoma);
-    // imprime_soma(vetsoma);
+    transforma_soma(vetsoma);
+    imprime_soma(vetsoma);
 
     return 0;
 }

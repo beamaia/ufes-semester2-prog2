@@ -5,8 +5,6 @@ typedef struct{
     char num[100];
 } tIntGrande;
 
-
-
 int main()
 {
     tIntGrande n;
