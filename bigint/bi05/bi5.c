@@ -55,13 +55,6 @@ void soma_vets(int * vet1, int * vet2, int * vetsoma, int len1, int len2)
     
 }
 
-int maior_len(int n1, int n2)
-{
-    if(n1 >= n2)
-        return n1;
-    else
-        return n2;    
-}
 
 void transforma_soma(int * vetsoma, int len)
 {
@@ -76,21 +69,23 @@ void transforma_soma(int * vetsoma, int len)
     }
 }
 
-
-
 int main()
 {
-    tIntGrande n1, n2;
-    scanf("%s %s", n1.num, n2.num);
+    tIntGrande n1;
+    int n2, i;
+    scanf("%s %d", n1.num, &n2);
     
-    int vet1[100], vet2[100], vetsoma[100], len1, len2, len;
-    len1 = strlen(n1.num);
-    len2 = strlen(n2.num);
-    torna_int(vet1, n1, len1);
-    torna_int(vet2, n2, len2);
-    soma_vets(vet1, vet2, vetsoma, len1, len2);
-    len = maior_len(len1, len2);
+    int vet[100], vetsoma[100], len;
+    len = strlen(n1.num);
+    torna_int(vet, n1, len);
+    soma_vets(vet, vet, vetsoma, len, len);
     transforma_soma(vetsoma, len);
+    for(i = 0; i < n2 - 1; i++)
+    {
+        soma_vets(vetsoma, vet, vetsoma, len, len);
+        transforma_soma(vetsoma, len);
+    }
+    
     imprime_soma(vetsoma, len);
 
     return 0;
