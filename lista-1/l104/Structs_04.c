@@ -10,16 +10,6 @@ typedef struct {
    int p, q;
 } racional;
 
-/* INSIRA SEU CODIGO AQUI, CASO DESEJE CRIAR ALGUMA FUNCAO AUXILIAR */
-int divisivel(int num, int div)
-{
-   return num % div == 0;
-}
-
-int num_maior(int n1, int n2)
-{
-   return n1 >= n2;
-}
 
 int limite_min(int a, int b)
 {
@@ -30,7 +20,7 @@ int limite_min(int a, int b)
    if(b < 0)
       y = b *-1;
 
-   if(num_maior(x, y))
+   if(x >= y)
       return x;
    else
       return y;
@@ -39,25 +29,25 @@ int limite_min(int a, int b)
 racional reduz (int a, int b) 
 {
    int lim = limite_min(a, b);
+   racional r;
+   r.p = a;
+   r.q = b;
 
    if(b < 0)
    {
-      b = b * -1;
-      a = a * -1;
+      r.q = b * -1;
+      r.p = a * -1;
    }
 
    for(int i = lim; i >= 2; i--)
    {
-      if(divisivel(a, i) && divisivel(b, i))
+      if(a % i == 0 && b % i == 0)
       {
-         a = a/i;
-         b = b/i;
+         r.p = r.p/i;
+         r.q = r.q/i;
       }
    }  
 
-   racional r;
-   r.p = a;
-   r.q = b;
    return r;
 }
 
