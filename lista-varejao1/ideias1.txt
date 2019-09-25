@@ -1,0 +1,22 @@
+structs:
+aluno -> matricula e cr
+curso -> vetor alunos dum curso e cod do curso
+uni -> vetor de cursos
+
+aluno:
+compara matricula
+imprime aluno
+leia aluno
+
+curso:
+ordena aluno_matricula
+compara cod de curso
+imprime curso
+leia cod de curso
+leia curso
+verifica se for um cod ja existente
+
+uni:
+ordena turma_por_cod
+imprime uni
+leia uni
