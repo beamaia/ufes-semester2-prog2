@@ -9,9 +9,9 @@ imprime aluno
 leia aluno
 
 curso:
-ordena aluno_matricula
+-ordena aluno_matricula
 compara cod de curso
-imprime curso
+-imprime curso
 leia cod de curso
 leia curso
 verifica se for um cod ja existente
