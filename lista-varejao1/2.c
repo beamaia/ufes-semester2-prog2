@@ -60,6 +60,7 @@ void apresenta_medalhas(tMedalhas m, FILE * fp)
 {
     fprintf(fp, "%d %d %d\n", m.ouro, m.prata, m.bronze);
 }
+
 typedef struct{
     int cod;
     tMedalhas medalhas;

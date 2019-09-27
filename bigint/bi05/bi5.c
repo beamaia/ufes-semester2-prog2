@@ -3,90 +3,100 @@
 
 typedef struct{
     char num[100];
+    int tam;
 } tIntGrande;
 
-void imprime_soma(int * vet, int len)
+void zera(int *vet, int tam)
 {
-    int i;
-    for(i = 0; i < len; i++)
+    for(int i = 0; i < tam; i++)
     {
-        printf("%d", vet[i]);
-    }
-    printf("\n");
-}
-
-void torna_int(int * vet, tIntGrande n, int len)
-{
-    int i;
-    for(i = 0; i < len; i++)
-    {
-        vet[i] = n.num[i] - 48;
+        vet[i] = 0;
     }
 }
 
-
-void soma_vets(int * vet1, int * vet2, int * vetsoma, int len1, int len2)
+void transforma_int(int *vet1, int *vet2, tIntGrande *n)
 {
-    int i;
-    if(len1 >= len2)
+    for(int i = 0; i < n->tam; i++)
     {
-        vetsoma[len1 - 1] -= -1;
-        for(i = 1; i <= len2; i++)
-        {
-            vetsoma[len1 - i] = vet1[len1 - i] + vet2[len2 - i];
-        }
-        for(; i <= len1; i++)
-        {
-            vetsoma[len1 - i] = vet1[len1 - i];
-        }
+        vet1[i] = n->num[i] - '0';
+        vet2[i] = n->num[i] - '0';
     }
-    else
-    {
-        vetsoma[len2 - 1] -= -1;
-        for(i = 1; i <= len1; i++)
-        {
-            vetsoma[len2 - i] = vet1[len1 - i] + vet2[len2 - i];
-        }
-        for(; i <= len2; i++)
-        {
-            vetsoma[len2 - i] = vet2[len2 - i];
-        }
-    }
-    
 }
 
+void inverte(int *vet, int tam)
+{
+    int aux;
+    for(int i = 0; i < tam/2; i++)
+    {
+        aux = vet[i];
+        vet[i] = vet[tam - i - 1];
+        vet[tam - i - 1] = aux;
+    }
+    // for(int i = 0; i < tam; i++)
+    // {
+    //     aux[i] = vet[i];
+    // }
+    // for(int i = 0; i < tam; i++)
+    // {
+    //     vet[i] = aux[tam - i - 1];
+    // }
+}
 
-void transforma_soma(int * vetsoma, int len)
+void transforma_bigint(int *vet, tIntGrande *n)
 {
     int i;
-    for(i = 1; i < len; i++)
+    for(i = 0; i < n->tam; i++)
     {
-        if(vetsoma[len - i] > 9)
+        n->num[i] = vet[i] + '0';
+    }
+    n->num[i] = '\0';
+}
+
+void soma(int * vet, int * vetsoma, tIntGrande * n)
+{
+    int vai1;
+    for(int i = 0; i < n->tam; i++)
+    {
+        vetsoma[i] += vet[i];
+        if(vetsoma[i] > 9)
         {
-            vetsoma[len - i] -= 10;
-            vetsoma[len - 1 - i] += 1;
+            vai1 = vetsoma[i]/10;
+            vetsoma[i] -= vai1 * 10;
+            vetsoma[i + 1] += vai1;
+
+            if(i + 1 == n->tam)
+                n->tam++;
         }
     }
+}
+
+void mult(int *vet, int *vetsoma, tIntGrande *n, int mul)
+{
+    for(int i = 0; i < mul - 1; i++)
+    {
+        soma(vet, vetsoma, n);
+    }
+}
+
+void apresenta(tIntGrande n)
+{
+    printf("%s\n", n.num);
 }
 
 int main()
 {
     tIntGrande n1;
-    int n2, i;
+    int n2, vet[100], vetsoma[100];
     scanf("%s %d", n1.num, &n2);
-    
-    int vet[100], vetsoma[100], len;
-    len = strlen(n1.num);
-    torna_int(vet, n1, len);
-    soma_vets(vet, vet, vetsoma, len, len);
-    transforma_soma(vetsoma, len);
-    for(i = 0; i < n2 - 1; i++)
-    {
-        soma_vets(vetsoma, vet, vetsoma, len, len);
-        transforma_soma(vetsoma, len);
-    }
-    
-    imprime_soma(vetsoma, len);
-
+    n1.tam = strlen(n1.num);
+    zera(vet, n1.tam);
+    zera(vetsoma, n1.tam);
+    transforma_int(vet, vetsoma, &n1);
+    inverte(vet, n1.tam);
+    inverte(vetsoma, n1.tam);
+    mult(vet, vetsoma, &n1, n2);
+    inverte(vetsoma, n1.tam);
+    transforma_bigint(vetsoma, &n1);
+    apresenta(n1);
     return 0;
 }
