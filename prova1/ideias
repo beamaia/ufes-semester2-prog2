@@ -1,0 +1,44 @@
+Tipos:
+Time
+Competicao
+
+*Time*
+
+inicializa_time(tTime *t);
+compara_nome()
+compara_vitorias
+compara_saldo
+apresenta_time
+verifica_jogo
+adiciona_vitoria
+adiciona_ponto
+adiciona_saldo
+
+
+*Competicao*
+
+
+
+>verifica se é final de arq
+>leitura de time 1 + gol
+>inicializa aux 1
+>armazena em aux 1
+>leitura de time 2 + gol
+>inicializa aux 2
+>armazena em aux 2
+>verifica quem ganhou
+>da vitoria para quem ganhou
+>ver se o time 1 ja existe
+    >caso sim: incrementa saldo + vitoria + gol
+    >caso nao: adiciona a lista de times
+>ver se o time 2 ja existe
+    >caso sim: incrementa saldo + vitoria + gol
+    >caso nao: adiciona a lista de times>verifica se é final de arq
+>verifica se é final de arq
+
+
+tTime a;
+char aux[15];
+scanf("%s ", aux);
+a.nome = (char *) malloc(sizeof(char)*strlen(aux));
+

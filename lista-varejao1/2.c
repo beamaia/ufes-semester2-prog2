@@ -52,8 +52,7 @@ int comp_medalhas(tMedalhas a, tMedalhas b, int med)
     else
     {
         return comp_qtd(a.bronze, b.bronze);
-    }
-    
+    }   
 }
 
 void apresenta_medalhas(tMedalhas m, FILE * fp)
