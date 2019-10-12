@@ -1,0 +1,3 @@
+/*
+Biblioteca para funcoes e tipos relacionado a imoveis
+*/
