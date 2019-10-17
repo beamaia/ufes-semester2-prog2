@@ -1,4 +1,4 @@
-Ordenação por gols:
+Ordenação por saldo de gols:
 
 Ordenação por pontuação:
 
