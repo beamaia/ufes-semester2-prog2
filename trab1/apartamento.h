@@ -8,7 +8,9 @@
         tResidencia res;
         unsigned int andar,
                      preco,
-                     andares_total;
+                     andares_total,
+                     num_quartos,
+                     num_vagas;
         float area;
         char lazer;
     } tApartamento;

@@ -5,7 +5,8 @@
 //Leitura dos dados referente ao apartamento
 void le_apartamento(tApartamento *apto, FILE *arq)
 {
-    le_residencia(&apto->res, arq);
+    fscanf(arq, "%d%*c", &apto->num_quartos);
+    fscanf(arq, "%d%*c", &apto->num_vagas);
     fscanf(arq, "%d%*c", &apto->andar);
     fscanf(arq, "%f%*c", &apto->area);
     fscanf(arq, "%d%*c", &apto->preco);

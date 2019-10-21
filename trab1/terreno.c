@@ -18,3 +18,5 @@ float fator_preco_terreno(tTerreno *ter)
         case 'R': return 1.1 * ter->preco;
     }
 }
+
+tTerreno

@@ -50,3 +50,20 @@ int categoria_compara_quartos(tCategoria *cat1, tCategoria *cat2)
 {
     return casa_compara_quartos(&cat1->casa, &cat2->casa);
 }
+
+int categoria_identifica_argiloso(tCategoria *cat, int tipo)
+{
+    switch(tipo)
+    {
+        case 1: return solo_argilosos_triangulo(&cat->tri);
+        case 2: return solo_argilosos_traprezio(&cat->tra);
+        case 3: return solo_argilosos_retangulo(&cat->ret);
+    }
+
+    return 0;
+}
+
+in categoria_compara_preco(tCategoria *cat)
+{
+
+}

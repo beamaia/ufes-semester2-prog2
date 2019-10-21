@@ -13,13 +13,13 @@
     
     void inicializa_catalogo(tCatalogo *);
     void le_catalogo(tCatalogo *, FILE *);
-    void le_atual(tCatalogo *, FILE *);
+    void altera_imovel(tCatalogo *, tImovel *);
     void inclusao_imovel(tCatalogo *, tImovel *);
     void exclusao_imovel(tCatalogo *);
-    void altera_imovel(tCatalogo *, tImovel *);
+    void le_atual(tCatalogo *, FILE *);
     void calcula_preco(tCatalogo *);
-    void ordena(tCatalogo *, int (* cmp)(tImovel, tImovel));
-    int calcula_qtd_caros(tCatalogo *, tCatalogo *, tEspec *);
+    void ordena(tCatalogo *, int (* cmp)(tImovel *, tImovel *));
+    int calcula_qtd_caros(tCatalogo *, tEspec *);
     void imoveis_mais_caros(tCatalogo *, tEspec *, tIdentificadores);
     int calcula_qtd_argilosos(tCatalogo *, tEspec *);
     void catalogo_argiloso(tCatalogo *, tCatalogo *, tEspec *);

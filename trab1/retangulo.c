@@ -19,5 +19,20 @@ float area_retagulo(tRetangulo *ret)
 //Calcula o preco do terreno tipo retangulo
 float preco_retangulo(tRetangulo *ret)
 {
-    return area_retagulo(ret) * fator_preco_terreno(&ret->ter);
+    float fator;
+    switch (ret->solo)
+    {
+        case 'A': fator =  0.9 * ret->preco;
+        case 'G': fator =  1.3 * ret->preco;
+        case 'R': fator = 1.1 * ret->preco;
+    }
+    return area_retagulo(ret) * fator;
 }
+
+int solo_argiloso_retangulo(tRetangulo *ret)
+{
+    if(ret->solo == 'A')
+        return 1;
+    
+    return 0;
+}   

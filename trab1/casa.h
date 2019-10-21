@@ -10,7 +10,9 @@
               area_livre;
         unsigned int num_pav,
                      preco_pav,
-                     preco_livre;
+                     preco_livre,
+                     num_quartos,
+                     num_vagas;
     } tCasa;
 
     void le_casa(tCasa *, FILE *);

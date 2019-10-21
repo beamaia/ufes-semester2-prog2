@@ -17,9 +17,9 @@
 
     typedef struct 
     {
-        unsigned int i_id,
-                     j_id,
-                     k_id;
+        unsigned int i,
+                     j,
+                     k;
     } tIdentificadores;
     
 

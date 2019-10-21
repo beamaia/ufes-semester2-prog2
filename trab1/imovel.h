@@ -25,11 +25,12 @@
     int identifica_categoria(tImovel *);
     void le_imovel(tImovel *, FILE *);
     void modifica_imovel(tImovel *, tImovel *);
-    float preco_imovel(tImovel *);
+    void preco_imovel(tImovel *);
     float area_imovel(tImovel *);
     int imovel_limite_area_preco(tImovel *, tEspec *);
-    int compara_quartos(tImovel *, tImovel *);
-    int compara_preco(tImovel *, tImovel *);
-    int compara_area(tImovel *, tImovel *);
-
+    int compara_id(tImovel *, tImovel *);
+    int compara_quartos(tImovel *, tImovel *);//redo
+    int compara_preco(tImovel *, tImovel *);//redo
+    int compara_area(tImovel *, tImovel *);//redo
+    int identifica_id(tImovel *);
 #endif
