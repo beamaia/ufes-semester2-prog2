@@ -1,28 +1,23 @@
 #include <stdio.h>
-#include "triangulo.h"
 #include "terreno.h"
+#include "triangulo.h"
 
-//Leitura das informacoes de terreno formato triangular
-void le_triangulo(tTriangulo *t, FILE *fp)
+//Leitura das informacoes do terreno tipo triangulo
+void le_triangulo(tTriangulo *tri, FILE *arq)
 {
-    le_terreno(&t->terreno, fp);
-    fscanf(fp, "%f%*c%f", &t->base, 
-                              &t->altura);
+    le_terreno(&tri->ter, arq);
+    fscanf(arq, "%f%*c", &tri->base);
+    fscanf(arq, "%f%*c", &tri->altura);
 }
 
-//Calcula a area do triangulo
-void area_triangulo(tTriangulo *t)
+//Calcula a area do terreno tipo triangulo
+float area_triangulo(tTriangulo *tri)
 {
-    t->area = (t->base * t->altura) / 2;
+    tri->base * tri->altura / 2;
 }
 
-//Calcula o preco do terreno triangular
-float preco_triangulo(tTriangulo *t)
+//Calcula o preco do terreno tipo triangulo
+float preco_triangulo(tTriangulo *tri)
 {
-    switch(t->solo)
-    {
-        case 'A': return t->preco_m2 * t->area * 0.9;
-        case 'G': return t->preco_m2 * t->area * 1.3;
-        case 'R': return t->preco_m2 * t->area * 1.1;
-    }
+    return area_triangulo(tri) * fator_preco_terreno(&tri->ter);
 }

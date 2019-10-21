@@ -1,10 +1,20 @@
 #include <stdio.h>
 #include "terreno.h"
 
-void le_terreno(tTerreno *t, FILE *fp)
+//Leitura do tipo de solo e o preco do m2 do terreno
+void le_terreno(tTerreno * ter, FILE *arq)
 {
-    fscanf(fp, "%c%*c%f%*c", &t->solo,
-                             &t->preco_m2)
+    fscanf(arq, "%c%*c", &ter->solo);
+    fscanf(arq, "%d%*c", &ter->preco);
 }
 
-float mult_preco_e_solo_terreno(tTerreno *);
+//Fator que ira ser utilizado para calcular o preco do terreno
+float fator_preco_terreno(tTerreno *ter)
+{
+    switch (ter->solo)
+    {
+        case 'A': return 0.9 * ter->preco;
+        case 'G': return 1.3 * ter->preco;
+        case 'R': return 1.1 * ter->preco;
+    }
+}

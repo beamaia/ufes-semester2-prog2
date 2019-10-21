@@ -3,14 +3,15 @@
     #include <stdio.h>
     #include "terreno.h"
 
-    typedef struct
+    typedef struct 
     {
-        float base;
-        float altura;
-        float area;
-        tTerreno terreno;
+        tTerreno ter;
+        float base,
+              altura,
+              area;
     } tTriangulo;
-
-    void le_triangulo(tTriangulo *, FILE *);
-    void area_triangulo(tTriangulo *);
+    
+    void le_triangulo(tTriangulo *,FILE *);
+    float area_triangulo(tTriangulo *);
     float preco_triangulo(tTriangulo *);
+#endif

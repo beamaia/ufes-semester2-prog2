@@ -1,14 +1,16 @@
 #ifndef _RETANGULO
     #define _RETANGULO
+    #include <stdio.h>
+    #include "terreno.h"
 
     typedef struct 
     {
-        float lado1;
-        float lado2;
-        float area;
-        tTerreno terreno;
-    }tRetangulo;
-
+        tTerreno ter;
+        float lado1,
+              lado2;
+    } tRetangulo;
+    
     void le_retangulo(tRetangulo *, FILE *);
-    void area_retangulo(tRetangulo *);
+    float area_retagulo(tRetangulo *);
     float preco_retangulo(tRetangulo *);
+#endif

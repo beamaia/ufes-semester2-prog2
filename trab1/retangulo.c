@@ -1,27 +1,23 @@
 #include <stdio.h>
+#include "terreno.h"
 #include "retangulo.h"
 
-//Leitura das informacoes de terreno formato retangular
-void le_retangulo(tRetangulo *r, FILE *fp)
+//Leitura das informacoes do terreno tipo retangulo
+void le_retangulo(tRetangulo *ret, FILE *arq)
 {
-    fscanf(fp, "%c%*c%f%*c%f%*c%f", &r->solo,
-                                    &r->preco_m2,
-                                    &r->lado1, 
-                                    &r->lado2);
+    le_terreno(&ret->ter, arq);
+    fscanf(arq, "%f%*c", &ret->lado1);
+    fscanf(arq, "%f%*c", &ret->lado2);
 }
 
-//Calcula a area do retangulo
-void area_retangulo(tRetangulo *r)
+//Calcula a area do terreno tipo retangulo
+float area_retagulo(tRetangulo *ret)
 {
-    r->area = r->lado1 * r->lado2;
+    return ret->lado1 * ret->lado2;
 }
 
-float preco_retangulo(tRetangulo *r)
+//Calcula o preco do terreno tipo retangulo
+float preco_retangulo(tRetangulo *ret)
 {
-    switch(r->solo)
-    {
-        case 'A': return r->preco_m2 * r->area * 0.9;
-        case 'G': return r->preco_m2 * r->area * 1.3;
-        case 'R': return r->preco_m2 * r->area * 1.1;
-    }
+    return area_retagulo(ret) * fator_preco_terreno(&ret->ter);
 }
