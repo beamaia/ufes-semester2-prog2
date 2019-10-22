@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-#include "terreno.h"
 #include "triangulo.h"
 #include "retangulo.h"
 #include "trapezio.h"
-#include "residencia.h"
 #include "casa.h"
 #include "apartamento.h"
 #include "categoria.h"
@@ -31,34 +29,6 @@ int identifica_categoria(tImovel *imo)
         return 4;
     if(!strcmp(imo->categoria, "apto"))
         return 5;
-}
-
-void le_categoria(tCategoria *cat, int tipo, FILE * arq)
-{
-    switch (tipo)
-    {
-        case 1: le_triangulo(&cat->tri, arq);
-                return;
-        case 2: le_retangulo(&cat->ret, arq);
-                return;
-        case 3: le_trapezio(&cat->tra, arq);
-                return;
-        case 4: le_casa(&cat->casa, arq);
-                return;
-        case 5: le_apartamento(&cat->apto, arq);
-    }
-}
-
-float preco_imovel_categoria(tCategoria * cat, int tipo)
-{
-    switch (tipo)
-    {
-        case 1: return preco_triangulo(&cat->tri);
-        case 2: return preco_retangulo(&cat->ret);
-        case 3: return preco_trapezio(&cat->tra);
-        case 4: return preco_casa(&cat->casa);
-        case 5: return preco_apartamento(&cat->apto);
-    }
 }
 
 void le_imovel(tImovel *imo, FILE *arq)

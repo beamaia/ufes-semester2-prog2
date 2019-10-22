@@ -1,11 +1,9 @@
 #ifndef _IMOVEL
     #define _IMOVEL
     #include <stdio.h>
-    #include "terreno.h"
     #include "triangulo.h"
     #include "retangulo.h"
     #include "trapezio.h"
-    #include "residencia.h"
     #include "casa.h"
     #include "apartamento.h"
     #include "categoria.h"
@@ -29,8 +27,11 @@
     float area_imovel(tImovel *);
     int imovel_limite_area_preco(tImovel *, tEspec *);
     int compara_id(tImovel *, tImovel *);
-    int compara_quartos(tImovel *, tImovel *);//redo
-    int compara_preco(tImovel *, tImovel *);//redo
-    int compara_area(tImovel *, tImovel *);//redo
+    int compara_quartos(tImovel *, tImovel *);
+    int compara_preco(tImovel *, tImovel *);
+    int compara_area(tImovel *, tImovel *);
     int identifica_id(tImovel *);
+    int imovel_identifica_argiloso(tImovel *);
+    void imovel_apresenta_identificador(tImovel *);
+
 #endif

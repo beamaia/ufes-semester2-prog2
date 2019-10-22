@@ -1,11 +1,4 @@
 #include <stdio.h>
-#include <string.h>
-#include "triangulo.h"
-#include "retangulo.h"
-#include "trapezio.h"
-#include "casa.h"
-#include "apartamento.h"
-#include "categoria.h"
 #include "imovel.h"
 #include "catalogo.h"
 #include "espec.h"
@@ -163,7 +156,6 @@ void terrenos_argilosos_menores(tCatalogo *c1, tCatalogo *c2, tIdentificadores *
 
 }
 
-
 void catalogo_casas(tCatalogo *c1, tCatalogo *c2, tEspec *espec)
 {
     for(int i = 0, j = 0; i < c1->qtd_imoveis; i++)
@@ -213,32 +205,28 @@ void apresenta_imoveis_caros(tCatalogo *c, int limite)
 
 void apresenta_terrenos_argilosos(tCatalogo *c, int limite)
 {
-    for(int i = limite; i >= 0; i++)
+    for(int i = limite; i >= 0; i--)
     {
         imovel_apresenta_identificaor(c->imoveis[i]);
     }
+
+    printf("\n");
 }
 
 void apresenta_casas_limite(tCatalogo *c)
 {
-
-}
-
-
-void apresenta_idenificadores(tCatalogo *c, int limite)
-{
-    for(int i = 0; i < limite; i++)
+    for(int i = 0; i < c->qtd_imoveis; i++)
     {
         imovel_apresenta_identificaor(c->imoveis[i]);
     }
 
-    printf("\n")
+    printf("\n");
 }
 
 void apresenta_catalogos(tCatalogo *c1, tCatalogo *c2, tCatalogo *c3, tIdentificadores *id)
 {
     printf("%d\n", id->i + id->j + id->k);
-    apresenta_idenificadores(c1, calcula_qtd_caros(c1, espec));
-    apresenta_idenificadores(c2, calcula_qtd_argilosos(c2, espec));
-    apresenta_idenificadores(c3);
+    apresenta_imoveis_caros(c1, calcula_qtd_caros(c1, espec));
+    apresenta_terrenos_argilosos(c2, calcula_qtd_argilosos(c2, espec));
+    apresenta_casas_limite(c3);
 }

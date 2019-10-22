@@ -9,7 +9,7 @@ void le_casa(tCasa *casa, FILE *arq)
     fscanf(arq, "%d%*c", &casa->num_pav);
     fscanf(arq, "%f%*c", &casa->area_pav);
     fscanf(arq, "%d%*c", &casa->preco_pav);
-    fscanf(arq, "%f%c", &casa->area_livre);
+    fscanf(arq, "%f%*c", &casa->area_livre);
     fscanf(arq, "%d%*c", &casa->preco_livre);
 }
 
@@ -31,7 +31,7 @@ int casa_compara_quartos(tCasa *casa1, tCasa *casa2)
     if(casa1->num_quartos < casa2->num_quartos)
         return 1;
     
-    if(casa->num_quartos == casa2->num_quartos)
+    if(casa1->num_quartos == casa2->num_quartos)
         return 2;
     
     return 0;

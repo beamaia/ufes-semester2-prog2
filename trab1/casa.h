@@ -1,11 +1,9 @@
 #ifndef _CASA
     #define _CASA
     #include <stdio.h>
-    #include "residencia.h"
 
     typedef struct
     {
-        tResidencia res;
         float area_pav,
               area_livre;
         unsigned int num_pav,

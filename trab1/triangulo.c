@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "terreno.h"
 #include "triangulo.h"
 
 //Leitura das informacoes do terreno tipo triangulo
@@ -31,6 +30,7 @@ float preco_triangulo(tTriangulo *tri)
     return area_triangulo(tri) * fator;
 }
 
+//Verifica se o solo do terreno tipo triangulo e argiloso
 int solo_argiloso_triangulo(tTriangulo *tri)
 {
     if(tri->solo == 'A')

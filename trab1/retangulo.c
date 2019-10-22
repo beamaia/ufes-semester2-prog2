@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include "terreno.h"
 #include "retangulo.h"
 
 //Leitura das informacoes do terreno tipo retangulo
 void le_retangulo(tRetangulo *ret, FILE *arq)
 {
-    le_terreno(&ret->ter, arq);
+    fscanf(arq, "%c%*c", &ret->solo);
+    fscanf(arq, "%d%*c", &ret->preco);
     fscanf(arq, "%f%*c", &ret->lado1);
     fscanf(arq, "%f%*c", &ret->lado2);
 }
@@ -29,6 +29,7 @@ float preco_retangulo(tRetangulo *ret)
     return area_retagulo(ret) * fator;
 }
 
+//Verifica se o solo do terreno tipo retangulo e argiloso
 int solo_argiloso_retangulo(tRetangulo *ret)
 {
     if(ret->solo == 'A')

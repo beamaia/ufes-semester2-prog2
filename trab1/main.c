@@ -28,8 +28,11 @@ int main()
 
     le_catalogo(&imoveis, cat);
     le_atual(&imoveis, atual);
-    le_espec(&espec, )
-    imoveis_mais_caros()
+    le_espec(&espec, arq_espec);
+    imoveis_mais_caros(&imoveis, &espec, &id);
     terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
     casa_limite(&imoveis, &casa, &id, &espec);
+    apresenta_catalogo(&imoveis, &argilosos, &casas);
+
+    return 0;
 }

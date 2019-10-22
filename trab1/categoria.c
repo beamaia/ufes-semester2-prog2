@@ -36,7 +36,7 @@ float preco_imovel_categoria(tCategoria * cat, int tipo)
 
 float area_imovel_categoria(tCategoria * cat, int tipo)
 {
-    switch (tipo)
+    switch(tipo)
     {
         case 1: return area_triangulo(&cat->tri);
         case 2: return area_retangulo(&cat->ret);
@@ -44,6 +44,8 @@ float area_imovel_categoria(tCategoria * cat, int tipo)
         case 4: return area_casa(&cat->casa);
         case 5: return area_apartamento(&cat->apto);
     }
+
+    return 0;
 }
 
 int categoria_compara_quartos(tCategoria *cat1, tCategoria *cat2)
@@ -61,9 +63,4 @@ int categoria_identifica_argiloso(tCategoria *cat, int tipo)
     }
 
     return 0;
-}
-
-in categoria_compara_preco(tCategoria *cat)
-{
-
 }

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "residencia.h"
 #include "apartamento.h"
 
 //Leitura dos dados referente ao apartamento
