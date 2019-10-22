@@ -69,6 +69,11 @@ int compara_id(tImovel *imo1, tImovel *imo2)
     return imo1->id == imo2->id;
 }
 
+void acrescenta_id(tImovel *imo, int id)
+{
+    imo->id = id;
+}
+
 int compara_quartos(tImovel *imo1, tImovel *imo2)
 {
     int situacao = compara_quartos(&imo1->tipo_imovel, &imo2->tipo_imovel);
@@ -102,10 +107,10 @@ int identifica_id(tImovel *imo)
 int imovel_identifica_argiloso(tImovel *imo)
 {
     int tipo_solo = identifica_categoria(imo);
-    if(categoria_identifica_argiloso(&c1->imoveis, tipo_solo))
+    if(categoria_identifica_argiloso(imo, tipo_solo))
         return 1;
     
-    return
+    return 0;
 }
 
 void imovel_apresenta_identificador(tImovel *imo)

@@ -32,7 +32,7 @@ int main()
     imoveis_mais_caros(&imoveis, &espec, &id);
     terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
     casa_limite(&imoveis, &casas, &id, &espec);
-    apresenta_catalogo(&imoveis, &argilosos, &casas);
+    apresenta_catalogo(&imoveis, &argilosos, &casas, &id);
 
     return 0;
 }

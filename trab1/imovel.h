@@ -27,6 +27,7 @@
     float area_imovel(tImovel *);
     int imovel_limite_area_preco(tImovel *, tEspec *);
     int compara_id(tImovel *, tImovel *);
+    void acrescenta_id(tImovel *, int);
     int compara_quartos(tImovel *, tImovel *);
     int compara_preco(tImovel *, tImovel *);
     int compara_area(tImovel *, tImovel *);

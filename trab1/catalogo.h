@@ -19,9 +19,9 @@
     
     void inicializa_catalogo(tCatalogo *);
     void le_catalogo(tCatalogo *, FILE *);
-    void altera_imovel(tCatalogo *, tImovel);
+    void altera_imovel(tCatalogo *, tImovel *);
     void inclusao_imovel(tCatalogo *, tImovel *);
-    void exclusao_imovel(tCatalogo *);
+    void exclusao_imovel(tCatalogo *, tImovel *);
     void le_atual(tCatalogo *, FILE *);
     void calcula_preco(tCatalogo *);
     void ordena(tCatalogo *, int (* cmp)(tImovel *, tImovel *));

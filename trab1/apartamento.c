@@ -20,5 +20,5 @@ float preco_apartamento(tApartamento *apto)
     if(apto->lazer == 'S')
         lazer = 1.5;
     
-    return apto->preco * apto->area * (0.9 + apto->andar/apto->andares_total) * lazer;
+    return apto->preco * apto->area * (0.9 + ((float) apto->andar)/apto->andares_total) * lazer;
 }
