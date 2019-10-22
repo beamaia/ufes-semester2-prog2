@@ -15,5 +15,5 @@
     float area_triangulo(tTriangulo *);
     float preco_triangulo(tTriangulo *);
     int solo_argiloso_triangulo(tTriangulo *);
-
+    
 #endif

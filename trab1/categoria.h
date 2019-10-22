@@ -19,8 +19,8 @@
 
     void le_categoria(tCategoria *, int, FILE *);
     float preco_imovel_categoria(tCategoria *, int);
-    float area_imovel_categoria(tCategoria *, int)
+    float area_imovel_categoria(tCategoria *, int);
     int categoria_compara_quartos(tCategoria *, tCategoria *);
-    int categoria_identifica_argiloso(tCategoria *, int)
+    int categoria_identifica_argiloso(tCategoria *, int);
 
 #endif

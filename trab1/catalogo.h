@@ -1,6 +1,12 @@
 #ifndef _CATALOGO
     #define _CATALOGO
     #include <stdio.h>
+    #include "triangulo.h"
+    #include "retangulo.h"
+    #include "trapezio.h"
+    #include "casa.h"
+    #include "apartamento.h"
+    #include "categoria.h"
     #include "imovel.h"
     #include "espec.h"
     #define MAX_IMO 300
@@ -13,14 +19,14 @@
     
     void inicializa_catalogo(tCatalogo *);
     void le_catalogo(tCatalogo *, FILE *);
-    void altera_imovel(tCatalogo *, tImovel *);
+    void altera_imovel(tCatalogo *, tImovel);
     void inclusao_imovel(tCatalogo *, tImovel *);
     void exclusao_imovel(tCatalogo *);
     void le_atual(tCatalogo *, FILE *);
     void calcula_preco(tCatalogo *);
     void ordena(tCatalogo *, int (* cmp)(tImovel *, tImovel *));
     int calcula_qtd_caros(tCatalogo *, tEspec *);
-    void imoveis_mais_caros(tCatalogo *, tEspec *, tIdentificadores);
+    void imoveis_mais_caros(tCatalogo *, tEspec *, tIdentificadores *);
     int calcula_qtd_argilosos(tCatalogo *, tEspec *);
     void catalogo_argiloso(tCatalogo *, tCatalogo *, tEspec *);
     void terrenos_argilosos_menores(tCatalogo *, tCatalogo *, tIdentificadores *, tEspec *);

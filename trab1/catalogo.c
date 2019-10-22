@@ -1,4 +1,10 @@
 #include <stdio.h>
+#include "triangulo.h"
+#include "retangulo.h"
+#include "trapezio.h"
+#include "casa.h"
+#include "apartamento.h"
+#include "categoria.h"
 #include "imovel.h"
 #include "catalogo.h"
 #include "espec.h"
@@ -10,20 +16,21 @@ void inicializa_catalogo(tCatalogo *c)
 
 void le_catalogo(tCatalogo *c, FILE *arq)
 {
-    while(feop(arq))
+    while(!feof(arq))
     {
         c->qtd_imoveis++;
-        le_imovel(c->imovel[c->qtd_imoveis - 1]);
+        le_imovel(&c->imoveis[c->qtd_imoveis - 1], arq);
+        fscanf(arq, "\n");
     }
 }
 
-void altera_imovel(tCatalogo *c, tImovel *imo)
+void altera_imovel(tCatalogo *c, tImovel imo)
 {
     for(int i = 0; i < c->qtd_imoveis; i++)
     {
         if(compara_id(&c->imoveis[i], imo))
         {
-            c->qtd_imoveis[i] = imo;
+            c->imoveis[i] = imo;
             break;
         }
     }
@@ -31,11 +38,13 @@ void altera_imovel(tCatalogo *c, tImovel *imo)
 
 void inclusao_imovel(tCatalogo *c, tImovel *imo)
 {
-    c->qtd_imoveis[c->++qtd_imoveis] = imo;
+    c->qtd_imoveis++;
+    c->imoveis[c->qtd_imoveis] = imo;
 }
 
-void exclusao_imovel(tCatalogo *)
+void exclusao_imovel(tCatalogo *c, int num)
 {
+    
     for(int i = 0; i < c->qtd_imoveis; i++)
     {
         if(compara_id(&c->imoveis[i], imo))
@@ -55,18 +64,21 @@ void le_atual(tCatalogo *c, FILE *arq)
     tImovel aux;
     char acao;
 
-    while(feop(arq))
+    while(!feof(arq))
     {
+        tImovel aux;
+        int temp;
         fscanf(arq, "%c%*c", &acao);
         switch(acao)
         {
             case 'a': le_imovel(&aux, arq);
-                      altera_imovel(c, &aux);
+                      altera_imovel(c, aux);
                       break;
             case 'i': le_imovel(&aux, arq);
                       inclusao_imovel(c, &aux);
                       break;
-            case 'e': exclusao_imovel(c, arq);            
+            case 'e': fscanf(arq, "%d%*c", temp);
+                      exclusao_imovel(c, temp);            
         }
     }
 }
@@ -89,8 +101,8 @@ void ordena(tCatalogo *c, int (* cmp)(tImovel *, tImovel *))
             if((*cmp)(&c->imoveis[j], &c->imoveis[j+1]))
             {
                 aux = c->imoveis[j];
-                c->qtd_imoveis[j] = c->qtd_imoveis[j + 1];
-                c->qtd_imoveis[j + 1] = aux;
+                c->imoveis[j] = c->imoveis[j + 1];
+                c->imoveis[j + 1] = aux;
             }
         }
     }

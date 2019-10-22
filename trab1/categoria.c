@@ -5,6 +5,7 @@
 #include "casa.h"
 #include "apartamento.h"
 #include "categoria.h"
+#include "espec.h"
 
 void le_categoria(tCategoria *cat, int tipo, FILE * arq)
 {
