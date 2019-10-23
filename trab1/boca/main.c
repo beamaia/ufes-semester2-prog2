@@ -65,7 +65,9 @@ float preco_triangulo(tTriangulo *tri)
     switch (tri->solo)
     {
         case 'A': fator =  0.9 * tri->preco;
+                  break;
         case 'G': fator =  1.3 * tri->preco;
+                  break;
         case 'R': fator = 1.1 * tri->preco;
     }
 
@@ -113,7 +115,9 @@ float preco_trapezio(tTrapezio *tra)
     switch (tra->solo)
     {
         case 'A': fator =  0.9 * tra->preco;
+                  break;
         case 'G': fator =  1.3 * tra->preco;
+                  break;
         case 'R': fator = 1.1 * tra->preco;
     }
 
@@ -159,7 +163,9 @@ float preco_retangulo(tRetangulo *ret)
     switch (ret->solo)
     {
         case 'A': fator =  0.9 * ret->preco;
+                  break;
         case 'G': fator =  1.3 * ret->preco;
+                  break;
         case 'R': fator = 1.1 * ret->preco;
     }
     return area_retangulo(ret) * fator;
@@ -378,9 +384,9 @@ void preco_imovel(tImovel *imo)
     imo->preco = preco_imovel_categoria(&imo->categoria, identifica_categoria(imo));
 }
 
-float area_imovel(tImovel *imo)
+void area_imovel(tImovel *imo)
 {
-    return area_imovel_categoria(&imo->categoria, identifica_categoria(imo));
+    imo->area = area_imovel_categoria(&imo->categoria, identifica_categoria(imo));
 }
 
 int imovel_limite_area_preco(tImovel *imo, tEspec *espec)
@@ -481,8 +487,11 @@ void altera_imovel(tCatalogo *c, tImovel *imo)
 
 void inclusao_imovel(tCatalogo *c, tImovel *imo)
 {
+    if(c->qtd_imoveis == 300)
+        return;
+
     c->qtd_imoveis++;
-    c->imoveis[c->qtd_imoveis] = *imo;
+    c->imoveis[c->qtd_imoveis - 1] = *imo;
 }
 
 void exclusao_imovel(tCatalogo *c, tImovel *imo)
@@ -494,7 +503,7 @@ void exclusao_imovel(tCatalogo *c, tImovel *imo)
             c->qtd_imoveis--;
             for(int j = i; j < c->qtd_imoveis - 1; j++)
             {
-                c->imoveis[j] = c->imoveis[j + 1];
+                modifica_imovel(&c->imoveis[j], &c->imoveis[j + 1]);
             }
             break;
         }
@@ -505,11 +514,10 @@ void le_atual(tCatalogo *c, FILE *arq)
 {
     tImovel aux;
     char acao;
+    int temp;
 
     while(!feof(arq))
     {
-        tImovel aux;
-        int temp;
         fscanf(arq, "%c%*c", &acao);
         switch(acao)
         {
@@ -717,7 +725,7 @@ int main()
     le_espec(&espec, arq_espec);
     calcula_preco(&imoveis);
     calcula_area(&imoveis);
-    imoveis_mais_caros(&imoveis, &espec, &id);
+    // imoveis_mais_caros(&imoveis, &espec, &id);
     // terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
     // casas_limite(&imoveis, &casas, &id, &espec);
     // apresenta_catalogos(&imoveis, &argilosos, &casas, &id, &espec);
