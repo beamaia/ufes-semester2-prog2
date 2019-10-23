@@ -43,7 +43,12 @@ void le_imovel(tImovel *imo, FILE *arq)
 
 void modifica_imovel(tImovel *imo1, tImovel *imo2)
 {
-    imo1 = imo2;
+    strcpy(imo1->tipo_imovel, imo2->tipo_imovel);
+    strcpy(imo1->nome_proprietario, imo2->nome_proprietario);
+    imo1->id = imo2->id;
+    imo1->categoria = imo2->categoria;
+    imo1->preco = imo2->preco;
+    imo1->area = imo2->area;
 }
 
 void preco_imovel(tImovel *imo)

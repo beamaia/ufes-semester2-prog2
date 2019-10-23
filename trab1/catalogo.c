@@ -91,6 +91,14 @@ void calcula_preco(tCatalogo *c)
     }
 }
 
+void calcula_area(tCatalogo *c)
+{
+    for(int i = 0; i < c->qtd_imoveis; i++)
+    {
+        area_imovel(&c->imoveis[i]);
+    }
+}
+
 void ordena(tCatalogo *c, int (* cmp)(tImovel *, tImovel *))
 {
     tImovel aux;

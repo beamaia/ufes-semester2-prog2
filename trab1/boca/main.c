@@ -329,7 +329,7 @@ int categoria_identifica_argiloso(tCategoria *cat, int tipo)
 
 typedef struct 
 {
-    char tipo_imovel[6],
+    char tipo_imovel[7],
             nome_proprietario[MAX_NOME];
     unsigned int id;
     tCategoria categoria;
@@ -355,7 +355,7 @@ void le_imovel(tImovel *imo, FILE *arq)
 {
     fscanf(arq, "%s%*c", imo->tipo_imovel);
     fscanf(arq, "%d%*c", &imo->id);
-    fscanf(arq, "%[^\n]", imo->nome_proprietario);
+    fscanf(arq, "%[^\n]%*c ", imo->nome_proprietario);
     
     int cat = identifica_categoria(imo);
     le_categoria(&imo->categoria, cat, arq);
@@ -363,7 +363,14 @@ void le_imovel(tImovel *imo, FILE *arq)
 
 void modifica_imovel(tImovel *imo1, tImovel *imo2)
 {
-    imo1 = imo2;
+    strcpy(imo1->tipo_imovel, imo2->tipo_imovel);
+    strcpy(imo1->nome_proprietario, imo2->nome_proprietario);
+    imo1->id = imo2->id;
+    imo1->categoria = imo2->categoria;
+    imo1->preco = imo2->preco;
+    imo1->area = imo2->area;
+    imo1->preco = imo2->preco;
+    imo1->area = imo2->area;
 }
 
 void preco_imovel(tImovel *imo)
@@ -480,12 +487,12 @@ void inclusao_imovel(tCatalogo *c, tImovel *imo)
 
 void exclusao_imovel(tCatalogo *c, tImovel *imo)
 {
-        for(int i = 0; i < c->qtd_imoveis; i++)
+    for(int i = 0; i < c->qtd_imoveis; i++)
     {
         if(compara_id(&c->imoveis[i], imo))
         {
             c->qtd_imoveis--;
-            for(int j = i; j < c->qtd_imoveis; j++)
+            for(int j = i; j < c->qtd_imoveis - 1; j++)
             {
                 c->imoveis[j] = c->imoveis[j + 1];
             }
@@ -516,6 +523,7 @@ void le_atual(tCatalogo *c, FILE *arq)
                       acrescenta_id(&aux, temp);  
                       exclusao_imovel(c, &aux);            
         }
+        fscanf(arq, "%*c");
     }
 }
 
@@ -524,6 +532,14 @@ void calcula_preco(tCatalogo *c)
     for(int i = 0; i < c->qtd_imoveis; i++)
     {
         preco_imovel(&c->imoveis[i]);
+    }
+}
+
+void calcula_area(tCatalogo *c)
+{
+    for(int i = 0; i < c->qtd_imoveis; i++)
+    {
+        area_imovel(&c->imoveis[i]);
     }
 }
 
@@ -536,9 +552,9 @@ void ordena(tCatalogo *c, int (* cmp)(tImovel *, tImovel *))
         {
             if((*cmp)(&c->imoveis[j], &c->imoveis[j+1]))
             {
-                aux = c->imoveis[j];
-                c->imoveis[j] = c->imoveis[j + 1];
-                c->imoveis[j + 1] = aux;
+                modifica_imovel(&aux, &c->imoveis[j]);
+                modifica_imovel(&c->imoveis[j], &c->imoveis[j + 1]);
+                modifica_imovel(&c->imoveis[j + 1], &aux);
             }
         }
     }
@@ -681,9 +697,9 @@ void apresenta_catalogos(tCatalogo *c1, tCatalogo *c2, tCatalogo *c3, tIdentific
 
 int main()
 {
-    FILE *arq_cat = fopen("/home/bea/ufes/semestre-2/prog2b/trab1/1/catalogo.txt", "r");
-    FILE *arq_atual = fopen("/home/bea/ufes/semestre-2/prog2b/trab1/1/atual.txt", "r");
-    FILE *arq_espec = fopen("/home/bea/ufes/semestre-2/prog2b/trab1/1/espec.txt", "r");
+    FILE *arq_cat = fopen("/home/2019107651/ufes/semester-2/prog2b/trab1/1/catalogo.txt", "r");
+    FILE *arq_atual = fopen("/home/2019107651/ufes/semester-2/prog2b/trab1/1/atual.txt", "r");
+    FILE *arq_espec = fopen("/home/2019107651/ufes/semester-2/prog2b/trab1/1/espec.txt", "r");
 
     if(!arq_cat || !arq_atual || !arq_espec)
     {
@@ -699,8 +715,10 @@ int main()
     le_catalogo(&imoveis, arq_cat);
     le_atual(&imoveis, arq_atual);
     le_espec(&espec, arq_espec);
+    calcula_preco(&imoveis);
+    calcula_area(&imoveis);
     imoveis_mais_caros(&imoveis, &espec, &id);
-    terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
+    // terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
     // casas_limite(&imoveis, &casas, &id, &espec);
     // apresenta_catalogos(&imoveis, &argilosos, &casas, &id, &espec);
 

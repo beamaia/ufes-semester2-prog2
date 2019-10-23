@@ -24,6 +24,7 @@
     void exclusao_imovel(tCatalogo *, tImovel *);
     void le_atual(tCatalogo *, FILE *);
     void calcula_preco(tCatalogo *);
+    void calcula_area(tCatalogo *);
     void ordena(tCatalogo *, int (* cmp)(tImovel *, tImovel *));
     int calcula_qtd_caros(tCatalogo *, tEspec *);
     void imoveis_mais_caros(tCatalogo *, tEspec *, tIdentificadores *);

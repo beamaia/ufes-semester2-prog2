@@ -12,12 +12,12 @@
 
     typedef struct 
     {
-        char categoria[6],
-             nome_proprietario[MAX_NOME];
+        char tipo_imovel[7],
+                nome_proprietario[MAX_NOME];
         unsigned int id;
-        tCategoria tipo_imovel;
+        tCategoria categoria;
         float preco,
-              area;
+                area;
     } tImovel;
 
     int identifica_categoria(tImovel *);
