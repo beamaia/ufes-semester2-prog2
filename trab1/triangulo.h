@@ -5,8 +5,7 @@
     typedef struct 
     {
         float base,
-              altura,
-              area;
+              altura;
         char solo;
         unsigned int preco;
     } tTriangulo;

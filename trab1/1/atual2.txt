@@ -1,0 +1,50 @@
+i
+trapez
+41500
+Gabriella Siqueira Miranda
+R
+3548
+20.3
+693.1
+517.8
+
+i
+triang
+48658
+Amanda Loyola Goulart
+A
+202
+14.1
+740.5
+
+i
+trapez
+64532
+Pedro Salim Carone
+A
+8725
+373.6
+3.7
+268.3
+
+i
+trapez
+49055
+Marina De Lorenzo Azevedo
+A
+4987
+229.6
+821.7
+819.9
+
+i
+apto
+44955
+Thais Nobre De Morais
+1
+2
+5
+224.4
+3149
+N
+17

@@ -55,7 +55,7 @@ void le_triangulo(tTriangulo *tri, FILE *arq)
 //Calcula a area do terreno tipo triangulo
 float area_triangulo(tTriangulo *tri)
 {
-    tri->base * tri->altura / 2;
+    return (tri->base * tri->altura / 2.0);
 }
 
 //Calcula o preco do terreno tipo triangulo
@@ -64,11 +64,11 @@ float preco_triangulo(tTriangulo *tri)
     float fator;
     switch (tri->solo)
     {
-        case 'A': fator =  0.9 * tri->preco;
+        case 'A': fator =  0.9 * ((float) tri->preco);
                   break;
-        case 'G': fator =  1.3 * tri->preco;
+        case 'G': fator =  1.3 * ((float) tri->preco);
                   break;
-        case 'R': fator = 1.1 * tri->preco;
+        case 'R': fator = 1.1 * ((float) tri->preco);
     }
 
     return area_triangulo(tri) * fator;
@@ -105,20 +105,21 @@ void le_trapezio(tTrapezio *tra, FILE *arq)
 //Calcula a area do terreno tipo trapezio
 float area_trapezio(tTrapezio *tra)
 {
-    return (tra->base1 + tra->base2) * tra->altura / 2;
+    float x = ((tra->base1 + tra->base2) * tra->altura) / ((float) 2.0);
+    return x;
 }
 
 //Calcula o preco do terreno tipo trapezio
 float preco_trapezio(tTrapezio *tra)
 {
-    float fator;
+    float fator = 0;
     switch (tra->solo)
     {
-        case 'A': fator =  0.9 * tra->preco;
+        case 'A': fator = 0.9 * ((float) tra->preco);
                   break;
-        case 'G': fator =  1.3 * tra->preco;
+        case 'G': fator = 1.3 * ((float) tra->preco);
                   break;
-        case 'R': fator = 1.1 * tra->preco;
+        case 'R': fator = 1.1 * ((float) tra->preco);
     }
 
     return area_trapezio(tra) * fator;
@@ -162,11 +163,11 @@ float preco_retangulo(tRetangulo *ret)
     float fator;
     switch (ret->solo)
     {
-        case 'A': fator =  0.9 * ret->preco;
+        case 'A': fator = 0.9 * ((float) ret->preco);
                   break;
-        case 'G': fator =  1.3 * ret->preco;
+        case 'G': fator = 1.3 * ((float) ret->preco);
                   break;
-        case 'R': fator = 1.1 * ret->preco;
+        case 'R': fator = 1.1 * ((float) ret->preco);
     }
     return area_retangulo(ret) * fator;
 }
@@ -464,7 +465,7 @@ void inicializa_catalogo(tCatalogo *c)
 
 void le_catalogo(tCatalogo *c, FILE *arq)
 {
-    while(!feof(arq))
+    while(!feof(arq) && c->qtd_imoveis < 301)
     {
         c->qtd_imoveis++;
         le_imovel(&c->imoveis[c->qtd_imoveis - 1], arq);
@@ -516,7 +517,7 @@ void le_atual(tCatalogo *c, FILE *arq)
     char acao;
     int temp;
 
-    while(!feof(arq))
+    while(!feof(arq) && (c->qtd_imoveis < 301))
     {
         fscanf(arq, "%c%*c", &acao);
         switch(acao)
@@ -705,9 +706,9 @@ void apresenta_catalogos(tCatalogo *c1, tCatalogo *c2, tCatalogo *c3, tIdentific
 
 int main()
 {
-    FILE *arq_cat = fopen("/home/2019107651/ufes/semester-2/prog2b/trab1/1/catalogo.txt", "r");
-    FILE *arq_atual = fopen("/home/2019107651/ufes/semester-2/prog2b/trab1/1/atual.txt", "r");
-    FILE *arq_espec = fopen("/home/2019107651/ufes/semester-2/prog2b/trab1/1/espec.txt", "r");
+    FILE *arq_cat = fopen("/home/bmsmaia/ufes/semestre2/prog2/trab1/1/catalogo.txt", "r");
+    FILE *arq_atual = fopen("/home/bmsmaia/ufes/semestre2/prog2/trab1/1/atual.txt", "r");
+    FILE *arq_espec = fopen("/home/bmsmaia/ufes/semestre2/prog2/trab1/1/espec.txt", "r");
 
     if(!arq_cat || !arq_atual || !arq_espec)
     {
@@ -723,9 +724,9 @@ int main()
     le_catalogo(&imoveis, arq_cat);
     le_atual(&imoveis, arq_atual);
     le_espec(&espec, arq_espec);
-    calcula_preco(&imoveis);
     calcula_area(&imoveis);
-    // imoveis_mais_caros(&imoveis, &espec, &id);
+    calcula_preco(&imoveis);
+    imoveis_mais_caros(&imoveis, &espec, &id);
     // terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
     // casas_limite(&imoveis, &casas, &id, &espec);
     // apresenta_catalogos(&imoveis, &argilosos, &casas, &id, &espec);
