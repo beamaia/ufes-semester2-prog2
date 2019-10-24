@@ -256,7 +256,7 @@ float preco_apartamento(tApartamento *apto)
 {
     float lazer = 1;
     if(apto->lazer == 'S')
-        lazer = 1.5;
+        lazer = 1.15;
     
     return apto->preco * apto->area * (0.9 + ((float) apto->andar)/apto->andares_total) * lazer;
 }
@@ -707,9 +707,13 @@ void apresenta_catalogos(tCatalogo *c1, tCatalogo *c2, tCatalogo *c3, tIdentific
 
 int main()
 {
-    FILE *arq_cat = fopen("/home/bmsmaia/ufes/semestre2/prog2/trab1/1/catalogo.txt", "r");
-    FILE *arq_atual = fopen("/home/bmsmaia/ufes/semestre2/prog2/trab1/1/atual.txt", "r");
-    FILE *arq_espec = fopen("/home/bmsmaia/ufes/semestre2/prog2/trab1/1/espec.txt", "r");
+    char arq_path[150];
+    scanf("%s", arq_path);
+    FILE *arq_cat = fopen(arq_path, "r");
+    scanf("%s", arq_path);
+    FILE *arq_atual = fopen(arq_path, "r");
+    scanf("%s", arq_path);
+    FILE *arq_espec = fopen(arq_path, "r");
 
     if(!arq_cat || !arq_atual || !arq_espec)
     {

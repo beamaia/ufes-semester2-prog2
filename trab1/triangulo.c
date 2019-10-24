@@ -13,7 +13,7 @@ void le_triangulo(tTriangulo *tri, FILE *arq)
 //Calcula a area do terreno tipo triangulo
 float area_triangulo(tTriangulo *tri)
 {
-    tri->base * tri->altura / 2;
+    return (tri->base * tri->altura / 2.0);
 }
 
 //Calcula o preco do terreno tipo triangulo
@@ -22,9 +22,11 @@ float preco_triangulo(tTriangulo *tri)
     float fator;
     switch (tri->solo)
     {
-        case 'A': fator =  0.9 * tri->preco;
-        case 'G': fator =  1.3 * tri->preco;
-        case 'R': fator = 1.1 * tri->preco;
+        case 'A': fator =  0.9 * ((float) tri->preco);
+                  break;
+        case 'G': fator =  1.3 * ((float) tri->preco);
+                  break;
+        case 'R': fator = 1.1 * ((float) tri->preco);
     }
 
     return area_triangulo(tri) * fator;
@@ -33,7 +35,7 @@ float preco_triangulo(tTriangulo *tri)
 //Verifica se o solo do terreno tipo triangulo e argiloso
 int solo_argiloso_triangulo(tTriangulo *tri)
 {
-    if(tri->solo == 'A')
+    if(tri->solo == 'G')
         return 1;
     
     return 0;

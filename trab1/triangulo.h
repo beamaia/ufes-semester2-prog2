@@ -2,6 +2,7 @@
     #define _TRIANGULO
     #include <stdio.h>
 
+    //Dados do terrento tipo triangulo. Base, altura, tipo de solo e preco do m2
     typedef struct 
     {
         float base,
