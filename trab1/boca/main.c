@@ -77,7 +77,7 @@ float preco_triangulo(tTriangulo *tri)
 //Verifica se o solo do terreno tipo triangulo e argiloso
 int solo_argiloso_triangulo(tTriangulo *tri)
 {
-    if(tri->solo == 'A')
+    if(tri->solo == 'G')
         return 1;
     
     return 0;
@@ -128,7 +128,7 @@ float preco_trapezio(tTrapezio *tra)
 //Verifica se o solo do terreno tipo trapezio e argiloso
 int solo_argiloso_trapezio(tTrapezio *tra)
 {
-    if(tra->solo == 'A')
+    if(tra->solo == 'G')
         return 1;
     
     return 0;
@@ -175,7 +175,7 @@ float preco_retangulo(tRetangulo *ret)
 //Verifica se o solo do terreno tipo retangulo e argiloso
 int solo_argiloso_retangulo(tRetangulo *ret)
 {
-    if(ret->solo == 'A')
+    if(ret->solo == 'G')
         return 1;
     
     return 0;
@@ -327,8 +327,8 @@ int categoria_identifica_argiloso(tCategoria *cat, int tipo)
     switch(tipo)
     {
         case 1: return solo_argiloso_triangulo(&cat->tri);
-        case 2: return solo_argiloso_trapezio(&cat->tra);
-        case 3: return solo_argiloso_retangulo(&cat->ret);
+        case 2: return solo_argiloso_retangulo(&cat->ret);
+        case 3: return solo_argiloso_trapezio(&cat->tra);
     }
 
     return 0;
@@ -410,8 +410,8 @@ void acrescenta_id(tImovel *imo, int id)
 
 int compara_quartos(tImovel *imo1, tImovel *imo2)
 {
-    int situacao = compara_quartos(imo1, imo2);
-    if(situacao == 1 || (situacao == 2 && imo1->id > imo2->id))
+    int situacao = categoria_compara_quartos(&imo1->categoria, &imo2->categoria);
+    if(situacao == 1 || (situacao == 2 && imo1->id < imo2->id))
         return 1;
 
     return 0;
@@ -419,7 +419,7 @@ int compara_quartos(tImovel *imo1, tImovel *imo2)
 
 int compara_preco(tImovel *imo1, tImovel *imo2)
 {
-    if(imo1->preco > imo2->preco || (imo1->preco == imo2->preco && imo1->id < imo2->id))
+    if(imo1->preco > imo2->preco || (imo1->preco == imo2->preco && imo1->id > imo2->id))
         return 1;
 
     return 0;
@@ -449,7 +449,7 @@ int imovel_identifica_argiloso(tImovel *imo)
 
 void imovel_apresenta_identificador(tImovel *imo)
 {
-    printf("%d ", imo->id);
+    printf("%d", imo->id);
 }
 
 
@@ -458,6 +458,7 @@ typedef struct
     tImovel imoveis[MAX_IMO];
     unsigned int qtd_imoveis;
 } tCatalogo;
+
 void inicializa_catalogo(tCatalogo *c)
 {
     c->qtd_imoveis = 0;
@@ -491,8 +492,8 @@ void inclusao_imovel(tCatalogo *c, tImovel *imo)
     if(c->qtd_imoveis == 300)
         return;
 
+    c->imoveis[c->qtd_imoveis] = *imo;
     c->qtd_imoveis++;
-    c->imoveis[c->qtd_imoveis - 1] = *imo;
 }
 
 void exclusao_imovel(tCatalogo *c, tImovel *imo)
@@ -502,7 +503,7 @@ void exclusao_imovel(tCatalogo *c, tImovel *imo)
         if(compara_id(&c->imoveis[i], imo))
         {
             c->qtd_imoveis--;
-            for(int j = i; j < c->qtd_imoveis - 1; j++)
+            for(int j = i; j < c->qtd_imoveis; j++)
             {
                 modifica_imovel(&c->imoveis[j], &c->imoveis[j + 1]);
             }
@@ -559,7 +560,7 @@ void ordena(tCatalogo *c, int (* cmp)(tImovel *, tImovel *))
     {
         for(int j = 0; j < c->qtd_imoveis - i - 1; j++)
         {
-            if((*cmp)(&c->imoveis[j], &c->imoveis[j+1]))
+            if((*cmp)(&c->imoveis[j], &c->imoveis[j + 1]))
             {
                 modifica_imovel(&aux, &c->imoveis[j]);
                 modifica_imovel(&c->imoveis[j], &c->imoveis[j + 1]);
@@ -577,38 +578,31 @@ int calcula_qtd_caros(tCatalogo *c1, tEspec *espec)
 void imoveis_mais_caros(tCatalogo *c, tEspec *espec, tIdentificadores *id)
 {
     ordena(c, compara_preco);
+    int limite = calcula_qtd_caros(c, espec);
     if(espec->i > c->qtd_imoveis || espec->i == 0)
     {
         id->i = 0;
     }
     else
     {
-        id->i = identifica_id(&c->imoveis[espec->i - 1]);
+        id->i = identifica_id(&c->imoveis[espec->i - 1 + c->qtd_imoveis - limite]);
     }
 }
 
 int calcula_qtd_argilosos(tCatalogo *c, tEspec *espec)
 {
-    return espec->percent_argiloso * c->qtd_imoveis;
+    return espec->percent_argiloso * c->qtd_imoveis / 100;
 }
 
 void catalogo_argiloso(tCatalogo *c1, tCatalogo *c2, tEspec *espec)
 {
-    for(int i = 0, j = 0; i < c1->qtd_imoveis; i++)
+    inicializa_catalogo(c2);
+    for(int i = 0; i < c1->qtd_imoveis; i++)
     {
-        for(; j < c1->qtd_imoveis; j++)
+        if(imovel_identifica_argiloso(&c1->imoveis[i]))
         {
-            if(imovel_identifica_argiloso(&c1->imoveis[j]))
-            {
-                c2->imoveis[i] = c1->imoveis[j];
-                break;
-            }
-        }
-
-        if(j == c1->qtd_imoveis)
-        {
-            c2->qtd_imoveis = i;
-            break;
+            modifica_imovel(&c2->imoveis[c2->qtd_imoveis], &c1->imoveis[i]);
+            c2->qtd_imoveis++;
         }
     }
 }
@@ -631,22 +625,17 @@ void terrenos_argilosos_menores(tCatalogo *c1, tCatalogo *c2, tIdentificadores *
 
 void catalogo_casas(tCatalogo *c1, tCatalogo *c2, tEspec *espec)
 {
-    for(int i = 0, j = 0; i < c1->qtd_imoveis; i++)
+    inicializa_catalogo(c2);
+    for(int i = 0; i < c1->qtd_imoveis; i++)
     {
-        for(; j < c1->qtd_imoveis; j++)
+        if(identifica_categoria(&c1->imoveis[i]) == 4)
         {
-            if(imovel_limite_area_preco(&c1->imoveis[j], espec))
+            if(imovel_limite_area_preco(&c1->imoveis[i], espec))
             {
-                c2->imoveis[i] = c1->imoveis[j];
-                break;
+                modifica_imovel(&c2->imoveis[c2->qtd_imoveis], &c1->imoveis[i]);
+                c2->qtd_imoveis++;
             }
-        }
-
-        if(j == c1->qtd_imoveis)
-        {
-            c2->qtd_imoveis = i;
-            break;
-        }
+        }       
     }
 }
 
@@ -670,6 +659,10 @@ void apresenta_imoveis_caros(tCatalogo *c, int limite)
     for(int i = c->qtd_imoveis - limite; i < c->qtd_imoveis; i++)
     {
         imovel_apresenta_identificador(&c->imoveis[i]);
+        if(i != c->qtd_imoveis - 1)
+        {
+            printf(", ");
+        }
     }
 
     printf("\n");
@@ -678,9 +671,13 @@ void apresenta_imoveis_caros(tCatalogo *c, int limite)
 
 void apresenta_terrenos_argilosos(tCatalogo *c, int limite)
 {
-    for(int i = limite; i >= 0; i--)
+    for(int i = c->qtd_imoveis - limite; i < c->qtd_imoveis; i++)
     {
         imovel_apresenta_identificador(&c->imoveis[i]);
+        if(i != c->qtd_imoveis - 1)
+        {
+            printf(", ");
+        }
     }
 
     printf("\n");
@@ -691,6 +688,10 @@ void apresenta_casas_limite(tCatalogo *c)
     for(int i = 0; i < c->qtd_imoveis; i++)
     {
         imovel_apresenta_identificador(&c->imoveis[i]);
+        if(i != c->qtd_imoveis - 1)
+        {
+            printf(", ");
+        }
     }
 
     printf("\n");
@@ -727,9 +728,9 @@ int main()
     calcula_area(&imoveis);
     calcula_preco(&imoveis);
     imoveis_mais_caros(&imoveis, &espec, &id);
-    // terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
-    // casas_limite(&imoveis, &casas, &id, &espec);
-    // apresenta_catalogos(&imoveis, &argilosos, &casas, &id, &espec);
+    terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
+    casas_limite(&imoveis, &casas, &id, &espec);
+    apresenta_catalogos(&imoveis, &argilosos, &casas, &id, &espec);
 
     fclose(arq_atual);
     fclose(arq_cat);
