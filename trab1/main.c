@@ -12,9 +12,9 @@
 
 int main()
 {
-    FILE *arq_cat = fopen("1/catalogo.txt", "r");
-    FILE *arq_atual = fopen("1/atual.txt", "r");
-    FILE *arq_espec = fopen("1/espec.txt", "r");
+    FILE *arq_cat = fopen("catalogo.txt", "r");
+    FILE *arq_atual = fopen("atual.txt", "r");
+    FILE *arq_espec = fopen("espec.txt", "r");
 
     if(!arq_cat || !arq_atual || !arq_espec)
     {
@@ -26,13 +26,19 @@ int main()
     tEspec espec;
     tIdentificadores id;
 
+    inicializa_catalogo(&imoveis);
     le_catalogo(&imoveis, arq_cat);
     le_atual(&imoveis, arq_atual);
     le_espec(&espec, arq_espec);
+    calcula_area(&imoveis);
+    calcula_preco(&imoveis);
     imoveis_mais_caros(&imoveis, &espec, &id);
     terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
-    casa_limite(&imoveis, &casas, &id, &espec);
-    apresenta_catalogo(&imoveis, &argilosos, &casas, &id);
+    casas_limite(&imoveis, &casas, &id, &espec);
+    apresenta_catalogos(&imoveis, &argilosos, &casas, &id, &espec);
 
+    fclose(arq_atual);
+    fclose(arq_cat);
+    fclose(arq_espec);
     return 0;
 }

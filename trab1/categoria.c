@@ -42,7 +42,7 @@ float area_imovel_categoria(tCategoria * cat, int tipo)
         case 1: return area_triangulo(&cat->tri);
         case 2: return area_retangulo(&cat->ret);
         case 3: return area_trapezio(&cat->tra);
-        case 4: return area_casa(&cat->casa);
+        case 4: return area_cons_casa(&cat->casa);
         case 5: return area_apartamento(&cat->apto);
     }
 
@@ -58,9 +58,9 @@ int categoria_identifica_argiloso(tCategoria *cat, int tipo)
 {
     switch(tipo)
     {
-        case 1: return solo_argilosos_triangulo(&cat->tri);
-        case 2: return solo_argilosos_traprezio(&cat->tra);
-        case 3: return solo_argilosos_retangulo(&cat->ret);
+        case 1: return solo_argiloso_triangulo(&cat->tri);
+        case 2: return solo_argiloso_retangulo(&cat->ret);
+        case 3: return solo_argiloso_trapezio(&cat->tra);
     }
 
     return 0;

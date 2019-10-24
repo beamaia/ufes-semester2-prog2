@@ -15,5 +15,6 @@
     
     void le_apartamento(tApartamento *, FILE *);
     float preco_apartamento(tApartamento *);
-    
+    float area_apartamento(tApartamento *);
+
 #endif

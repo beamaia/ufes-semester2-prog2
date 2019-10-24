@@ -13,18 +13,18 @@
     typedef struct 
     {
         char tipo_imovel[7],
-                nome_proprietario[MAX_NOME];
+             nome_proprietario[MAX_NOME];
         unsigned int id;
         tCategoria categoria;
         float preco,
-                area;
+              area;
     } tImovel;
 
     int identifica_categoria(tImovel *);
     void le_imovel(tImovel *, FILE *);
     void modifica_imovel(tImovel *, tImovel *);
     void preco_imovel(tImovel *);
-    float area_imovel(tImovel *);
+    void area_imovel(tImovel *);
     int imovel_limite_area_preco(tImovel *, tEspec *);
     int compara_id(tImovel *, tImovel *);
     void acrescenta_id(tImovel *, int);

@@ -19,26 +19,26 @@ Identifica qual e a categoria escolhida.
 */
 int identifica_categoria(tImovel *imo)
 {
-    if(!strcmp(imo->categoria, "triang"))
+    if(!strcmp(imo->tipo_imovel, "triang"))
         return 1;
-    if(!strcmp(imo->categoria, "retang"))
+    if(!strcmp(imo->tipo_imovel, "retang"))
         return 2;
-    if(!strcmp(imo->categoria, "trapez"))
+    if(!strcmp(imo->tipo_imovel, "trapez"))
         return 3;
-    if(!strcmp(imo->categoria, "casa"))
+    if(!strcmp(imo->tipo_imovel, "casa"))
         return 4;
-    if(!strcmp(imo->categoria, "apto"))
+    if(!strcmp(imo->tipo_imovel, "apto"))
         return 5;
 }
 
 void le_imovel(tImovel *imo, FILE *arq)
 {
-    fscanf(arq, "%s%*c", imo->categoria);
+    fscanf(arq, "%s%*c", imo->tipo_imovel);
     fscanf(arq, "%d%*c", &imo->id);
-    fscanf(arq, "%[^\n]", &imo->nome_proprietario);
+    fscanf(arq, "%[^\n]%*c ", imo->nome_proprietario);
     
     int cat = identifica_categoria(imo);
-    le_categoria(&imo->tipo_imovel, cat, arq);
+    le_categoria(&imo->categoria, cat, arq);
 }
 
 void modifica_imovel(tImovel *imo1, tImovel *imo2)
@@ -49,6 +49,8 @@ void modifica_imovel(tImovel *imo1, tImovel *imo2)
     imo1->categoria = imo2->categoria;
     imo1->preco = imo2->preco;
     imo1->area = imo2->area;
+    imo1->preco = imo2->preco;
+    imo1->area = imo2->area;
 }
 
 void preco_imovel(tImovel *imo)
@@ -56,9 +58,9 @@ void preco_imovel(tImovel *imo)
     imo->preco = preco_imovel_categoria(&imo->categoria, identifica_categoria(imo));
 }
 
-float area_imovel(tImovel *imo)
+void area_imovel(tImovel *imo)
 {
-    return area_imovel_categoria(&imo->categoria, identifica_categoria(imo));
+    imo->area = area_imovel_categoria(&imo->categoria, identifica_categoria(imo));
 }
 
 int imovel_limite_area_preco(tImovel *imo, tEspec *espec)
@@ -81,8 +83,8 @@ void acrescenta_id(tImovel *imo, int id)
 
 int compara_quartos(tImovel *imo1, tImovel *imo2)
 {
-    int situacao = compara_quartos(&imo1->tipo_imovel, &imo2->tipo_imovel);
-    if(situacao == 1 || (situacao == 2 && imo1->id > imo2->id))
+    int situacao = categoria_compara_quartos(&imo1->categoria, &imo2->categoria);
+    if(situacao == 1 || (situacao == 2 && imo1->id < imo2->id))
         return 1;
 
     return 0;
@@ -90,7 +92,7 @@ int compara_quartos(tImovel *imo1, tImovel *imo2)
 
 int compara_preco(tImovel *imo1, tImovel *imo2)
 {
-    if(imo1->preco > imo2->preco || (imo1->preco == imo2->preco && imo1->id < imo2->id))
+    if(imo1->preco > imo2->preco || (imo1->preco == imo2->preco && imo1->id > imo2->id))
         return 1;
 
     return 0;
@@ -111,8 +113,8 @@ int identifica_id(tImovel *imo)
 
 int imovel_identifica_argiloso(tImovel *imo)
 {
-    int tipo_solo = identifica_categoria(imo);
-    if(categoria_identifica_argiloso(imo, tipo_solo))
+    int tipo_imovel = identifica_categoria(imo);
+    if(categoria_identifica_argiloso(&imo->categoria, tipo_imovel))
         return 1;
     
     return 0;
@@ -120,5 +122,5 @@ int imovel_identifica_argiloso(tImovel *imo)
 
 void imovel_apresenta_identificador(tImovel *imo)
 {
-    printf("%d ", imo->id);
+    printf("%d", imo->id);
 }

@@ -26,7 +26,6 @@ void le_espec(tEspec * esp, FILE * arq)
                                   &esp->k);
 }
 
-
 typedef struct 
 {
     unsigned int i,
