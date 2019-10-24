@@ -120,7 +120,7 @@ int imovel_identifica_argiloso(tImovel *imo)
     return 0;
 }
 
-void imovel_apresenta_identificador(tImovel *imo)
+void imovel_apresenta_identificador(tImovel *imo, FILE *arq)
 {
-    printf("%d", imo->id);
+    fprintf(arq, "%d", imo->id);
 }

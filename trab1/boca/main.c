@@ -576,6 +576,11 @@ int calcula_qtd_caros(tCatalogo *c1, tEspec *espec)
 
 void imoveis_mais_caros(tCatalogo *c, tEspec *espec, tIdentificadores *id)
 {
+    if(!c->qtd_imoveis)
+    {
+        return;
+    }
+
     ordena(c, compara_preco);
     int limite = calcula_qtd_caros(c, espec);
     if(espec->i > c->qtd_imoveis || espec->i == 0)
@@ -609,6 +614,11 @@ void catalogo_argiloso(tCatalogo *c1, tCatalogo *c2, tEspec *espec)
 void terrenos_argilosos_menores(tCatalogo *c1, tCatalogo *c2, tIdentificadores *id, tEspec *espec)
 {
     catalogo_argiloso(c1, c2, espec);
+    if(!c2->qtd_imoveis)
+    {
+        return;
+    }
+
     ordena(c2, compara_area);
 
     if(espec->j > c2->qtd_imoveis || espec->j == 0)
@@ -641,6 +651,12 @@ void catalogo_casas(tCatalogo *c1, tCatalogo *c2, tEspec *espec)
 void casas_limite(tCatalogo *c1, tCatalogo *c2, tIdentificadores *id, tEspec *espec)
 {
     catalogo_casas(c1, c2, espec);
+
+    if(!c2->qtd_imoveis)
+    {
+        return;
+    }
+
     ordena(c2, compara_quartos);
     
     if(espec->k > c2->qtd_imoveis || espec->k == 0)

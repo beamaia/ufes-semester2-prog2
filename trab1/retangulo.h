@@ -11,7 +11,7 @@
     } tRetangulo;
     
     void le_retangulo(tRetangulo *, FILE *);
-    float area_retagulo(tRetangulo *);
+    float area_retangulo(tRetangulo *);
     float preco_retangulo(tRetangulo *);
     int solo_argiloso_retangulo(tRetangulo *);
 

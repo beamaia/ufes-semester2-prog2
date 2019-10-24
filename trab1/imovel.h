@@ -33,6 +33,6 @@
     int compara_area(tImovel *, tImovel *);
     int identifica_id(tImovel *);
     int imovel_identifica_argiloso(tImovel *);
-    void imovel_apresenta_identificador(tImovel *);
+    void imovel_apresenta_identificador(tImovel *, FILE *);
 
 #endif

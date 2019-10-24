@@ -33,9 +33,9 @@
     void terrenos_argilosos_menores(tCatalogo *, tCatalogo *, tIdentificadores *, tEspec *);
     void catalogo_casas(tCatalogo *, tCatalogo *, tEspec *);
     void casas_limite(tCatalogo *, tCatalogo *, tIdentificadores *, tEspec *);
-    void apresenta_imoveis_caros(tCatalogo *, int);
-    void apresenta_terrenos_argilosos(tCatalogo *, int);
-    void apresenta_casas_limite(tCatalogo *);
+    void apresenta_imoveis_caros(tCatalogo *, int, FILE *);
+    void apresenta_terrenos_argilosos(tCatalogo *, int, FILE *);
+    void apresenta_casas_limite(tCatalogo *, FILE *);
     void apresenta_catalogos(tCatalogo *, tCatalogo *, tCatalogo *, tIdentificadores *, tEspec *);
 
 #endif

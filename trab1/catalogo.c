@@ -127,6 +127,10 @@ int calcula_qtd_caros(tCatalogo *c1, tEspec *espec)
 
 void imoveis_mais_caros(tCatalogo *c, tEspec *espec, tIdentificadores *id)
 {
+    if(!c->qtd_imoveis)
+    {
+        return;
+    }
     ordena(c, compara_preco);
     int limite = calcula_qtd_caros(c, espec);
     if(espec->i > c->qtd_imoveis || espec->i == 0)
@@ -160,6 +164,12 @@ void catalogo_argiloso(tCatalogo *c1, tCatalogo *c2, tEspec *espec)
 void terrenos_argilosos_menores(tCatalogo *c1, tCatalogo *c2, tIdentificadores *id, tEspec *espec)
 {
     catalogo_argiloso(c1, c2, espec);
+
+    if(!c2->qtd_imoveis)
+    {
+        return;
+    }
+
     ordena(c2, compara_area);
 
     if(espec->j > c2->qtd_imoveis || espec->j == 0)
@@ -192,6 +202,12 @@ void catalogo_casas(tCatalogo *c1, tCatalogo *c2, tEspec *espec)
 void casas_limite(tCatalogo *c1, tCatalogo *c2, tIdentificadores *id, tEspec *espec)
 {
     catalogo_casas(c1, c2, espec);
+
+    if(!c2->qtd_imoveis)
+    {
+        return;
+    }
+
     ordena(c2, compara_quartos);
     
     if(espec->k > c2->qtd_imoveis || espec->k == 0)
@@ -204,53 +220,54 @@ void casas_limite(tCatalogo *c1, tCatalogo *c2, tIdentificadores *id, tEspec *es
     }
 }
 
-void apresenta_imoveis_caros(tCatalogo *c, int limite)
+void apresenta_imoveis_caros(tCatalogo *c, int limite, FILE *arq)
 {
     for(int i = c->qtd_imoveis - limite; i < c->qtd_imoveis; i++)
     {
-        imovel_apresenta_identificador(&c->imoveis[i]);
+        imovel_apresenta_identificador(&c->imoveis[i], arq);
         if(i != c->qtd_imoveis - 1)
         {
-            printf(", ");
+            fprintf(arq, ", ");
         }
     }
 
-    printf("\n");
+    fprintf(arq, "\n");
 
 }
 
-void apresenta_terrenos_argilosos(tCatalogo *c, int limite)
+void apresenta_terrenos_argilosos(tCatalogo *c, int limite, FILE *arq)
 {
     for(int i = c->qtd_imoveis - limite; i < c->qtd_imoveis; i++)
     {
-        imovel_apresenta_identificador(&c->imoveis[i]);
+        imovel_apresenta_identificador(&c->imoveis[i], arq);
         if(i != c->qtd_imoveis - 1)
         {
-            printf(", ");
+            fprintf(arq, ", ");
         }
     }
 
-    printf("\n");
+    fprintf(arq, "\n");
 }
 
-void apresenta_casas_limite(tCatalogo *c)
+void apresenta_casas_limite(tCatalogo *c, FILE *arq)
 {
     for(int i = 0; i < c->qtd_imoveis; i++)
     {
-        imovel_apresenta_identificador(&c->imoveis[i]);
+        imovel_apresenta_identificador(&c->imoveis[i], arq);
         if(i != c->qtd_imoveis - 1)
         {
-            printf(", ");
+            fprintf(arq, ", ");
         }
     }
 
-    printf("\n");
+    fprintf(arq, "\n");
 }
 
 void apresenta_catalogos(tCatalogo *c1, tCatalogo *c2, tCatalogo *c3, tIdentificadores *id, tEspec *espec)
 {
-    printf("%d\n", id->i + id->j + id->k);
-    apresenta_imoveis_caros(c1, calcula_qtd_caros(c1, espec));
-    apresenta_terrenos_argilosos(c2, calcula_qtd_argilosos(c2, espec));
-    apresenta_casas_limite(c3);
+    FILE * arq_saida = fopen("saida.txt", "w");
+    fprintf(arq_saida, "%d\n", id->i + id->j + id->k);
+    apresenta_imoveis_caros(c1, calcula_qtd_caros(c1, espec), arq_saida);
+    apresenta_terrenos_argilosos(c2, calcula_qtd_argilosos(c2, espec), arq_saida);
+    apresenta_casas_limite(c3, arq_saida);
 }
