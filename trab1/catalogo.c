@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "triangulo.h"
 #include "retangulo.h"
 #include "trapezio.h"
@@ -18,8 +19,10 @@ void le_catalogo(tCatalogo *c, FILE *arq)
 {
     while(!feof(arq) && c->qtd_imoveis < 301)
     {
-        c->qtd_imoveis++;
-        le_imovel(&c->imoveis[c->qtd_imoveis - 1], arq);
+        if(le_imovel(&c->imoveis[c->qtd_imoveis], arq))
+        {
+            c->qtd_imoveis++;
+        }
         fscanf(arq, "\n");
 
     }
@@ -230,8 +233,8 @@ void apresenta_imoveis_caros(tCatalogo *c, int limite, FILE *arq)
             fprintf(arq, ", ");
         }
     }
-
-    fprintf(arq, "\n");
+    if(c->qtd_imoveis)
+        fprintf(arq, "\n");
 
 }
 
@@ -244,9 +247,9 @@ void apresenta_terrenos_argilosos(tCatalogo *c, int limite, FILE *arq)
         {
             fprintf(arq, ", ");
         }
-    }
-
-    fprintf(arq, "\n");
+        }
+    if(c->qtd_imoveis)
+        fprintf(arq, "\n");
 }
 
 void apresenta_casas_limite(tCatalogo *c, FILE *arq)
@@ -259,15 +262,21 @@ void apresenta_casas_limite(tCatalogo *c, FILE *arq)
             fprintf(arq, ", ");
         }
     }
-
-    fprintf(arq, "\n");
+    if(c->qtd_imoveis)
+     fprintf(arq, "\n");
 }
 
 void apresenta_catalogos(tCatalogo *c1, tCatalogo *c2, tCatalogo *c3, tIdentificadores *id, tEspec *espec)
 {
     FILE * arq_saida = fopen("saida.txt", "w");
+    if(!arq_saida)
+    {
+        printf("Arquivo não encontrado\n");
+        exit(1);    
+    }
     fprintf(arq_saida, "%d\n", id->i + id->j + id->k);
     apresenta_imoveis_caros(c1, calcula_qtd_caros(c1, espec), arq_saida);
     apresenta_terrenos_argilosos(c2, calcula_qtd_argilosos(c2, espec), arq_saida);
     apresenta_casas_limite(c3, arq_saida);
+    fclose(arq_saida);
 }

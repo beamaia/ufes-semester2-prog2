@@ -7,19 +7,20 @@
 #include "categoria.h"
 #include "espec.h"
 
-void le_categoria(tCategoria *cat, int tipo, FILE * arq)
+int le_categoria(tCategoria *cat, int tipo, FILE * arq)
 {
     switch (tipo)
     {
         case 1: le_triangulo(&cat->tri, arq);
-                return;
+                return 1;
         case 2: le_retangulo(&cat->ret, arq);
-                return;
+                return 1;
         case 3: le_trapezio(&cat->tra, arq);
-                return;
+                return 1;
         case 4: le_casa(&cat->casa, arq);
-                return;
+                return 1;
         case 5: le_apartamento(&cat->apto, arq);
+                return 1;
     }
 }
 

@@ -21,7 +21,7 @@
     } tImovel;
 
     int identifica_categoria(tImovel *);
-    void le_imovel(tImovel *, FILE *);
+    int le_imovel(tImovel *, FILE *);
     void modifica_imovel(tImovel *, tImovel *);
     void preco_imovel(tImovel *);
     void area_imovel(tImovel *);

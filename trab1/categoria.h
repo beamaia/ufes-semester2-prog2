@@ -17,7 +17,7 @@
         tApartamento apto;
     } tCategoria;
 
-    void le_categoria(tCategoria *, int, FILE *);
+    int le_categoria(tCategoria *, int, FILE *);
     float preco_imovel_categoria(tCategoria *, int);
     float area_imovel_categoria(tCategoria *, int);
     int categoria_compara_quartos(tCategoria *, tCategoria *);

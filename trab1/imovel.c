@@ -31,14 +31,14 @@ int identifica_categoria(tImovel *imo)
         return 5;
 }
 
-void le_imovel(tImovel *imo, FILE *arq)
+int le_imovel(tImovel *imo, FILE *arq)
 {
     fscanf(arq, "%s%*c", imo->tipo_imovel);
     fscanf(arq, "%d%*c", &imo->id);
     fscanf(arq, "%[^\n]%*c ", imo->nome_proprietario);
     
     int cat = identifica_categoria(imo);
-    le_categoria(&imo->categoria, cat, arq);
+    return le_categoria(&imo->categoria, cat, arq);
 }
 
 void modifica_imovel(tImovel *imo1, tImovel *imo2)

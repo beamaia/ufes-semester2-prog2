@@ -274,19 +274,21 @@ typedef union
     tApartamento apto;
 } tCategoria;
 
-void le_categoria(tCategoria *cat, int tipo, FILE * arq)
+int le_categoria(tCategoria *cat, int tipo, FILE * arq)
 {
     switch (tipo)
     {
         case 1: le_triangulo(&cat->tri, arq);
-                return;
+                return 1;
         case 2: le_retangulo(&cat->ret, arq);
-                return;
+                return 1;
         case 3: le_trapezio(&cat->tra, arq);
-                return;
+                return 1;
         case 4: le_casa(&cat->casa, arq);
-                return;
+                return 1;
         case 5: le_apartamento(&cat->apto, arq);
+                return 1;
+        default: return 0;
     }
 }
 
@@ -299,6 +301,7 @@ float preco_imovel_categoria(tCategoria * cat, int tipo)
         case 3: return preco_trapezio(&cat->tra);
         case 4: return preco_casa(&cat->casa);
         case 5: return preco_apartamento(&cat->apto);
+        default: return 0;
     }
 }
 
@@ -311,9 +314,8 @@ float area_imovel_categoria(tCategoria * cat, int tipo)
         case 3: return area_trapezio(&cat->tra);
         case 4: return area_cons_casa(&cat->casa);
         case 5: return area_apartamento(&cat->apto);
+        default: return 0;
     }
-
-    return 0;
 }
 
 int categoria_compara_quartos(tCategoria *cat1, tCategoria *cat2)
@@ -355,16 +357,17 @@ int identifica_categoria(tImovel *imo)
         return 4;
     if(!strcmp(imo->tipo_imovel, "apto"))
         return 5;
+    return 0;
 }
 
-void le_imovel(tImovel *imo, FILE *arq)
+int le_imovel(tImovel *imo, FILE *arq)
 {
     fscanf(arq, "%s%*c", imo->tipo_imovel);
     fscanf(arq, "%d%*c", &imo->id);
     fscanf(arq, "%[^\n]%*c ", imo->nome_proprietario);
     
     int cat = identifica_categoria(imo);
-    le_categoria(&imo->categoria, cat, arq);
+    return le_categoria(&imo->categoria, cat, arq);
 }
 
 void modifica_imovel(tImovel *imo1, tImovel *imo2)
@@ -467,8 +470,10 @@ void le_catalogo(tCatalogo *c, FILE *arq)
 {
     while(!feof(arq) && c->qtd_imoveis < 301)
     {
-        c->qtd_imoveis++;
-        le_imovel(&c->imoveis[c->qtd_imoveis - 1], arq);
+        if(le_imovel(&c->imoveis[c->qtd_imoveis], arq))
+        {
+            c->qtd_imoveis++;
+        }
         fscanf(arq, "\n");
 
     }
@@ -583,6 +588,7 @@ void imoveis_mais_caros(tCatalogo *c, tEspec *espec, tIdentificadores *id)
 
     ordena(c, compara_preco);
     int limite = calcula_qtd_caros(c, espec);
+    
     if(espec->i > c->qtd_imoveis || espec->i == 0)
     {
         id->i = 0;
@@ -598,6 +604,7 @@ int calcula_qtd_argilosos(tCatalogo *c, tEspec *espec)
     return espec->percent_argiloso * c->qtd_imoveis / 100;
 }
 
+//duplicado
 void catalogo_argiloso(tCatalogo *c1, tCatalogo *c2, tEspec *espec)
 {
     inicializa_catalogo(c2);
@@ -614,6 +621,7 @@ void catalogo_argiloso(tCatalogo *c1, tCatalogo *c2, tEspec *espec)
 void terrenos_argilosos_menores(tCatalogo *c1, tCatalogo *c2, tIdentificadores *id, tEspec *espec)
 {
     catalogo_argiloso(c1, c2, espec);
+    
     if(!c2->qtd_imoveis)
     {
         return;
@@ -621,13 +629,14 @@ void terrenos_argilosos_menores(tCatalogo *c1, tCatalogo *c2, tIdentificadores *
 
     ordena(c2, compara_area);
 
+    int limite = calcula_qtd_argilosos(c2, espec);
     if(espec->j > c2->qtd_imoveis || espec->j == 0)
     {
         id->j = 0;
     }
     else
     {
-        id->j = identifica_id(&c2->imoveis[espec->j - 1]);
+        id->j = identifica_id(&c2->imoveis[espec->j - 1 + c2->qtd_imoveis - limite]);
     }
 
 }
@@ -679,11 +688,14 @@ void apresenta_imoveis_caros(tCatalogo *c, int limite)
             printf(", ");
         }
     }
-
-    printf("\n");
+    if(c->qtd_imoveis)
+    {
+        printf("\n");
+    }
 
 }
 
+//tira isso
 void apresenta_terrenos_argilosos(tCatalogo *c, int limite)
 {
     for(int i = c->qtd_imoveis - limite; i < c->qtd_imoveis; i++)
@@ -694,8 +706,10 @@ void apresenta_terrenos_argilosos(tCatalogo *c, int limite)
             printf(", ");
         }
     }
-
-    printf("\n");
+    if(c->qtd_imoveis)
+    {
+        printf("\n");
+    }
 }
 
 void apresenta_casas_limite(tCatalogo *c)
@@ -708,8 +722,10 @@ void apresenta_casas_limite(tCatalogo *c)
             printf(", ");
         }
     }
-
-    printf("\n");
+    if(c->qtd_imoveis)
+    {
+        printf("\n");
+    }
 }
 
 void apresenta_catalogos(tCatalogo *c1, tCatalogo *c2, tCatalogo *c3, tIdentificadores *id, tEspec *espec)
@@ -730,7 +746,7 @@ int main()
     scanf("%s", arq_path);
     FILE *arq_espec = fopen(arq_path, "r");
 
-    if(!arq_cat || !arq_atual || !arq_espec)
+    if(arq_cat == NULL || arq_atual == NULL || arq_espec == NULL)
     {
         printf("Arquivo não encontrado\n");
         exit(1);
