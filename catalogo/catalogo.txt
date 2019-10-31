@@ -1,0 +1,10 @@
+Catalogo de academicos
+> Nome (char *)
+> Idade (unsigned )
+> Matricula (unsigned)
+
+Listas de academicos ordenadas
+> por Nome
+> por Matricula
+> por idade
+
