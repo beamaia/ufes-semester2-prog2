@@ -2,101 +2,107 @@
 #include <string.h>
 
 typedef struct{
-    char num[100];
+    char num[101];
+    int num_int[101];
     int tam;
-} tIntGrande;
+} Int_Grande;
 
-void zera(int *vet, int tam)
+
+int le_int_grande(Int_Grande *n)
 {
-    for(int i = 0; i < tam; i++)
-    {
-        vet[i] = 0;
-    }
+    int mul;
+    scanf("%s %d", n->num, &mul);
+    n->tam = strlen(n->num);
+    return mul;
 }
 
-void transforma_int(int *vet1, int *vet2, tIntGrande *n)
+void transforma_numero(Int_Grande *n)
 {
     for(int i = 0; i < n->tam; i++)
     {
-        vet1[i] = n->num[i] - '0';
-        vet2[i] = n->num[i] - '0';
+        n->num_int[i] = n->num[i] - '0';
     }
 }
 
-void inverte(int *vet, int tam)
+void inverte_numeros(Int_Grande *n)
 {
     int aux;
-    for(int i = 0; i < tam/2; i++)
+    for(int i = 0; i < n->tam/2; i++)
     {
-        aux = vet[i];
-        vet[i] = vet[tam - i - 1];
-        vet[tam - i - 1] = aux;
+        aux = n->num_int[i];
+        n->num_int[i] = n->num_int[n->tam - i - 1];
+        n->num_int[n->tam - i - 1] = aux;
     }
-    // for(int i = 0; i < tam; i++)
-    // {
-    //     aux[i] = vet[i];
-    // }
-    // for(int i = 0; i < tam; i++)
-    // {
-    //     vet[i] = aux[tam - i - 1];
-    // }
 }
 
-void transforma_bigint(int *vet, tIntGrande *n)
+void copia_numero(Int_Grande *n1, Int_Grande *n2)
 {
-    int i;
-    for(i = 0; i < n->tam; i++)
+    for(int i = 0; i < n1->tam; i++)
     {
-        n->num[i] = vet[i] + '0';
+        n2->num_int[i] = n1->num_int[i];
     }
-    n->num[i] = '\0';
+
+    n2->tam = n1->tam;
 }
 
-void soma(int * vet, int * vetsoma, tIntGrande * n)
+void soma_numeros(Int_Grande *n1, Int_Grande *n2)
 {
-    int vai1;
-    for(int i = 0; i < n->tam; i++)
+    for(int i = 0; i < n2->tam; i++)
     {
-        vetsoma[i] += vet[i];
-        if(vetsoma[i] > 9)
+        n2->num_int[i] += n1->num_int[i];
+
+        if(n2->num_int[i] > 9)
         {
-            vai1 = vetsoma[i]/10;
-            vetsoma[i] -= vai1 * 10;
-            vetsoma[i + 1] += vai1;
-
-            if(i + 1 == n->tam)
-                n->tam++;
+            n2->num_int[i + 1] += n2->num_int[i]/10;
+            n2->num_int[i] = n2->num_int[i]%10;
+            if(i == n2->tam - 1)
+                n2->tam++;
         }
     }
 }
 
-void mult(int *vet, int *vetsoma, tIntGrande *n, int mul)
+void anula_num(Int_Grande *n)
 {
-    for(int i = 0; i < mul - 1; i++)
-    {
-        soma(vet, vetsoma, n);
-    }
+        n->num_int[0] = 0;
+        n->tam = 1;
 }
 
-void apresenta(tIntGrande n)
+void multiplica_numeros(Int_Grande *n, int mul)
 {
-    printf("%s\n", n.num);
+    Int_Grande aux;
+    copia_numero(n, &aux);
+    
+    if(mul > 1)
+    {
+        soma_numeros(&aux, n);
+        for(int i = 1; i < mul - 1; i++)
+        {
+            soma_numeros(&aux, n);
+        }
+    }
+    if(mul == 0)
+        anula_num(n);
+}
+
+
+void apresenta_int_grande(Int_Grande n)
+{
+    for(int i = 0; i < n.tam; i++)
+    {
+        printf("%d", n.num_int[i]);
+    }
+    printf("\n");
 }
 
 int main()
 {
-    tIntGrande n1;
-    int n2, vet[100], vetsoma[100];
-    scanf("%s %d", n1.num, &n2);
-    n1.tam = strlen(n1.num);
-    zera(vet, n1.tam);
-    zera(vetsoma, n1.tam);
-    transforma_int(vet, vetsoma, &n1);
-    inverte(vet, n1.tam);
-    inverte(vetsoma, n1.tam);
-    mult(vet, vetsoma, &n1, n2);
-    inverte(vetsoma, n1.tam);
-    transforma_bigint(vetsoma, &n1);
-    apresenta(n1);
-    return 0;
+    Int_Grande num;
+    int mul;
+
+    mul = le_int_grande(&num);
+    transforma_numero(&num);
+    inverte_numeros(&num);
+    multiplica_numeros(&num, mul);
+    inverte_numeros(&num);
+    apresenta_int_grande(num);
 }

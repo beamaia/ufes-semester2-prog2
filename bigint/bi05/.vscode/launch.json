@@ -8,7 +8,7 @@
             "name": "gcc-5 build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "program": "/home/2019107651/ufes/semester-2/prog2b/bigint/bi05/a.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
