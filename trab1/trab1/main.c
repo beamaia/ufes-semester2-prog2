@@ -17,17 +17,13 @@ Matricula: 2019107651
 
 int main()
 {
-    char arq_path1[150], arq_path2[150], arq_path3[150];
-    scanf("%s\n", arq_path1);
-    FILE *arq_cat = fopen(arq_path1, "r");
-    scanf("%s\n", arq_path2);
-    FILE *arq_atual = fopen(arq_path2, "r");
-    scanf("%s\n", arq_path3);
-    FILE *arq_espec = fopen(arq_path3, "r");
+    FILE *arq_cat = fopen("catalogo.txt", "r");
+    FILE *arq_atual = fopen("atual.txt", "r");
+    FILE *arq_espec = fopen("espec.txt", "r");
 
     if(arq_cat == NULL || arq_atual == NULL || arq_espec == NULL)
     {
-        printf("Arquivo não encontrado\n");
+        printf("Um dos arquivos não foi encontrado\n");
         exit(1);
     }
 
@@ -36,6 +32,7 @@ int main()
     tIdentificadores id;
 
     inicializa_catalogo(&imoveis);
+    inicializa_identificadores(&id);
     le_catalogo(&imoveis, arq_cat);
     le_atual(&imoveis, arq_atual);
     le_espec(&espec, arq_espec);
