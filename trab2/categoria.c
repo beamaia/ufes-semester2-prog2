@@ -117,3 +117,18 @@ int categoria_identifica_argiloso(Categoria cat, int tipo)
         default: return 0;
     }
 }
+
+/*
+Chama a funcao que libera o tipo de imovel
+*/
+void libera_categoria(Categoria cat, int tipo)
+{
+    switch(tipo)
+    {
+        case 1: libera_triangulo(&cat->tri);
+        case 2: libera_retangulo(&cat->ret);
+        case 3: libera_trapezio(&cat->tra);
+        case 4: libera_casa(&cat->casa);
+        case 5: libera_apartamento(&cat->apto);
+    }
+}

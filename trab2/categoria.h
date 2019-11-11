@@ -14,4 +14,5 @@
     float categoria_area_imovel(Categoria, int);
     int categoria_compara_quartos(Categoria, Categoria);
     int categoria_identifica_argiloso(Categoria, int);
+    void libera_categoria(Categoria, int);
 #endif

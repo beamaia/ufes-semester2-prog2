@@ -9,4 +9,6 @@
     typedef struct identificadores * Identificadores;
 
     void inicializa_identificadores(Identificadores);
+    int espec_imovel_limite(int area, int preco, Espec espec);
+    void imprime_soma_id(Identificadores id);
 #endif

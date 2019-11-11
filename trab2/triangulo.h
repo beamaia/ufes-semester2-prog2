@@ -8,4 +8,5 @@
     float area_triangulo(Triangulo);
     float preco_triangulo(Triangulo);
     int solo_argiloso_triangulo(Triangulo);
+    void libera_triangulo(Triangulo);
 #endif
