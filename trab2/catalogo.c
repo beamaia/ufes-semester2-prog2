@@ -33,12 +33,15 @@ void inicializa_catalogo(Catalogo c)
         printf("Erro na alocação de memoria, abortando programa");
         exit(1);
     }
+
+
 }
 
 void expande_catalogo(Catalogo c)
 {
     c->qtd_max += MAX_IMO;
-    Imovel aux = malloc_imovel(c->imoveis, c->qtd_max);
+    Imovel *aux = (Imovel *) malloc(sizeof(Imovel) * c->qtd_max);
+            //malloc_imovel(c->imoveis, c->qtd_max);
 
     if(aux == NULL)
     {
