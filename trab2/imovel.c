@@ -2,11 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "espec.h"
-#include "triangulo.h"
-#include "retangulo.h"
-#include "trapezio.h"
-#include "casa.h"
-#include "apto.h"
 #include "categoria.h"
 #include "imovel.h"
 #define MAX_NOME 40
@@ -73,29 +68,24 @@ void le_nome_proprietario(char * nome, FILE *arq)
 int le_imovel(Imovel imo, FILE *arq)
 {
     imo = (Imovel) malloc(sizeof(struct imovel));
-    le_tipo_imovel(&imo->tipo_imovel, arq);
-    fscanf(arq, "%u\n", &imo->id);
-    le_nome_proprietario(&imo->nome_proprietario, arq);
+    le_tipo_imovel(imo->tipo_imovel, arq);
+    fscanf(arq, "%d\n", &imo->id);
+    le_nome_proprietario(imo->nome_proprietario, arq);
     
     int cat = identifica_categoria(imo);
-    return le_categoria(&imo->categoria, cat, arq);
+    return le_categoria(imo->categoria, cat, arq);
 }
 
-Imovel malloc_imovel(Imovel imo, int qtd)
-{
-    imo = (Imovel) malloc(sizeof(struct imovel) * qtd);
-}
-
-//Chama a funcao que retorna o preco total to imovel e armezena o valor dentro do struct tImovel.
+//Chama a funcao que retorna o preco total to imovel e armazena o valor dentro do struct tImovel.
 void preco_imovel(Imovel imo)
 {
-    imo->preco = categoria_preco_imovel(&imo->categoria, identifica_categoria(imo));
+    imo->preco = categoria_preco_imovel(imo->categoria, identifica_categoria(imo));
 }
 
-//Chama a funcao que retorna a area total construida to imovel e armezena o valor dentro do struct tImovel.
+//Chama a funcao que retorna a area total construida to imovel e armazena o valor dentro do struct tImovel.
 void area_imovel(Imovel imo)
 {
-    imo->area = categoria_area_imovel(&imo->categoria, identifica_categoria(imo));
+    imo->area = categoria_area_imovel(imo->categoria, identifica_categoria(imo));
 }
 
 //Verifica se a cara esta dentro do limite de area e preco de acordo com as informacoes do arquivo espec.txt.
@@ -104,13 +94,13 @@ int imovel_limite_area_preco(Imovel imo, Espec espec)
     return espec_imovel_limite(imo->area, imo->preco, espec);
 }
 
-//Verifica se o numero de identificao de imoveis diferentes sao iguais.
+//Verifica se o numero de identificacao de imoveis diferentes sao iguais.
 int compara_id(Imovel imo1, Imovel imo2)
 {
     return imo1->id == imo2->id;
 }
 
-//Associa um numero de identificao id a um imovel imo.
+//Associa um numero de identificacao id a um imovel imo.
 void acrescenta_id(Imovel imo, int id)
 {
     imo->id = id;
@@ -124,7 +114,7 @@ menos quartos.
 */
 int compara_quartos(Imovel imo1, Imovel imo2)
 {
-    int situacao = categoria_compara_quartos(&imo1->categoria, &imo2->categoria);
+    int situacao = categoria_compara_quartos(imo1->categoria, imo2->categoria);
     if(situacao == 1 || (situacao == 2 && imo1->id < imo2->id))
         return 1;
 
@@ -159,7 +149,7 @@ int compara_area(Imovel imo1, Imovel imo2)
     return 0;
 }
 
-//Retorna o numero de identificao do imovel.
+//Retorna o numero de identificacao do imovel.
 int identifica_id(Imovel imo)
 {
     return imo->id;
@@ -169,7 +159,7 @@ int identifica_id(Imovel imo)
 int imovel_identifica_argiloso(Imovel imo)
 {
     int tipo_imovel = identifica_categoria(imo);
-    if(categoria_identifica_argiloso(&imo->categoria, tipo_imovel))
+    if(categoria_identifica_argiloso(imo->categoria, tipo_imovel))
     {
         return 1;
     }
