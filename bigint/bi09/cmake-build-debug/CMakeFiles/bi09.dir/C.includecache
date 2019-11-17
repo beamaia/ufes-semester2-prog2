@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/bea/ufes/semestre-2/prog2b/bigint/bi09/bi09.c
+stdio.h
+-
+stdlib.h
+-
+time.h
+-
+

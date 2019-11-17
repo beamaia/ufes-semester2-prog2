@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/bi06.dir/bi06.c.o  -o bi06 

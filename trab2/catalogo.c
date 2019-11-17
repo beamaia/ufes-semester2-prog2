@@ -23,18 +23,14 @@ struct catalogo
 //Coloca 0 em quantidade de imoveis do catalogo.
 void inicializa_catalogo(Catalogo c)
 {
-    c->qtd_imoveis = 0;
-    c->qtd_max = MAX_IMO;
-
     c = (Catalogo) malloc(sizeof(struct catalogo));
-
     if(c == NULL)
     {
         printf("Erro na alocação de memoria, abortando programa");
         exit(1);
     }
-
-
+    c->qtd_imoveis = 0;
+    c->qtd_max = MAX_IMO;
 }
 
 void expande_catalogo(Catalogo c)

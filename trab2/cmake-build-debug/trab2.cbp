@@ -8,33 +8,33 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug"/>
+				<Option working_dir="/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug"/>
+				<Option working_dir="/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="apto.c">
-				<Option output="/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/apto.c" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug"/>
+				<Option output="/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/apto.c" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/bmsmaia/ufes/semestre2/prog2/trab2/."/>
+					<Add directory="/home/bea/ufes/semestre-2/prog2b/trab2/."/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -45,20 +45,20 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 apto.c"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 apto.c"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="apto.c/fast">
-				<Option output="/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/apto.c" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug"/>
+				<Option output="/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/apto.c" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/bmsmaia/ufes/semestre2/prog2/trab2/."/>
+					<Add directory="/home/bea/ufes/semestre-2/prog2b/trab2/."/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -69,78 +69,78 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 apto.c/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 apto.c/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug"/>
+				<Option working_dir="/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bmsmaia/ufes/semestre2/prog2/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/apto.h">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/apto.h">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/casa.c">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/casa.c">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/casa.h">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/casa.h">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/catalogo.c">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/catalogo.c">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/catalogo.h">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/catalogo.h">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/categoria.c">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/categoria.c">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/categoria.h">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/categoria.h">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/espec.c">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/espec.c">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/espec.h">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/espec.h">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/imovel.c">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/imovel.c">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/imovel.h">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/imovel.h">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/main.c">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/main.c">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/retangulo.c">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/retangulo.c">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/retangulo.h">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/retangulo.h">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/trapezio.c">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/trapezio.c">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/trapezio.h">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/trapezio.h">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/triangulo.c">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/triangulo.c">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/triangulo.h">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/triangulo.h">
 			<Option target="apto.c"/>
 		</Unit>
-		<Unit filename="/home/bmsmaia/ufes/semestre2/prog2/trab2/CMakeLists.txt">
+		<Unit filename="/home/bea/ufes/semestre-2/prog2b/trab2/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

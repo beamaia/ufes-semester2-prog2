@@ -1,87 +1,121 @@
 #include <stdio.h>
 #include <string.h>
+#define MAX_NUM 100
 
 typedef struct{
-    char num[101];
-    int num_int[101];
+    char num[MAX_NUM + 1];
     int tam;
 } Int_Grande;
 
-
-int le_int_grande(Int_Grande *n)
+Int_Grande inicializa_int_grande()
 {
-    int mul;
-    scanf("%s %d", n->num, &mul);
-    n->tam = strlen(n->num);
-    return mul;
-}
-
-void transforma_numero(Int_Grande *n)
-{
-    for(int i = 0; i < n->tam; i++)
+    Int_Grande n;
+    for(int i = 0; i < 100; i++)
     {
-        n->num_int[i] = n->num[i] - '0';
+        n.num[i] = 0;
     }
+
+    n.tam = 0;
+    return n;
 }
 
-void inverte_numeros(Int_Grande *n)
+Int_Grande le_int_grande()
+{
+    Int_Grande n;
+    char aux;
+    n = inicializa_int_grande();
+
+    for(int i = 0; i < MAX_NUM; i++)
+    {
+        scanf("%c", &aux);
+        if(aux >= '0' && aux <= '9')
+        {
+            n.num[i] = aux;
+            n.tam++;
+        }
+        else
+            break;
+    }
+    
+    return n;
+}
+
+Int_Grande transforma_numero(Int_Grande n)
+{
+    for(int i = 0; i < n.tam; i++)
+    {
+        n.num[i] = n.num[i] - '0';
+    }
+    
+    return n;
+}
+
+Int_Grande inverte_numeros(Int_Grande n)
 {
     int aux;
-    for(int i = 0; i < n->tam/2; i++)
+    for(int i = 0; i < n.tam/2; i++)
     {
-        aux = n->num_int[i];
-        n->num_int[i] = n->num_int[n->tam - i - 1];
-        n->num_int[n->tam - i - 1] = aux;
+        aux = n.num[i];
+        n.num[i] = n.num[n.tam - i - 1];
+        n.num[n.tam - i - 1] = aux;
     }
+    return n;
 }
 
-void copia_numero(Int_Grande *n1, Int_Grande *n2)
+Int_Grande copia_numero(Int_Grande n1, Int_Grande n2)
 {
-    for(int i = 0; i < n1->tam; i++)
+    for(int i = 0; i < n1.tam; i++)
     {
-        n2->num_int[i] = n1->num_int[i];
+        n2.num[i] = n1.num[i];
     }
 
-    n2->tam = n1->tam;
+    n2.tam = n1.tam;
+    return n2;
 }
 
-void soma_numeros(Int_Grande *n1, Int_Grande *n2)
+Int_Grande soma_numeros(Int_Grande n1, Int_Grande n2)
 {
-    for(int i = 0; i < n2->tam; i++)
+    for(int i = 0; i < n2.tam; i++)
     {
-        n2->num_int[i] += n1->num_int[i];
+        n2.num[i] += n1.num[i];
 
-        if(n2->num_int[i] > 9)
+        if(n2.num[i] > 9)
         {
-            n2->num_int[i + 1] += n2->num_int[i]/10;
-            n2->num_int[i] = n2->num_int[i]%10;
-            if(i == n2->tam - 1)
-                n2->tam++;
+            n2.num[i + 1] += n2.num[i]/10;
+            n2.num[i] = n2.num[i] % 10;
+            if(i == n2.tam - 1)
+                n2.tam++;
         }
     }
+    return n2;
 }
 
-void anula_num(Int_Grande *n)
+Int_Grande anula_num(Int_Grande n)
 {
-        n->num_int[0] = 0;
-        n->tam = 1;
+    n.num[0] = 0;
+    n.tam = 1;
+    return n;
 }
 
-void multiplica_numeros(Int_Grande *n, int mul)
+Int_Grande multiplica_numeros(Int_Grande n, int mul)
 {
     Int_Grande aux;
-    copia_numero(n, &aux);
+    aux = inicializa_int_grande();
+    aux = copia_numero(n, aux);
     
     if(mul > 1)
     {
-        soma_numeros(&aux, n);
+        n = soma_numeros(aux, n);
         for(int i = 1; i < mul - 1; i++)
         {
-            soma_numeros(&aux, n);
+            n = soma_numeros(aux, n);
         }
     }
+
     if(mul == 0)
-        anula_num(n);
+        n  = anula_num(n);
+    
+    return n;
 }
 
 
@@ -89,7 +123,7 @@ void apresenta_int_grande(Int_Grande n)
 {
     for(int i = 0; i < n.tam; i++)
     {
-        printf("%d", n.num_int[i]);
+        printf("%d", n.num[i]);
     }
     printf("\n");
 }
@@ -99,10 +133,13 @@ int main()
     Int_Grande num;
     int mul;
 
-    mul = le_int_grande(&num);
-    transforma_numero(&num);
-    inverte_numeros(&num);
-    multiplica_numeros(&num, mul);
-    inverte_numeros(&num);
+    num = le_int_grande(num);
+    scanf("%d", &mul);
+    num = transforma_numero(num);
+    num = inverte_numeros(num);
+    num = multiplica_numeros(num, mul);
+    num = inverte_numeros(num);
     apresenta_int_grande(num);
+
+    return 0;
 }

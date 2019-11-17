@@ -1,0 +1,3 @@
+/home/bea/ufes/semestre-2/prog2b/bigint/bi09/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/bea/ufes/semestre-2/prog2b/bigint/bi09/cmake-build-debug/CMakeFiles/bi09.dir
+/home/bea/ufes/semestre-2/prog2b/bigint/bi09/cmake-build-debug/CMakeFiles/edit_cache.dir

@@ -5,9 +5,10 @@
 /*
 Informacoes do arquivo espec.txt como a porcentagem de imoveis caros da lista a,
 a porcentagem de terrenos argilosos da lista b e a área e o preço limite das casas
-que irão compor a lista c, além da posicao dos identificadores que devem ser somados 
+que irão compor a lista c, além da posicao dos identificadores que devem ser somados
 (i, j, k) no final do programa.
 */
+
 struct espec
 {
     unsigned int percent_caros,

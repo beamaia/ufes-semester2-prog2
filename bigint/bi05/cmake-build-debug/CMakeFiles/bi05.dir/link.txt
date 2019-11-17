@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/bi05.dir/bi5.c.o  -o bi05 

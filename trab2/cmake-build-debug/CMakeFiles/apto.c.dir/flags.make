@@ -6,5 +6,5 @@ C_FLAGS = -g
 
 C_DEFINES = 
 
-C_INCLUDES = -I/home/bmsmaia/ufes/semestre2/prog2/trab2/. 
+C_INCLUDES = -I/home/bea/ufes/semestre-2/prog2b/trab2/. 
 

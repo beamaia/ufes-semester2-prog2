@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/m01.dir/m01.c.o  -o m01 

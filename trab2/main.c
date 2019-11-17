@@ -27,15 +27,16 @@ int main()
         exit(1);
     }
 
-    tCatalogo imoveis, casas, argilosos;
-    tEspec espec;
-    tIdentificadores id;
+    Catalogo imoveis, casas, argilosos;
+    Espec espec;
+    Identificadores id;
 
-    inicializa_catalogo(&imoveis);
-    inicializa_catalogo(&casas);
-    inicializa_catalogo(&argilosos);
-    le_catalogo(&imoveis, arq_cat);
-    le_atual(&imoveis, arq_atual);
+
+    inicializa_catalogo(imoveis);
+    inicializa_catalogo(casas);
+    inicializa_catalogo(argilosos);
+    le_catalogo(imoveis, arq_cat);
+    le_atual(imoveis, arq_atual);
 
     if(imoveis.qtd_imoveis)
     {

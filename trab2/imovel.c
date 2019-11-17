@@ -28,6 +28,7 @@ Identifica qual e a categoria escolhida:
 4: Casa
 5: Apartamento
 */
+
 int identifica_categoria(Imovel imo)
 {
     if(!strcmp(imo->tipo_imovel, "triang"))
@@ -43,6 +44,17 @@ int identifica_categoria(Imovel imo)
     return 0;
 }
 
+void inicializa_imoveis(Imovel imo, int qtd)
+{
+    imo = (Imovel) malloc(sizeof(struct imovel) * qtd);
+    
+    for(int i = 0; i < qtd; i++)
+    {
+        *imo[i]->area = 0;
+
+
+    }
+}
 
 //Le a tag do imovel
 void le_tipo_imovel(char * tipo, FILE * arq)
