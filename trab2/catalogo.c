@@ -18,6 +18,7 @@ struct catalogo
     Imovel imoveis;
     unsigned int qtd_imoveis,
                  qtd_max;
+    
 };
 
 //Coloca 0 em quantidade de imoveis do catalogo.
@@ -31,6 +32,8 @@ void inicializa_catalogo(Catalogo c)
     }
     c->qtd_imoveis = 0;
     c->qtd_max = MAX_IMO;
+    inicializa_imoveis(c->imoveis, c->qtd_max);
+
 }
 
 void expande_catalogo(Catalogo c)

@@ -22,13 +22,13 @@ void inicializa_int_grande(Int_Grande *n)
     }
 }
 
-void numero_inicial(Int_Grande *n)
-{
-    n->tam = 1;
-    n->max_tam = MAX_NUM;
-    inicializa_int_grande(n);
-    n->num[0] = 1;
-}
+//void numero_inicial(Int_Grande *n)
+//{
+//    n->tam = 1;
+//    n->max_tam = MAX_NUM;
+//    inicializa_int_grande(n);
+//    n->num[0] = 1;
+//}
 
 Int_Grande expande_int_grande(Int_Grande *n)
 {
@@ -115,15 +115,15 @@ void apresenta_int_grande(Int_Grande *n)
     }
 }
 
-void fatorial_numero(Int_Grande *n, int mul)
-{
-    numero_inicial(n);
-
-    for(int i = 1; i < mul; i++)
-    {
-        multiplica_numeros(n, i + 1);
-    }
-}
+//void fatori   al_numero(Int_Grande *n, int mul)
+//{
+//    numero_inicial(n);
+//
+//    for(int i = 1; i < mul; i++)
+//    {
+//        multiplica_numeros(n, i + 1);
+//    }
+//}
 
 int main()
 {
@@ -132,27 +132,31 @@ int main()
 
     scanf("%d", &mul);
 
-    clock_t start = clock();
-
-    int n = 100;
-    int i = 0;
-    while(i<100*n)
-        i++;
+//    clock_t start = clock();
 
     if(mul == 0 || mul == 1)
     {
         printf("1");
-        clock_t stop = clock();
-        double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;
-        printf("\nTime elapsed: %.5f\n", elapsed);
+//        clock_t stop = clock();
+//        double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;
+//        printf("\nTime elapsed: %.5f\n", elapsed);
         return 0;
     }
 
-    fatorial_numero(&num, mul);
+    num.tam = 1;
+    num.max_tam = MAX_NUM;
+    inicializa_int_grande(&num);
+    num.num[0] = 1;
+
+    for(int i = 1; i < mul; i++)
+    {
+        multiplica_numeros(&num, i + 1);
+    }
+
     inverte_numeros(&num);
     apresenta_int_grande(&num);
-    clock_t stop = clock();
-    double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;
-    printf("\nTime elapsed: %.5f\n", elapsed);
+//    clock_t stop = clock();
+//    double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;
+//    printf("\nTime elapsed: %.5f\n", elapsed);
     return 0;
 }

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_TAM 2
+#define MAX_TAM 10
 
 typedef struct{
     int **matriz;
@@ -9,6 +9,7 @@ typedef struct{
     int max_col;
     int max_lin;
 } Matriz;
+
 
 Matriz inicializa_matriz(Matriz x)
 {
@@ -44,7 +45,17 @@ Matriz expande_matriz(Matriz *m)
     aux.lin = m->lin;
     aux.col = m->col;
 
-    aux = inicializa_matriz(aux);
+    aux.matriz = (int **) malloc(sizeof(int *) * aux.max_lin);
+
+    for(int i = 0; i < aux.max_lin; i++)
+    {
+        aux.matriz[i] = (int *) malloc(sizeof(int) * aux.max_col);
+        for(int j = 0; j < aux.max_col; j++)
+        {
+            aux.matriz[i][j] = 0;
+        }
+    }
+
     for(int i = 0; i < aux.lin; i++)
     {
         for(int j = 0; j< aux.col; j++)
@@ -69,16 +80,16 @@ Matriz le_matriz(Matriz *m)
 
     while(scanf("%d%c", &aux, &esp) == 2)
     {
-        m->matriz[i][j] = aux;
-        j++;
-
-        if(i == m->max_lin)
+        if(i == m->max_lin - 1)
             *m = expande_matriz(m);
-        if(j == m->max_col)
+        if(j == m->max_col - 1)
             *m = expande_matriz(m);
 
         if(i == 0)
             m->col++;
+
+        m->matriz[i][j] = aux;
+        j++;
 
         if(esp == '\n')
         {
@@ -93,11 +104,14 @@ Matriz le_matriz(Matriz *m)
 
 void apresenta_matriz(Matriz m)
 {
-    for(int i = 0; i < m.lin - 1; i++)
+    for(int i = 0; i < m.col - 1; i++)
     {
-        for(int j = 0; j < m.col - 1; j++)
+        for(int j = 0; j < m.lin - 1; j++)
         {
-            printf("%d ", m.matriz[i][j]);
+                printf("%d ", m.matriz[j][i]);
+
+
+            
         }
         printf("\n");
     }
