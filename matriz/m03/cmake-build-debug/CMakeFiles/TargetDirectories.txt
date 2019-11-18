@@ -1,0 +1,3 @@
+/home/2019107651/ufes/semester-2/prog2b/matriz/m03/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/2019107651/ufes/semester-2/prog2b/matriz/m03/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/2019107651/ufes/semester-2/prog2b/matriz/m03/cmake-build-debug/CMakeFiles/m03.dir

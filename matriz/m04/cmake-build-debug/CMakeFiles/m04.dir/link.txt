@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/m04.dir/m04.c.o  -o m04 

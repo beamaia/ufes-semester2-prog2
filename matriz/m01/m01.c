@@ -108,10 +108,7 @@ void apresenta_matriz(Matriz m)
     {
         for(int j = 0; j < m.lin - 1; j++)
         {
-                printf("%d ", m.matriz[j][i]);
-
-
-            
+                printf("%d ", m.matriz[j][i]);           
         }
         printf("\n");
     }

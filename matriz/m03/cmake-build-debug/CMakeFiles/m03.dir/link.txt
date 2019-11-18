@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/m03.dir/m03.c.o  -o m03 

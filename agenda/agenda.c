@@ -78,22 +78,28 @@ void transforma_agenda(Agenda *a)
 
 int hora_marcada(Agenda *a, int horas)
 {
-    int i, j, k = 0;
+    int i, j, k = 0, aux = -1, aux_i;
     for(i = 0; i < a->qtd_horas;)
     {
         j = i;
         for(i = i; i < 4 + j && i< a->qtd_horas;)
         {
             k = 0;
-            while(a->agenda[i + k] == 0 && k < horas && (i + k) < (4 + j))
+            while(a->agenda[i + k] == 0 && (i + k) < (4 + j))
                 k++;
 
-            if(k == horas)
-                return i+1;
+            if((aux == -1 && k > 0) || aux > k)
+            {
+                aux = k;
+                aux_i = i;
+            }
+
             i++;
         }
 
     }
+    if(aux);
+        return i;
 
     return 0;
 }
