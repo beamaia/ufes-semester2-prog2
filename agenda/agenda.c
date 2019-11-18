@@ -79,25 +79,61 @@ void transforma_agenda(Agenda *a)
 int hora_marcada(Agenda *a, int horas)
 {
     int i, j, k = 0;
-    for(i = 0; i < a->qtd_horas; i++)
+    for(i = 0; i < a->qtd_horas;)
     {
         j = i;
-        for(i = i; i < 3 + j; i++)
+        for(i = i; i < 4 + j && i< a->qtd_horas;)
         {
-            while(a->agenda[i] == 0 && (k < horas || k == horas))
+            k = 0;
+            while(a->agenda[i + k] == 0 && k < horas && (i + k) < (4 + j))
                 k++;
 
             if(k == horas)
-                return i - horas + 2;
+                return i+1;
+            i++;
         }
+
     }
 
-    return k;
+    return 0;
+}
+void apresenta_semana(int s)
+{
+    printf("Semana %d, ", s + 1);
+}
+
+void apresenta_dia(int d)
+{
+    switch(d)
+    {
+        case 0: printf("Segunda-feira, ");
+                break;
+        case 1: printf("Terça-feira, ");
+                break;
+        case 2:printf("Quarta-feira, ");
+                break;
+        case 3:printf("Quinta-feira, ");
+                break;
+        case 4:printf("Sexta-feira, ");
+                break;
+    }
+}
+
+void apresenta_hora(int h)
+{
+    if(h < 4)
+    {
+        printf("%d:00 horas\n", h + 8);
+    }
+    else
+    {
+        printf("%d:00 horas\n", h + 10);
+    }
 }
 
 void apresenta_horario(int marcado)
 {
-    if (marcado == 0)
+    if(marcado == 0)
     {
         printf("Nao ha espaco na agenda para este compromisso!\n");
         return;
@@ -105,11 +141,13 @@ void apresenta_horario(int marcado)
 
     int semana, dia, hora;
     marcado--;
-    semana = marcado / 40 + 1  ;
-    dia = (marcado/semana) / 5 + 1;
+    semana = marcado / 40;
+    dia = (marcado - 40 * semana) / 8;
     hora = marcado % 8;
 
-    printf("Marcado: %d Semana %d, Dia %d, Hora %d", marcado, semana, dia, hora);
+    apresenta_semana(semana);
+    apresenta_dia(dia);
+    apresenta_hora(hora);
 }
 
 int main()
