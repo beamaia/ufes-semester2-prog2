@@ -48,6 +48,7 @@ int main()
         terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
         casas_limite(&imoveis, &casas, &id, &espec);
     }
+
     apresenta_catalogos(&imoveis, &argilosos, &casas, &id, &espec);
 
     fclose(arq_atual);

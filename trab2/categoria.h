@@ -9,6 +9,7 @@
     #include "apto.h"
     typedef union categoria * Categoria;
 
+    Categoria inicializa_union();
     int le_categoria(Categoria, int, FILE *);
     float categoria_preco_imovel(Categoria, int);
     float categoria_area_imovel(Categoria, int);

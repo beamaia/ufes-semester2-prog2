@@ -18,7 +18,16 @@ union categoria
     Trapezio tra;
     Casa casa;
     Apartamento apto;
+    int vazio;
 };
+
+Categoria inicializa_union()
+{
+    Categoria ini;
+    ini = (Categoria) malloc(sizeof(union categoria));
+    ini->vazio = 0;
+    return ini;
+}
 
 int inicializa_categoria(Categoria cat, int tipo)
 {

@@ -96,10 +96,12 @@ void ver_se_isolado(Matriz m) {
 
     for (int i = 0; i < m.lin; i++) {
         for (int j = 0; j < m.col; j++) {
-            if (m.matriz[i][j] == 0)
-                continue;
-            else if (m.matriz[i][j] == 1) {
-                while(1)
+            
+            p = 0;
+            cont = 0;
+            if (m.matriz[i][j] == 1) 
+            {
+                while(p < 8)
                 {
                     switch (p) {
                         case 0:
@@ -143,29 +145,35 @@ void ver_se_isolado(Matriz m) {
                             p++;
                             break;
                     }
-
+                    
                     if(i == m.col - 1 && j == m.lin - 1)
                         break;
 
                     if((i == 0 && c < 0) || (i == m.lin - 1 && c > 0))
+                    {
+                        cont++;
                         continue;
+                    }
 
                     if((j == 0 && d < 0) || (j == m.col - 1 && d > 0))
+                    {
+                        cont++;
                         continue;
+                    }
 
                     if(m.matriz[i + 1 * c][j + 1 * d] == 0)
                         cont++;
                     else if(p == 7 || m.matriz[i + 1 * c][j + 1 * d] == 1)
                         break;
-
                 }
             }
 
-            if (cont == 8)
+            if(cont == 8)
                 qtd++;
         }
     }
 
+    printf("%d\n", qtd);
 }
 
 int main()

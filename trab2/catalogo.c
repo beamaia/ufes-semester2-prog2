@@ -43,7 +43,6 @@ void expande_catalogo(Catalogo c)
 {
     c->qtd_max += MAX_IMO;
     Imovel *aux = (Imovel *) malloc(sizeof(Imovel) * c->qtd_max);
-            //malloc_imovel(c->imoveis, c->qtd_max);
 
     if(aux == NULL)
     {

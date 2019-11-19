@@ -49,13 +49,10 @@ void inicializa_imoveis(Imovel *imo, int qtd)
     for(int i = 0; i < qtd; i++)
     {
         imo[i] = (Imovel) malloc(sizeof(struct imovel));
-
         imo[i]->area = 0;
-        //imo[i]->categoria = 0;
+        imo[i]->categoria = inicializa_union();
         imo[i]->id = 0;
-        imo[i]->nome_proprietario = 0;
         imo[i]->preco = 0;
-        imo[i]->tipo_imovel = '';
     }
 }
 
