@@ -49,8 +49,15 @@ void inicializa_imoveis(Imovel *imo, int qtd)
     for(int i = 0; i < qtd; i++)
     {
         imo[i] = (Imovel) malloc(sizeof(struct imovel));
+
+        if(imo[i] == NULL)
+        {
+            printf("Erro na alocação de memoria, abortando programa");
+            exit(1);
+        }
+
         imo[i]->area = 0;
-        imo[i]->categoria = inicializa_union();
+        imo[i]->categoria = inicializa_union(); //duvida
         imo[i]->id = 0;
         imo[i]->preco = 0;
     }
