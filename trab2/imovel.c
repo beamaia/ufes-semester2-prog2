@@ -44,15 +44,18 @@ int identifica_categoria(Imovel imo)
     return 0;
 }
 
-void inicializa_imoveis(Imovel imo, int qtd)
+void inicializa_imoveis(Imovel *imo, int qtd)
 {
-    imo = (Imovel) malloc(sizeof(struct imovel) * qtd);
-    
     for(int i = 0; i < qtd; i++)
     {
-        *imo[i]->area = 0;
+        imo[i] = (Imovel) malloc(sizeof(struct imovel));
 
-
+        imo[i]->area = 0;
+        //imo[i]->categoria = 0;
+        imo[i]->id = 0;
+        imo[i]->nome_proprietario = 0;
+        imo[i]->preco = 0;
+        imo[i]->tipo_imovel = '';
     }
 }
 

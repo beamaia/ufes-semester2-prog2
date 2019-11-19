@@ -45,16 +45,7 @@ Matriz expande_matriz(Matriz *m)
     aux.lin = m->lin;
     aux.col = m->col;
 
-    aux.matriz = (int **) malloc(sizeof(int *) * aux.max_lin);
-
-    for(int i = 0; i < aux.max_lin; i++)
-    {
-        aux.matriz[i] = (int *) malloc(sizeof(int) * aux.max_col);
-        for(int j = 0; j < aux.max_col; j++)
-        {
-            aux.matriz[i][j] = 0;
-        }
-    }
+    aux = inicializa_matriz(aux);
 
     for(int i = 0; i < aux.lin; i++)
     {
@@ -64,11 +55,7 @@ Matriz expande_matriz(Matriz *m)
         }
     }
 
-    for(int i = 0; i < m->max_lin; i++)
-    {
-        free(m->matriz[i]);
-    }
-    free(m->matriz);
+    libera_matriz(m);
     return aux;
 }
 
@@ -80,22 +67,22 @@ Matriz le_matriz(Matriz *m)
 
     while(scanf("%d%c", &aux, &esp) == 2)
     {
-        if(i == m->max_lin - 1)
+        if(i == m->max_lin - 1) // Quando i == m->max_lin estava ocorrendo segfault com testes em que i > j e i > m->max_lin 
             *m = expande_matriz(m);
-        if(j == m->max_col - 1)
+        if(j == m->max_col - 1) //Nao estava tendo o problemo que o primeiro if estava tendo
             *m = expande_matriz(m);
 
-        if(i == 0)
+        if(i == 0)  //Conta a quantidade de colunas enquanto le a primeira linha
             m->col++;
 
-        m->matriz[i][j] = aux;
-        j++;
+        m->matriz[i][j] = aux; 
+        j++; //Muda de coluna
 
-        if(esp == '\n')
+        if(esp == '\n') //Quando lê '\n' ele muda para a próxima linha;
         {
             i++;
-            m->lin++;
-            j = 0;
+            m->lin++; //Aumenta a quantidade de linhas da matriz
+            j = 0; //Volta para coluna = 0
         }
     }
 
@@ -117,7 +104,8 @@ void apresenta_matriz(Matriz m)
 int main()
 {
     Matriz m;
-    m.max_col = m.max_lin = MAX_TAM;
+    m.max_col = MAX_TAM;
+    m.max_lin = MAX_TAM;
     m.col = m.lin = 1;
     m = inicializa_matriz(m);
     m = le_matriz(&m);

@@ -15,7 +15,7 @@
 //Dados do catalogo. Um catalogo de varios imoveis e a quantidade de imoveis nesse catalogo.
 struct catalogo
 {
-    Imovel imoveis;
+    Imovel *imoveis;
     unsigned int qtd_imoveis,
                  qtd_max;
     
@@ -30,10 +30,13 @@ void inicializa_catalogo(Catalogo c)
         printf("Erro na alocação de memoria, abortando programa");
         exit(1);
     }
+
+    c->imoveis = (Imovel *) malloc(sizeof(Imovel) * c->qtd_max);
+
     c->qtd_imoveis = 0;
     c->qtd_max = MAX_IMO;
-    inicializa_imoveis(c->imoveis, c->qtd_max);
 
+    inicializa_imoveis(c->imoveis, c->qtd_max);
 }
 
 void expande_catalogo(Catalogo c)
