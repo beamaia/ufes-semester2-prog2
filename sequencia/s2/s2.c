@@ -27,8 +27,6 @@ Entrada * expande_vetor(Entrada *vet)
     aux->tam = vet->tam;
     aux->tam_max = vet->tam_max + MAX;
     aux->vetor = (int *) malloc(sizeof(int) * aux->tam_max);
-    free(vet->vetor);
-    free(vet);
     return aux;
 }
 
@@ -51,15 +49,20 @@ void leitura(Entrada *ent)
 
 int procura_sequencia(Entrada *ent)
 {
-    int cont = 0, cont_vezes = 0, add = 0, maior = 0, tam_seq = 0;
+    int cont = 0, cont_vezes = 0, add = 0, maior = 0, tam_seq = 0, cont_ant = 0;
     for(int i = 0; i < ent->tam; i++)
     {
         for(int j = 0;j < ent->tam; j++)
         {
-            while(ent->vetor[i + add++] == ent->vetor[j + add])
+            add = 0;
+            while(ent->vetor[i + add] == ent->vetor[j + add] && i != j)
             {
                 cont++;
+                add++;
             }
+
+            if(cont > cont_ant)
+                cont_ant = cont;
 
             if(cont_vezes == 0 && cont > 0)
             {
