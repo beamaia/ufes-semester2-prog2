@@ -45,13 +45,13 @@ void le_casa(Casa casa, FILE *arq)
 //Calcula o preco da casa.
 float preco_casa(Casa casa)
 {
-    return (casa->preco_pav * casa->num_pav * casa->area_pav) + (casa->preco_livre * casa->area_livre); 
+    return (((float) (casa->preco_pav * casa->num_pav)) * casa->area_pav) + ((float) casa->preco_livre * casa->area_livre);
 }
 
 //Calcula a area de pavimento da casa a ser considerada para comparacoes futuras.
 float area_cons_casa(Casa casa)
 {
-    return casa->area_pav * casa->num_pav;
+    return casa->area_pav * ((float) casa->num_pav);
 }
 
 /*

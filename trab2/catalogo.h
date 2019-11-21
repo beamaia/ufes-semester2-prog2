@@ -11,16 +11,18 @@
     #include "imovel.h"
     typedef struct catalogo * Catalogo;
 
-    void inicializa_catalogo(Catalogo);
+    Catalogo inicializa_catalogo();
+    void expande_catalogo(Catalogo);
     void le_catalogo(Catalogo, FILE *);
     void altera_imovel(Catalogo, Imovel);
     void inclusao_imovel(Catalogo, Imovel);
     void exclusao_imovel(Catalogo, Imovel);
     void le_atual(Catalogo, FILE *);
+    int tem_imoveis_no_catalogo(Catalogo);
     void calcula_preco(Catalogo);
     void calcula_area(Catalogo);
     void ordena(Catalogo, int (* cmp)(Imovel, Imovel));
-    int calcula_qtd_caros(Catalogo, Espec);
+    unsigned int calcula_qtd_caros(Catalogo, Espec);
     int calcula_qtd_argilosos(Catalogo, Espec);
     void catalogo_argiloso(Catalogo, Catalogo, Espec);
     void catalogo_casas(Catalogo, Catalogo, Espec);

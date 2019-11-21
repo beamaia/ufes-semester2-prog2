@@ -46,7 +46,7 @@ float preco_apartamento(Apartamento apto)
     if(apto->lazer == 'S')
         lazer = 1.15;
     
-    return apto->preco * apto->area * (0.9 + ((float) apto->andar)/apto->andares_total) * lazer;
+    return (float) apto->preco * apto->area * (0.9 + ((float) apto->andar)/apto->andares_total) * lazer;
 }
 
 //Retorna a area do apartamento.

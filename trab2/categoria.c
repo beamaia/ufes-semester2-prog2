@@ -18,14 +18,12 @@ union categoria
     Trapezio tra;
     Casa casa;
     Apartamento apto;
-    int vazio;
 };
 
 Categoria inicializa_union()
 {
     Categoria ini;
     ini = (Categoria) malloc(sizeof(union categoria));
-    ini->vazio = 0;
     return ini;
 }
 
@@ -135,9 +133,15 @@ void libera_categoria(Categoria cat, int tipo)
     switch(tipo)
     {
         case 1: libera_triangulo(cat->tri);
+                break;
         case 2: libera_retangulo(cat->ret);
+                break;
         case 3: libera_trapezio(cat->tra);
+                break;
         case 4: libera_casa(cat->casa);
+                break;
         case 5: libera_apartamento(cat->apto);
+                break;
+        default: return;
     }
 }

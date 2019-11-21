@@ -37,18 +37,17 @@ void le_triangulo(Triangulo tri, FILE *arq)
 //Calcula a area do terreno tipo triangulo.
 float area_triangulo(Triangulo tri)
 {
-    return (tri->base * tri->altura / 2);
+    return (float) (tri->base * tri->altura / 2);
 }
 
 //Calcula o preco do terreno tipo triangulo.
 float preco_triangulo(Triangulo tri)
 {
-    float fator = 0;
     switch (tri->solo)
     {
-        case 'A': return area_triangulo(tri) *  0.9 * ((float) tri->preco);
-        case 'G': return area_triangulo(tri) *  1.3 * ((float) tri->preco);
-        case 'R': return area_triangulo(tri) * 1.1 * ((float) tri->preco);
+        case 'A': return (float) (area_triangulo(tri) *  0.9 * tri->preco);
+        case 'G': return (float) (area_triangulo(tri) *  1.3 * tri->preco);
+        case 'R': return (float) (area_triangulo(tri) * 1.1 * tri->preco);
         default: return 0;
     }
 }

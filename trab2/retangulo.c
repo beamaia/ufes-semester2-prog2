@@ -37,7 +37,7 @@ void le_retangulo(Retangulo ret, FILE *arq)
 //Calcula a area do terreno tipo retangulo.
 float area_retangulo(Retangulo ret)
 {
-    return ret->lado1 * ret->lado2;
+    return (float) ret->lado1 * ret->lado2;
 }
 
 //Calcula o preco do terreno tipo retangulo.

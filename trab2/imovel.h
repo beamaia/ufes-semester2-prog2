@@ -12,7 +12,7 @@
 
     typedef struct imovel * Imovel;
 
-    void inicializa_imoveis(Imovel *, int)
+    void inicializa_imoveis(Imovel *, unsigned int);
     int identifica_categoria(Imovel);
     void le_tipo_imovel(char *, FILE *);
     void le_nome_proprietario(char *, FILE *);

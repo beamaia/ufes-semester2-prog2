@@ -32,21 +32,22 @@ int main()
     Identificadores id;
 
 
-    inicializa_catalogo(imoveis);
-    inicializa_catalogo(casas);
-    inicializa_catalogo(argilosos);
+    imoveis = inicializa_catalogo();
+    casas = inicializa_catalogo();
+    argilosos = inicializa_catalogo();
     le_catalogo(imoveis, arq_cat);
     le_atual(imoveis, arq_atual);
 
-    if(imoveis.qtd_imoveis)
+    if(tem_imoveis_no_catalogo(imoveis))
     {
-        inicializa_espec(&espec);
-        le_espec(&espec, arq_espec);
-        calcula_area(&imoveis);
-        calcula_preco(&imoveis);
-        imoveis_mais_caros(&imoveis, &espec, &id);
-        terrenos_argilosos_menores(&imoveis, &argilosos, &id, &espec);
-        casas_limite(&imoveis, &casas, &id, &espec);
+        espec = inicializa_espec();
+        le_espec(espec, arq_espec);
+        calcula_area(imoveis);
+        calcula_preco(imoveis);
+        id = inicializa_identificadores();
+        imoveis_mais_caros(imoveis, espec, id);
+        terrenos_argilosos_menores(imoveis, argilosos, id, espec);
+        casas_limite(imoveis, casas, id, espec);
     }
 
     apresenta_catalogos(&imoveis, &argilosos, &casas, &id, &espec);

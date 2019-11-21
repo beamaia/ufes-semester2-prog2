@@ -4,7 +4,7 @@
 #include "espec.h"
 #include "categoria.h"
 #include "imovel.h"
-#define MAX_NOME 40
+#define MAX_NOME 41
 
 /*
 Dados do imovel. O tag do tipo de imovel, o nome do proprietario, o codigo de identificacao,
@@ -17,7 +17,7 @@ struct imovel
     unsigned int id;
     Categoria categoria;
     float preco,
-            area;
+          area;
 };
 
 /*
@@ -44,9 +44,9 @@ int identifica_categoria(Imovel imo)
     return 0;
 }
 
-void inicializa_imoveis(Imovel *imo, int qtd)
+void inicializa_imoveis(Imovel *imo, unsigned int qtd)
 {
-    for(int i = 0; i < qtd; i++)
+    for(unsigned int i = 0; i < qtd; i++)
     {
         imo[i] = (Imovel) malloc(sizeof(struct imovel));
 
@@ -63,33 +63,28 @@ void inicializa_imoveis(Imovel *imo, int qtd)
     }
 }
 
-//Le a tag do imovel
-void le_tipo_imovel(char * tipo, FILE * arq)
-{
-    char aux[7];
-    fscanf(arq, "%s\n", aux);
-
-    tipo = (char *) malloc(sizeof(char)*strlen(aux));
-    strcpy(tipo, aux);
-}
-
-//Le o nome do proprietario
-void le_nome_proprietario(char * nome, FILE *arq)
+//Le uma linha de apenas caracteres
+void le_linha_char(char * palavra, FILE *arq)
 {
     char aux[MAX_NOME];
     fscanf(arq, "%[^\n]\n", aux);
 
-    nome = (char *) malloc(sizeof(char)*strlen(aux));
-    strcpy(nome, aux);
+    palavra = (char *) malloc(sizeof(char) * strlen(aux));
+    if(palavra == NULL)
+    {
+        printf("Erro na alocação de memoria, abortando programa");
+        exit(1);
+    }
+
+    strcpy(palavra, aux);
 }
 
 //Leitura dos dados do imovel. Retorna 1 caso foi feito a leitura de um imovel, 0 caso o contrario.
 int le_imovel(Imovel imo, FILE *arq)
 {
-    imo = (Imovel) malloc(sizeof(struct imovel));
-    le_tipo_imovel(imo->tipo_imovel, arq);
-    fscanf(arq, "%d\n", &imo->id);
-    le_nome_proprietario(imo->nome_proprietario, arq);
+    le_linha_char(imo->tipo_imovel, arq);
+    fscanf(arq, "%u\n", &imo->id);
+    le_linha_char(imo->nome_proprietario, arq);
     
     int cat = identifica_categoria(imo);
     return le_categoria(imo->categoria, cat, arq);

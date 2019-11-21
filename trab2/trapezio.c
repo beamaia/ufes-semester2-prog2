@@ -39,7 +39,7 @@ void le_trapezio(Trapezio tra, FILE *arq)
 //Calcula a area do terreno tipo trapezio.
 float area_trapezio(Trapezio tra)
 {
-    return ((tra->base1 + tra->base2) * tra->altura) / 2;
+    return (float) ((tra->base1 + tra->base2) * tra->altura) / 2;
 }
 
 //Calcula o preco do terreno tipo trapezio.
@@ -47,9 +47,9 @@ float preco_trapezio(Trapezio tra)
 {
     switch (tra->solo)
     {
-        case 'A': return area_trapezio(tra) * 0.9 * ((float) tra->preco);
-        case 'G': return area_trapezio(tra) * 1.3 * ((float) tra->preco);
-        case 'R': return area_trapezio(tra) * 1.1 * ((float) tra->preco);
+        case 'A': return (float) (area_trapezio(tra) * 0.9 * tra->preco);
+        case 'G': return (float) (area_trapezio(tra) * 1.3 * tra->preco);
+        case 'R': return (float) (area_trapezio(tra) * 1.1 * tra->preco);
         default: return 0;
     }
 }

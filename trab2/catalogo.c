@@ -22,8 +22,9 @@ struct catalogo
 };
 
 //Coloca 0 em quantidade de imoveis do catalogo.
-void inicializa_catalogo(Catalogo c)
+Catalogo inicializa_catalogo()
 {
+    Catalogo c;
     c = (Catalogo) malloc(sizeof(struct catalogo));
     if(c == NULL)
     {
@@ -43,6 +44,7 @@ void expande_catalogo(Catalogo c)
 {
     c->qtd_max += MAX_IMO;
     Imovel *aux = (Imovel *) malloc(sizeof(Imovel) * c->qtd_max);
+    inicializa_imoveis(aux, c->qtd_max);
 
     if(aux == NULL)
     {
@@ -50,13 +52,13 @@ void expande_catalogo(Catalogo c)
         exit(1);        
     }
 
-    for(int i = 0; i < c->qtd_imoveis; i++)
+    for(unsigned int i = 0; i < c->qtd_max; i++)
     {
         aux[i] = c->imoveis[i];
     }
 
     free(c->imoveis);
-    c->qtd_imoveis = aux;
+    c->imoveis = aux;
 }
 
 /*
@@ -66,15 +68,16 @@ no catalogo.
 
 void le_catalogo(Catalogo c, FILE *arq)
 {
-    for(int i = 0; i < c->qtd_max && !feof(arq); i++)
+    for(int i = 0; !feof(arq) ; i++)
     {
-        if(le_imovel(&c->imoveis[i], arq) && c->qtd_imoveis < c->qtd_max)
-        {
-            c->qtd_imoveis++;
-        }
         if(c->qtd_imoveis == c->qtd_max)
         {
             expande_catalogo(c);
+        }
+
+        if(le_imovel(c->imoveis[i], arq) && c->qtd_imoveis < c->qtd_max)
+        {
+            c->qtd_imoveis++;
         }
     }
 }
@@ -86,6 +89,7 @@ void altera_imovel(Catalogo c, Imovel imo)
     {
         if(compara_id(&c->imoveis[i], imo))
         {
+            free(c->imoveis[i]);
             c->imoveis[i] = imo;
             break;
         }
@@ -113,7 +117,7 @@ void exclusao_imovel(Catalogo c, Imovel imo)
 {
     for(int i = 0; i < c->qtd_imoveis && i < c->qtd_max; i++)
     {
-        if(compara_id(&c->imoveis[i], imo))
+        if(compara_id(c->imoveis[i], imo))
         {
             for(int j = i; j < c->qtd_imoveis - 1 && i < c->qtd_max; j++)
             {
@@ -145,21 +149,28 @@ void le_atual(Catalogo c, FILE *arq)
             expande_catalogo(c);
         }
 
+        inicializa_imoveis(&aux, 1);
+
         switch(acao)
         {
-            case 'a': le_imovel(&aux, arq);
-                      altera_imovel(c, &aux);
+            case 'a': le_imovel(aux, arq);
+                      altera_imovel(c, aux);
                       break;
-            case 'i': le_imovel(&aux, arq);
-                      inclusao_imovel(c, &aux);
+            case 'i': le_imovel(aux, arq);
+                      inclusao_imovel(c, aux);
                       break;
             case 'e': fscanf(arq, "%d%*c", &temp);
-                      acrescenta_id(&aux, temp);  
-                      exclusao_imovel(c, &aux);            
+                      acrescenta_id(aux, temp);
+                      exclusao_imovel(c, aux);
         }
 
         free(aux);
     }
+}
+
+int tem_imoveis_no_catalogo(Catalogo c)
+{
+    return (c->qtd_imoveis > 0);
 }
 
 //Calcula o preco de todos imoveis do catalogo.
@@ -167,7 +178,7 @@ void calcula_preco(Catalogo c)
 {
     for(int i = 0; i < c->qtd_imoveis && i < c->qtd_max; i++)
     {
-        preco_imovel(&c->imoveis[i]);
+        preco_imovel(c->imoveis[i]);
     }
 }
 
@@ -176,7 +187,7 @@ void calcula_area(Catalogo c)
 {
     for(int i = 0; i < c->qtd_imoveis && i < c->qtd_max; i++)
     {
-        area_imovel(&c->imoveis[i]);
+        area_imovel(c->imoveis[i]);
     }
 }
 
@@ -199,9 +210,9 @@ void ordena(Catalogo c, int (* cmp)(Imovel, Imovel))
 }
 
 //Calcula a quantidade de imoveis que serao apresentados.
-int calcula_qtd_caros(Catalogo c1, Espec *espec)
+unsigned int calcula_qtd_caros(Catalogo c1, Espec espec)
 {
-    return espec->percent_caros * c1->qtd_imoveis / 100;
+    return calcula_qtd_cara_espec(espec, c1->qtd_imoveis);
 }
 
 //Calcula a quantidade de imoveis argilosos que serao apresentados.
@@ -254,16 +265,12 @@ void imoveis_mais_caros(Catalogo c, Espec espec, Identificadores id)
 
     ordena(c, compara_preco);
 
-    int limite = calcula_qtd_caros(c, espec);
+    unsigned int limite = calcula_qtd_caros(c, espec);
 
-    if(espec->i > c->qtd_imoveis || espec->i == 0)
-    {
-        id->i = 0;
-    }
+    if(espec_id_zerado(espec, 1) || espec_fora_limite(espec, 1, c->qtd_imoveis))
+        zera_id(id, 1);
     else
-    {
-        id->i = identifica_id(&c->imoveis[espec->i - 1 + c->qtd_imoveis - limite]);
-    }
+        atribui_valor_id(id, identifica_id(&c->imoveis[espec->i - 1 + c->qtd_imoveis - limite]), 1);
 }
 
 /*

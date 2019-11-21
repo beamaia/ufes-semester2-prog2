@@ -12,9 +12,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70b25b19-1cba-4926-b993-2b60a1bfe1f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apto.c" beforeDir="false" afterPath="$PROJECT_DIR$/apto.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/casa.c" beforeDir="false" afterPath="$PROJECT_DIR$/casa.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalogo.c" beforeDir="false" afterPath="$PROJECT_DIR$/catalogo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalogo.h" beforeDir="false" afterPath="$PROJECT_DIR$/catalogo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categoria.c" beforeDir="false" afterPath="$PROJECT_DIR$/categoria.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/espec.c" beforeDir="false" afterPath="$PROJECT_DIR$/espec.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/espec.h" beforeDir="false" afterPath="$PROJECT_DIR$/espec.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imovel.c" beforeDir="false" afterPath="$PROJECT_DIR$/imovel.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imovel.h" beforeDir="false" afterPath="$PROJECT_DIR$/imovel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/retangulo.c" beforeDir="false" afterPath="$PROJECT_DIR$/retangulo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trapezio.c" beforeDir="false" afterPath="$PROJECT_DIR$/trapezio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/triangulo.c" beforeDir="false" afterPath="$PROJECT_DIR$/triangulo.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +35,20 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FindInProjectRecents">
@@ -104,6 +129,7 @@
       <workItem from="1574187959937" duration="632000" />
       <workItem from="1574195494181" duration="1235000" />
       <workItem from="1574201565889" duration="293000" />
+      <workItem from="1574339735627" duration="6085000" />
     </task>
     <servers />
   </component>
@@ -131,5 +157,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/imovel.c</url>
+          <line>22</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
