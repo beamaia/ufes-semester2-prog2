@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/2019107651/ufes/semester-2/prog2b/trab2/apto.c
+stdio.h
+-
+stdlib.h
+-
+apto.h
+/home/2019107651/ufes/semester-2/prog2b/trab2/apto.h
+
+/home/2019107651/ufes/semester-2/prog2b/trab2/apto.h
+stdio.h
+-
+

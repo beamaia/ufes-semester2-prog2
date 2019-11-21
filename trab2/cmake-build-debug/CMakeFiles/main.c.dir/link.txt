@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/main.c.dir/apto.c.o CMakeFiles/main.c.dir/casa.c.o CMakeFiles/main.c.dir/catalogo.c.o CMakeFiles/main.c.dir/categoria.c.o CMakeFiles/main.c.dir/espec.c.o CMakeFiles/main.c.dir/imovel.c.o CMakeFiles/main.c.dir/retangulo.c.o CMakeFiles/main.c.dir/trapezio.c.o CMakeFiles/main.c.dir/triangulo.c.o  -o main.c 

@@ -8,8 +8,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/apto.c.dir/retangulo.c.o"
   "CMakeFiles/apto.c.dir/trapezio.c.o"
   "CMakeFiles/apto.c.dir/triangulo.c.o"
-  "apto.c"
   "apto.c.pdb"
+  "apto.c"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
-add_executable(
+add_executable(main.c
     apto.c
     apto.h
     casa.c
@@ -18,7 +18,6 @@ add_executable(
     espec.h
     imovel.c
     imovel.h
-    main.c
     retangulo.c
     retangulo.h
     trapezio.c

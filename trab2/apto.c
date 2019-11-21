@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include "apto.h"
 
-struct apartamento 
+struct apartamento
 {
     unsigned int andar,
-                 andares_total,
-                 preco,
-                 num_quartos,
-                 num_vagas;
+            andares_total,
+            preco,
+            num_quartos,
+            num_vagas;
     float area;
     char lazer;
 };
@@ -23,7 +23,7 @@ Apartamento inicializa_apartamento()
         printf("Não foi possível alocar memória.\n");
         exit(1);
     }
-    
+
     return apto;
 }
 
@@ -45,7 +45,7 @@ float preco_apartamento(Apartamento apto)
     float lazer = 1;
     if(apto->lazer == 'S')
         lazer = 1.15;
-    
+
     return (float) apto->preco * apto->area * (0.9 + ((float) apto->andar)/apto->andares_total) * lazer;
 }
 

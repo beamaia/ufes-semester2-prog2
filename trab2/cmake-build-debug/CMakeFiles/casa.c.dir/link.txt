@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/casa.c.dir/catalogo.c.o CMakeFiles/casa.c.dir/categoria.c.o CMakeFiles/casa.c.dir/espec.c.o CMakeFiles/casa.c.dir/imovel.c.o CMakeFiles/casa.c.dir/main.c.o CMakeFiles/casa.c.dir/retangulo.c.o CMakeFiles/casa.c.dir/trapezio.c.o CMakeFiles/casa.c.dir/triangulo.c.o  -o casa.c 
