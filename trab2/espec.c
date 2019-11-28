@@ -112,9 +112,7 @@ Identificadores inicializa_identificadores()
 int espec_imovel_limite(float area, float preco, Espec espec)
 {
     if(area > espec->area_limite && preco < espec->preco_limite)
-    {
         return 1;
-    }
 
     return 0;   
 }
@@ -138,11 +136,11 @@ void atribui_valor_id(Identificadores id, unsigned int valor, int escolha)
     switch(escolha)
     {
         case 1: id->i = valor;
-            break;
+                break;
         case 2: id->j = valor;
-            break;
+                break;
         case 3: id->k = valor;
-            break;
+                break;
         default: return;
     }
 }

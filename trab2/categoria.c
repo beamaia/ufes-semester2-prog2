@@ -27,22 +27,24 @@ Categoria inicializa_union()
     return ini;
 }
 
-int inicializa_categoria(Categoria cat, int tipo)
+Categoria inicializa_categoria(int tipo)
 {
+    Categoria cat = inicializa_union();
     switch (tipo)
     {
         case 1: cat->tri = inicializa_triangulo();
-                return 1;
+                break;
         case 2: cat->ret = inicializa_retangulo();
-                return 1;
+                break;
         case 3: cat->tra = inicializa_trapezio();
-                return 1;
+                break;
         case 4: cat->casa = inicializa_casa();
-                return 1;
+                break;
         case 5: cat->apto = inicializa_apartamento();
-                return 1;
-        default: return 0;
-    }    
+                break;
+        default: break;
+    }
+    return cat;
 }
 
 /*
@@ -51,7 +53,6 @@ chama a funcao de leitura necessaria.
 */
 int le_categoria(Categoria cat, int tipo, FILE * arq)
 {
-    inicializa_categoria(cat, tipo);
     switch (tipo)
     {
         case 1: le_triangulo(cat->tri, arq);

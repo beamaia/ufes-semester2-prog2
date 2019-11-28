@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/apto.c.dir/casa.c.o CMakeFiles/apto.c.dir/catalogo.c.o CMakeFiles/apto.c.dir/categoria.c.o CMakeFiles/apto.c.dir/espec.c.o CMakeFiles/apto.c.dir/imovel.c.o CMakeFiles/apto.c.dir/main.c.o CMakeFiles/apto.c.dir/retangulo.c.o CMakeFiles/apto.c.dir/trapezio.c.o CMakeFiles/apto.c.dir/triangulo.c.o  -o apto.c 

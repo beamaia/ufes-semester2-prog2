@@ -44,50 +44,105 @@ int identifica_categoria(Imovel imo)
     return 0;
 }
 
-void inicializa_imoveis(Imovel *imo, unsigned int qtd)
+Imovel inicializa_imoveis()
 {
-    for(unsigned int i = 0; i < qtd; i++)
-    {
-        imo[i] = (Imovel) malloc(sizeof(struct imovel));
+    Imovel imo;
 
-        if(imo[i] == NULL)
-        {
-            printf("Erro na alocação de memoria, abortando programa");
-            exit(1);
-        }
+    imo = (Imovel) malloc(sizeof(struct imovel));
 
-        imo[i]->area = 0;
-        imo[i]->categoria = inicializa_union(); //duvida
-        imo[i]->id = 0;
-        imo[i]->preco = 0;
-    }
-}
-
-//Le uma linha de apenas caracteres
-void le_linha_char(char * palavra, FILE *arq)
-{
-    char aux[MAX_NOME];
-    fscanf(arq, "%[^\n]\n", aux);
-
-    palavra = (char *) malloc(sizeof(char) * strlen(aux));
-    if(palavra == NULL)
+    if(imo == NULL)
     {
         printf("Erro na alocação de memoria, abortando programa");
         exit(1);
     }
 
-    strcpy(palavra, aux);
+    imo->area = 0;
+    imo->id = 0;
+    imo->preco = 0;
+    return imo;
+}
+
+char * le_tipo_imovel(FILE *arq)
+{
+    char *tipo;
+    char aux[7];
+    fscanf(arq, "%s\n", aux);
+
+    tipo = (char *) malloc(sizeof(char) * (strlen(aux) + 1));
+    if(tipo == NULL)
+    {
+        printf("Erro na alocação de memoria, abortando programa");
+        exit(1);
+    }
+
+    strcpy(tipo, aux);
+    return tipo;
+}
+
+//Le uma linha de apenas caracteres
+char * le_nome_proprietario(FILE *arq)
+{
+    char *nome;
+    char aux[MAX_NOME];
+    fscanf(arq, "%[^\n]\n", aux);
+
+    nome = (char *) malloc(sizeof(char) * (strlen(aux) + 1));
+    if(nome == NULL)
+    {
+        printf("Erro na alocação de memoria, abortando programa");
+        exit(1);
+    }
+
+    strcpy(nome, aux);
+    return nome;
 }
 
 //Leitura dos dados do imovel. Retorna 1 caso foi feito a leitura de um imovel, 0 caso o contrario.
 int le_imovel(Imovel imo, FILE *arq)
 {
-    le_linha_char(imo->tipo_imovel, arq);
+    imo->tipo_imovel = le_tipo_imovel(arq);
     fscanf(arq, "%u\n", &imo->id);
-    le_linha_char(imo->nome_proprietario, arq);
+    imo->nome_proprietario = le_nome_proprietario(arq);
     
     int cat = identifica_categoria(imo);
+    imo->categoria = inicializa_categoria(cat);
     return le_categoria(imo->categoria, cat, arq);
+}
+
+//Iguala as informacoes do imovel imo1 ao do imovel imo2.
+void modifica_imovel(Imovel imo1, Imovel imo2)
+{
+    strcpy(imo1->tipo_imovel, imo2->tipo_imovel);
+    strcpy(imo1->nome_proprietario, imo2->nome_proprietario);
+    imo1->id = imo2->id;
+    imo1->categoria = imo2->categoria;
+    imo1->preco = imo2->preco;
+    imo1->area = imo2->area;
+    imo1->preco = imo2->preco;
+    imo1->area = imo2->area;
+}
+
+void modifica_imovel_inclusao(Imovel imo1, Imovel imo2)
+{
+    imo1->tipo_imovel = (char *) malloc(sizeof(char) * (strlen(imo2->tipo_imovel) + 1));
+    strcpy(imo1->tipo_imovel, imo2->tipo_imovel);
+    imo1->nome_proprietario = (char *) malloc(sizeof(char) * (strlen(imo2->nome_proprietario) + 1));
+    strcpy(imo1->nome_proprietario, imo2->nome_proprietario);
+    imo1->id = imo2->id;
+    imo1->categoria = inicializa_categoria(identifica_categoria(imo1));
+    imo1->categoria = imo2->categoria;
+    imo1->preco = imo2->preco;
+    imo1->area = imo2->area;
+    imo1->preco = imo2->preco;
+    imo1->area = imo2->area;
+}
+
+void modifica_imovel_alteracao(Imovel imo1, Imovel imo2)
+{
+//    libera_imovel(imo1);
+//    imo1 = (Imovel) malloc(sizeof(struct imovel));
+    modifica_imovel_inclusao(imo1, imo2);
+
 }
 
 //Chama a funcao que retorna o preco total to imovel e armazena o valor dentro do struct tImovel.
@@ -189,7 +244,13 @@ void imovel_apresenta_identificador(Imovel imo)
 
 void libera_imovel(Imovel imo)
 {
+    libera_categoria(imo->categoria, identifica_categoria(imo));
     free(imo->tipo_imovel);
     free(imo->nome_proprietario);
-    libera_categoria(imo->categoria, identifica_categoria(imo));
+    free(imo);
+}
+
+void libera_imovel_nao_utilizado(Imovel imo)
+{
+    free(imo);
 }

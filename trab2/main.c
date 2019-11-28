@@ -11,6 +11,11 @@
 #include "imovel.h"
 #include "catalogo.h"
 
+/*
+/home/bea/ufes/semestre-2/prog2b/trab1/validacao/1/catalogo.txt
+/home/bea/ufes/semestre-2/prog2b/trab1/validacao/1/atual.txt
+/home/bea/ufes/semestre-2/prog2b/trab1/validacao/1/espec.txt
+ */
 
 int main()
 {
@@ -54,8 +59,8 @@ int main()
 
     apresenta_catalogos(imoveis, argilosos, casas, id, espec);
     libera_catalogo(imoveis);
-    libera_catalogo(argilosos);
-    libera_catalogo(casas);
+    libera_apenas_catalogo(argilosos);
+    libera_apenas_catalogo(casas);
     libera_espec(espec);
     libera_id(id);
 

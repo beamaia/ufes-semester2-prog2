@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/trab2.dir/apto.c.o CMakeFiles/trab2.dir/casa.c.o CMakeFiles/trab2.dir/catalogo.c.o CMakeFiles/trab2.dir/categoria.c.o CMakeFiles/trab2.dir/espec.c.o CMakeFiles/trab2.dir/imovel.c.o CMakeFiles/trab2.dir/main.c.o CMakeFiles/trab2.dir/retangulo.c.o CMakeFiles/trab2.dir/trapezio.c.o CMakeFiles/trab2.dir/triangulo.c.o  -o trab2 

@@ -14,20 +14,24 @@ Entrada inicializa_vetor()
 {
     Entrada ent;
 
-    ent.tam = 0;
+    ent.tam = ent.tam_seq = ent.i = 0;
     ent.tam_max = MAX;
     ent.vetor = (int*) malloc(sizeof(int) * ent.tam_max);
 
     return ent;
 }
 
-Entrada * expande_vetor(Entrada *vet)
+void expande_vetor(Entrada *vet)
 {
     Entrada *aux = (Entrada *) malloc(sizeof(Entrada));
     aux->tam = vet->tam;
     aux->tam_max = vet->tam_max + MAX;
     aux->vetor = (int *) malloc(sizeof(int) * aux->tam_max);
-    return aux;
+    for(int i = 0; i < aux->tam; i++)
+        aux->vetor[i] = vet->vetor[i];
+
+    free(vet->vetor);
+    vet->vetor = aux->vetor;
 }
 
 void leitura(Entrada *ent)
@@ -38,7 +42,7 @@ void leitura(Entrada *ent)
     while (scanf("%d%c", &num, &esp) == 2)
     {
         if (ent->tam_max == ent->tam)
-            ent = expande_vetor(ent);
+            expande_vetor(ent);
 
         ent->vetor[ent->tam++] = num;
 
@@ -49,54 +53,56 @@ void leitura(Entrada *ent)
 
 int procura_sequencia(Entrada *ent)
 {
-    int cont = 0, cont_vezes = 0, add = 0, maior = 0, tam_seq = 0, cont_ant = 0;
-    for(int i = 0; i < ent->tam; i++)
+    int cont = 0, cont_vezes = 0, add = 0, tam_seq = 0, cont_seq = 0, i_seq = 0, cont_maior = 0;
+    for(int i = 0; i < ent->tam - 1; i++)
     {
-        for(int j = 0;j < ent->tam; j++)
+        while( i + cont < ent->tam - 1 && ent->vetor[i + cont] + 1 == ent->vetor[i + 1 + cont])
         {
-            add = 0;
-            while(ent->vetor[i + add] == ent->vetor[j + add] && i != j)
+            cont++;
+        }
+
+        if(cont)
+            cont++;
+
+        for(int j = i + cont; j < ent->tam && cont > 0; j++)
+        {
+            while(ent->vetor[i + add] == ent->vetor[j + add] && (j + add) < ent->tam && add < cont)
             {
-                cont++;
                 add++;
             }
 
-            if(cont > cont_ant)
-                cont_ant = cont;
-
-            if(cont_vezes == 0 && cont > 0)
+            if(add == cont)
             {
                 cont_vezes++;
-                tam_seq = cont;
-                j += cont;
-                cont = 0;
-                continue;
+                j += cont - 1;
             }
 
-            if(cont == tam_seq)
-            {
-                cont_vezes++;
-                j += cont;
-                cont = 0;
-            }
+            add = 0;
         }
 
-        if(cont_vezes > maior)
+        if(cont_vezes > cont_seq || (cont > 0 && !cont_seq))
         {
-            maior = cont_vezes;
-            ent->i = i;
-            ent->tam_seq = tam_seq;
+            i_seq = i;
+            tam_seq = cont;
+            cont_seq = cont_vezes + 1;
         }
+
+        cont_vezes = 0;
+        cont = 0;
     }
 
-    return cont_vezes;
+    ent->tam_seq = tam_seq;
+    ent->i = i_seq;
+
+    return cont_seq;
 }
 
 void apresenta(Entrada ent, int qtd)
 {
-    for(int i = 0; i < ent.tam_seq; i++)
+    printf("%d", ent.vetor[ent.i]);
+    for(int i = 1; i < ent.tam_seq; i++)
     {
-        printf("%d ", ent.vetor[ent.i + i]);
+        printf(" %d", ent.vetor[ent.i + i]);
     }
     printf("\n%d\n", qtd);
 }
@@ -108,7 +114,10 @@ int main()
     leitura(&vetor);
     if(vetor.tam > 1) {
         qtd = procura_sequencia(&vetor);
-        apresenta(vetor, qtd);
+        if(qtd)
+            apresenta(vetor, qtd);
+        else
+            printf("0\n");
     }
     else
         printf("0\n");

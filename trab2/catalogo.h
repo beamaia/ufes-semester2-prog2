@@ -34,5 +34,6 @@
     void apresenta_casas_limite(Catalogo);
     void apresenta_catalogos(Catalogo, Catalogo, Catalogo, Identificadores, Espec);
     void libera_catalogo(Catalogo c);
+void libera_apenas_catalogo(Catalogo c);
 
 #endif

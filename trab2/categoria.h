@@ -10,7 +10,8 @@
     typedef union categoria * Categoria;
 
     Categoria inicializa_union();
-    int le_categoria(Categoria, int, FILE *);
+    Categoria inicializa_categoria(int tipo);
+    int le_categoria(Categoria cat, int tipo, FILE * arq);
     float categoria_preco_imovel(Categoria, int);
     float categoria_area_imovel(Categoria, int);
     int categoria_compara_quartos(Categoria, Categoria);

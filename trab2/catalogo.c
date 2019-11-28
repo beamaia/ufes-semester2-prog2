@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "espec.h"
-#include "triangulo.h"
-#include "retangulo.h"
-#include "trapezio.h"
-#include "casa.h"
-#include "apto.h"
-#include "categoria.h"
+//#include "triangulo.h"
+//#include "retangulo.h"
+//#include "trapezio.h"
+//#include "casa.h"
+//#include "apto.h"
+//#include "categoria.h"
 #include "imovel.h"
 #include "catalogo.h"
-#define MAX_IMO 50
+#define MAX_IMO 20
 
 //Dados do catalogo. Um catalogo de varios imoveis e a quantidade de imoveis nesse catalogo.
 struct catalogo
@@ -32,12 +32,16 @@ Catalogo inicializa_catalogo()
         exit(1);
     }
 
-    c->imoveis = (Imovel *) malloc(sizeof(Imovel) * c->qtd_max);
-
     c->qtd_imoveis = 0;
     c->qtd_max = MAX_IMO;
+    c->imoveis = (Imovel *) malloc(sizeof(Imovel) * c->qtd_max);
 
-    inicializa_imoveis(c->imoveis, c->qtd_max);
+    if(c->imoveis == NULL)
+    {
+        printf("Erro na alocação de memoria, abortando programa");
+        exit(1);
+    }
+
     return c;
 }
 
@@ -45,7 +49,7 @@ void expande_catalogo(Catalogo c)
 {
     c->qtd_max += MAX_IMO;
     Imovel *aux = (Imovel *) malloc(sizeof(Imovel) * c->qtd_max);
-    inicializa_imoveis(aux, c->qtd_max);
+
 
     if(aux == NULL)
     {
@@ -53,13 +57,15 @@ void expande_catalogo(Catalogo c)
         exit(1);        
     }
 
-    for(unsigned int i = 0; i < c->qtd_max; i++)
+    for(unsigned int i = 0; i < c->qtd_imoveis; i++)
     {
-        aux[i] = c->imoveis[i];
+        aux[i] = inicializa_imoveis();
+        modifica_imovel_inclusao(aux[i], c->imoveis[i]);
+        libera_imovel(c->imoveis[i]);
     }
 
-    free(c->imoveis);
     c->imoveis = aux;
+
 }
 
 /*
@@ -69,13 +75,14 @@ no catalogo.
 
 void le_catalogo(Catalogo c, FILE *arq)
 {
-    for(int i = 0; !feof(arq) ; i++)
+    for(int i = 0; !feof(arq) && i < c->qtd_max + 1; i++)
     {
         if(c->qtd_imoveis == c->qtd_max)
         {
             expande_catalogo(c);
         }
 
+        c->imoveis[i] = inicializa_imoveis();
         if(le_imovel(c->imoveis[i], arq) && c->qtd_imoveis < c->qtd_max)
         {
             c->qtd_imoveis++;
@@ -90,8 +97,7 @@ void altera_imovel(Catalogo c, Imovel imo)
     {
         if(compara_id(c->imoveis[i], imo))
         {
-            free(c->imoveis[i]);
-            c->imoveis[i] = imo;
+            modifica_imovel_alteracao(c->imoveis[i], imo);
             break;
         }
     }
@@ -106,7 +112,8 @@ void inclusao_imovel(Catalogo c, Imovel imo)
     if(c->qtd_imoveis == MAX_IMO)
         return;
 
-    c->imoveis[c->qtd_imoveis] = imo;
+    c->imoveis[c->qtd_imoveis] = inicializa_imoveis();
+    modifica_imovel_inclusao(c->imoveis[c->qtd_imoveis], imo);
     c->qtd_imoveis++;
 }
 
@@ -122,7 +129,7 @@ void exclusao_imovel(Catalogo c, Imovel imo)
         {
             for(int j = i; j < c->qtd_imoveis - 1 && i < c->qtd_max; j++)
             {
-                c->imoveis[j] = c->imoveis[j + 1];
+                modifica_imovel_alteracao(c->imoveis[j], c->imoveis[j + 1]);
             }
 
             c->qtd_imoveis--;
@@ -143,14 +150,14 @@ void le_atual(Catalogo c, FILE *arq)
 
     while(!feof(arq))
     {
-        fscanf(arq, "%c", &acao);
+        fscanf(arq, "%c\n", &acao);
 
         if(c->qtd_imoveis == c->qtd_max)
         {
             expande_catalogo(c);
         }
 
-        inicializa_imoveis(&aux, 1);
+        aux = inicializa_imoveis();
 
         switch(acao)
         {
@@ -167,7 +174,7 @@ void le_atual(Catalogo c, FILE *arq)
             default:  break;
         }
 
-        free(aux);
+//        libera_imovel(aux);
     }
 }
 
@@ -198,15 +205,16 @@ void calcula_area(Catalogo c)
 void ordena(Catalogo c, int (* cmp)(Imovel, Imovel))
 {
     Imovel aux;
+    aux = inicializa_imoveis();
     for(int i = 0; i < c->qtd_imoveis - 1 && i < c->qtd_max; i++)
     {
-        for(int j = 0; j < c->qtd_imoveis - i - 1; j++)
+        for(unsigned int j = 0; j < c->qtd_imoveis - i - 1 && j < c->qtd_max; j++)
         {
             if((*cmp)(c->imoveis[j], c->imoveis[j + 1]))
             {
-                aux = c->imoveis[j];
-                c->imoveis[j] = c->imoveis[j + 1];
-                c->imoveis[j + 1] = aux;
+                modifica_imovel_inclusao(aux, c->imoveis[j]);
+                modifica_imovel_inclusao(c->imoveis[j], c->imoveis[j + 1]);
+                modifica_imovel_inclusao(c->imoveis[j + 1], aux);
             }
         }
     }
@@ -228,11 +236,12 @@ unsigned int calcula_qtd_argilosos(Catalogo c, Espec espec)
 //Cria um catalogo c2 baseado nos terrenos argilosos do catalogo c1.
 void catalogo_argiloso(Catalogo c1, Catalogo c2)
 {
-    for(int i = 0; i < c1->qtd_imoveis && c1->qtd_imoveis < c1->qtd_max; i++)
+    for(int i = 0; i < c1->qtd_imoveis && i < c1->qtd_max; i++)
     {
         if(imovel_identifica_argiloso(c1->imoveis[i]))
         {
-            c2->imoveis[c2->qtd_imoveis] = c1->imoveis[i];
+            c2->imoveis[c2->qtd_imoveis] = inicializa_imoveis();
+            modifica_imovel_inclusao(c2->imoveis[c2->qtd_imoveis], c1->imoveis[i]);
             c2->qtd_imoveis++;
         }
     }
@@ -247,7 +256,9 @@ void catalogo_casas(Catalogo c1, Catalogo c2, Espec espec)
         {
             if(imovel_limite_area_preco(c1->imoveis[i], espec))
             {
-                c2->imoveis[c2->qtd_imoveis++] = c1->imoveis[i];
+                c2->imoveis[c2->qtd_imoveis] = inicializa_imoveis();
+                modifica_imovel_inclusao(c2->imoveis[c2->qtd_imoveis], c1->imoveis[i]);
+                c2->qtd_imoveis++;
             }
         }       
     }
@@ -261,9 +272,7 @@ espec.txt.
 void imoveis_mais_caros(Catalogo c, Espec espec, Identificadores id)
 {
     if(!c->qtd_imoveis)
-    {
         return;
-    }
 
     ordena(c, compara_preco);
 
@@ -272,7 +281,9 @@ void imoveis_mais_caros(Catalogo c, Espec espec, Identificadores id)
     if(espec_id_zerado(espec, 1) || espec_id_limite(espec, 1, c->qtd_imoveis))
         zera_id(id, 1);
     else
+    {
         atribui_valor_id(id, identifica_id(c->imoveis[get_espec_letra(espec, 1) - 1 + c->qtd_imoveis - limite]), 1);
+    }
 }
 
 /*
@@ -324,7 +335,7 @@ void casas_limite(Catalogo c1, Catalogo c2, Identificadores id, Espec espec)
 //Apresenta o numero de identificao dos imoveis mais caros.
 void apresenta_imoveis_caros(Catalogo c, int limite)
 {
-    for(int i = c->qtd_imoveis - limite; i < c->qtd_imoveis && i >= 0 && i < c->qtd_max; i++)
+    for(int i = (int) c->qtd_imoveis - limite; i < c->qtd_imoveis && i >= 0 && i < c->qtd_max; i++)
     {
         imovel_apresenta_identificador(c->imoveis[i]);
         if(i != c->qtd_imoveis - 1)
@@ -340,7 +351,7 @@ void apresenta_imoveis_caros(Catalogo c, int limite)
 //Apresenta o numero de identificacao dos terrenos argilosos.
 void apresenta_terrenos_argilosos(Catalogo c, int limite)
 {
-    for(int i = c->qtd_imoveis - limite; i < c->qtd_imoveis && i < c->qtd_max; i++)
+    for(int i = (int) c->qtd_imoveis - limite; i < c->qtd_imoveis && i < c->qtd_max; i++)
     {
         imovel_apresenta_identificador(c->imoveis[i]);
         if(i != c->qtd_imoveis - 1)
@@ -378,18 +389,24 @@ void apresenta_catalogos(Catalogo c1, Catalogo c2, Catalogo c3, Identificadores 
     imprime_soma_id(id);
     if(c1->qtd_imoveis)
     {
-        apresenta_imoveis_caros(c1, calcula_qtd_caros(c1, espec));
-        apresenta_terrenos_argilosos(c2, calcula_qtd_argilosos(c2, espec));
+        apresenta_imoveis_caros(c1, (int) calcula_qtd_caros(c1, espec));
+        apresenta_terrenos_argilosos(c2, (int) calcula_qtd_argilosos(c2, espec));
         apresenta_casas_limite(c3);
     }
 }
 
 void libera_catalogo(Catalogo c)
 {
-    for(int i = 0; i < c->qtd_imoveis && i < c->qtd_max; i++)
+    for(int i = 0; i < (int) c->qtd_imoveis; i++)
     {
         libera_imovel(c->imoveis[i]);
     }
+
+    free(c->imoveis);
+    free(c);
+}
+void libera_apenas_catalogo(Catalogo c)
+{
     free(c->imoveis);
     free(c);
 }
