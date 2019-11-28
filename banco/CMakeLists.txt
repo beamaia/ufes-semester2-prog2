@@ -1,9 +1,8 @@
-cmake_minimum_required(VERSION 3.15)
-project(banco C)
+cmake_minimum_required(VERSION 3.12.3)
+project(banco)
 
 set(CMAKE_C_STANDARD 11)
 
 include_directories(.)
 
-add_executable(banco
-        banco.c)
+add_executable(new_bank new_bank.c)

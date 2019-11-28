@@ -1,0 +1,44 @@
+TADs 
+
+1. CR
+Soma da notas
+N de notas
+Cr
+
+2. Aluno
+matricula
+CR
+
+3. Catalogo de alunos
+Vetor de aluno
+qtd aluno
+max aluno
+
+4. Disciplina 
+Catalogo de aluno
+Codigo da Disciplina
+CR
+
+5. Catalogo de Disciplina
+vetor de disciplinas
+qtd disciplinas
+max disciplinas
+
+6. TAD cursos 
+Codigo curso
+catalogo de disciplina do curso
+CR
+
+7. Catalogo de curso
+vetor de curso
+qtd de cursos
+max cursos 
+
+8. TAD Ufes
+Catalogo de cursos
+
+9. TAD leitura
+Cod curso
+Cod disciplina
+Cod matricula
+Cod media

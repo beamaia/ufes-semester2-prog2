@@ -1,0 +1,253 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#define MAX 15
+
+
+typedef struct {
+    unsigned int conta;
+    float credito;
+    float debito;
+    float dif;
+} Correntista;
+
+Correntista inicializa_correntista()
+{
+    Correntista c;
+    for(int i = 0; i < 3; i++)
+        c.corrent[i] = 0;
+    c.credito = 0;
+    c.debito = 0;
+    c.dif = 0;
+    return c;
+}
+
+void le_correntista(Correntista *c)
+{
+    *c = inicializa_correntista();
+    char aux;
+    int i = 0;
+    while(i < 5)
+    {
+        scanf("%c", &aux);
+        c->corrent[i++] = aux - '0';
+    }
+
+    float op;
+    scanf("%*c%f", &op);
+    if(op > 0 && op == 0)
+        c->credito = op;
+    else if(op < 0)
+        c->debito = op;
+}
+
+void modifica_correntista(Correntista *c, Correntista *aux)
+{
+    c->credito += aux->credito;
+    c->debito += aux->debito;
+    c->dif = c->credito + c->debito;
+}
+
+int correntistas_iguais(Correntista *c, Correntista *aux)
+{
+    int i = 0;
+    while(i < 5)
+    {
+        if(c->corrent[i] != aux->corrent[i])
+            break;
+        i++;
+    }
+
+    if(i == 5)
+        return 1;
+    else
+        return 0;
+}
+
+typedef struct{
+    Correntista *contas;
+    unsigned int agencia;
+    float credito;
+    float debito;
+    float diff;
+    int qtd_agencia;
+    int qtd_max;
+} Agencia;
+
+Agencia inicializa_agencia()
+{
+    Agencia a;
+    a.contas = (Correntista *) malloc(sizeof(Correntista) * MAX);
+    a.contas = 0;
+    a.debito = 0;
+    a.dif = 0;
+    a.qtd_max = MAX;
+    a.qtd_agencia = 0;
+    return a;
+}
+
+int agencia_igual(Agencia *a, Agencia *aux)
+{
+    int i = 0;
+    for(int j = 0; j < a->qtd_agencia; j++) {
+        while (a->agencia[i] == aux->agencia[i] && i < 4)
+            i++;
+
+        if (i == 4)
+            if(correntistas_iguais(&aux->contas[j], aux->contas))
+                return 1;
+        i = 0;
+    }
+
+    return 0;
+}
+
+void le_agencia(Agencia *a)
+{
+    int i = 0;
+    char aux_c;
+    a->contas = (Correntista *) malloc(sizeof(Correntista));
+    while(i < 4)
+    {
+        scanf("%c", &aux_c);
+        a->agencia[i++] = aux_c - '0';
+    }
+    scanf("%*c");
+    le_correntista(a->contas);
+}
+
+int agencia_correntista_igual(Agencia *a, Agencia *aux)
+{
+    if(agencia_igual(a, aux))
+    {
+
+    }
+}
+
+typedef struct{
+    int banco[3];
+    Agencia *ag;
+    int qtd_agencia;
+    int qtd_max;
+} Banco;
+
+int le_banco(Banco *b)
+{
+    char aux;
+    int i = 0;
+    while(i < 3)
+    {
+        scanf("%c", &aux);
+        if(aux > ('0' - 1) && aux < ('9' +1))
+            b->banco[i++] = aux - '0';
+        else
+            break;
+    }
+
+    if(i == 3)
+    {
+        scanf("%*c");
+        b->ag = (Agencia *) malloc(sizeof(Agencia));
+        le_agencia(b->ag);
+        return 1;
+    }
+
+    return 0;
+}
+
+Banco inicializa_banco()
+{
+    Banco b;
+    b.qtd_max = MAX;
+    b.qtd_agencia = 0;
+    b.ag = (Agencia *) malloc(sizeof(Agencia));
+    return b;
+}
+
+int bancos_iguais(Banco *b, Banco *aux)
+{
+    int i = 0;
+    for(int j = 0; j < b->qtd_agencia; b++) {
+        while (b->banco[j] == aux->banco[j] && i < 3)
+            i++;
+
+        if (i == 3)
+            if(agencia_igual(&b->ag[j], aux->ag))
+                return 1;
+
+        i = 0;
+    }
+
+    return 0;
+}
+
+typedef struct{
+    Banco *bancos;
+    int qtd_banco;
+    int qtd_max;
+} Complexo;
+
+Complexo inicaliza_complex()
+{
+    Complexo c;
+    c.qtd_max = MAX;
+    c.qtd_banco = 0;
+    c.bancos = (Banco *)malloc(sizeof(Banco) * c.qtd_max);
+
+    for(int i = 0; i < c.qtd_max; i++)
+    {
+        c.bancos[i] = inicializa_banco();
+        for(int j = 0; j < c.qtd_max; j++)
+        {
+
+        }
+    }
+    return c;
+}
+
+int encontra_correntista(Banco *b, Banco *aux)
+{
+    if(bancos_iguais(b, aux))
+        return 1;
+
+    return 0;
+}
+
+
+void le_complexo(Complexo *c)
+{
+    int i;
+    Complexo aux_c;
+    aux_c.bancos = (Banco *) malloc(sizeof(Banco));
+    while(le_banco(aux_c.bancos))
+    {
+        for(i = 0; i < c->qtd_banco; i++)
+        {
+            if(encontra_correntista(&c->bancos[i], aux_c.bancos))
+            {
+//                modifica(c->bancos[i], aux_c.bancos);
+                printf("oi\n");
+            }
+        }
+
+        if(c->qtd_banco == c->qtd_max)
+//            expande_complex(c);
+
+        if(i == c->qtd_banco)
+        {
+            printf("ac\n");
+//            acrescenta_correntista(c->bancos[c->qtd_banco++])
+        }
+
+        i = 0;
+    }
+}
+
+int main()
+{
+    Complexo c;
+    c = inicaliza_complex();
+    le_complexo(&c);
+    printf("\n%d\n", c.qtd_banco);
+    return 0;
+}

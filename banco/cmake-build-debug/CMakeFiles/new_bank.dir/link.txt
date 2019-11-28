@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/new_bank.dir/new_bank.c.o  -o new_bank 

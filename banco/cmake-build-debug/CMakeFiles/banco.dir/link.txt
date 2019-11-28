@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/banco.dir/banco.c.o  -o banco 

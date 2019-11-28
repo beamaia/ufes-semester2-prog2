@@ -1,3 +1,0 @@
-/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/CMakeFiles/trab2.dir
-/home/bea/ufes/semestre-2/prog2b/trab2/cmake-build-debug/CMakeFiles/edit_cache.dir
