@@ -16,10 +16,10 @@ typedef struct catalog * Catalog;
 
 Catalog initialize_catalog();
 void read_catalog(Catalog, FILE *);
-void include_in_catalog(Catalog, Property);
 void expand_catalog(Catalog c);
-void modify_in_catalog(Catalog, Property);
-void remove_from_catalog(Catalog, Property);
+void include_in_catalog(Catalog, FILE *);
+void modify_in_catalog(Catalog, FILE *);
+void remove_from_catalog(Catalog, FILE *);
 void read_current(Catalog, FILE *);
 int are_there_properties(Catalog);
 void area_catalog(Catalog);

@@ -7,7 +7,7 @@
  */
 void read_triangle(Triangle *tri, FILE *arc)
 {
-    fscanf(arc,"%f%f", &tri->base, &tri->height);
+    fscanf(arc,"%f%*c%f%*c%*c", &tri->base, &tri->height);
 }
 
 /*

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.12.3)
 project(trab2en C)
 
 set(CMAKE_C_STANDARD 11)

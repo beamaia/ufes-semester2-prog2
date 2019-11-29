@@ -12,7 +12,7 @@
                      num_pav,
                      m2_price_pav,
                      m2_price_out;
-        float pav_area, outside_area, total_area;
+        float pav_area, outside_area;
     } House;
 
     void read_house(House *, FILE *);

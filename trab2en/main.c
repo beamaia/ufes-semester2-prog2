@@ -12,6 +12,8 @@
 #include "rectangle.h"
 #include "trapezoid.h"
 
+///home/2019107651/ufes/semester-2/prog2b/trab1/validacao/1
+
 int main()
 {
     char arq_path1[150], arq_path2[150], arq_path3[150];
@@ -34,24 +36,27 @@ int main()
 
     properties = initialize_catalog();
     read_catalog(properties, arc_cat);
-//    read_current(properties, arc_cat);
-//
-//    if(are_there_properties(properties))
-//    {
-//        clayey = initialize_catalog();
-//        houses = initialize_catalog();
-//        area_catalog(properties);
-//        price_catalog(properties);
-//        sort_most_expensive_catalog(properties, &spec, &id);
-//        sort_creat_clayey_catalog(properties, clayey, &spec, &id);
-//        sort_create_houses_catalog(properties, houses, &spec, &id);
-//        print_id_catalogs(properties, clayey, houses, &spec, &id);
-//        free_properties_informed(properties);
-//        free_catalog(clayey);
-//        free_catalog(houses);
-//    }
-//
-//    free_catalog(properties);
+    read_current(properties, arc_current);
+    read_spec(&spec, arc_spec);
+    initialize_identifiers(&id);
+
+
+    if(are_there_properties(properties))
+    {
+        clayey = initialize_catalog();
+        houses = initialize_catalog();
+        area_catalog(properties);
+        price_catalog(properties);
+        sort_most_expensive_catalog(properties, &spec, &id);
+        sort_creat_clayey_catalog(properties, clayey, &spec, &id);
+        sort_create_houses_catalog(properties, houses, &spec, &id);
+        print_id_catalogs(properties, clayey, houses, &spec, &id);
+        free_properties_informed(properties);
+        free_catalog(clayey);
+        free_catalog(houses);
+    }
+
+    free_catalog(properties);
 
     fclose(arc_cat);
     fclose(arc_current);

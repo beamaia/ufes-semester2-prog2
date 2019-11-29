@@ -15,6 +15,7 @@
     int identify_category(Property);
     Property initialize_property();
     int read_property(Property, FILE *);
+    void read_property_to_be_removed(Property prop, FILE *);
     void change_property_info(Property, Property);
     void area_property(Property);
     void price_property(Property);

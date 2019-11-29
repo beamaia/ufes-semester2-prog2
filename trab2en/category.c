@@ -8,21 +8,21 @@
 #include "house.h"
 #include "apt.h"
 
-void read_category(Category *cat, int tag, FILE *arc)
+int read_category(Category *cat, int tag, FILE *arc)
 {
     switch (tag)
     {
         case 1: read_lot(&cat->lot, tag, arc);
-                break;
+                return 1;
         case 2: read_lot(&cat->lot, tag, arc);
-                break;
+                return 1;
         case 3: read_lot(&cat->lot, tag, arc);
-                break;
+                return 1;
         case 4: read_house(&cat->house, arc);
-                break;
+                return 1;
         case 5: read_apartment(&cat->apt, arc);
-                break;
-        default: break;
+                return 1;
+        default: return 0;
     }
 }
 
@@ -33,7 +33,7 @@ void area_category(Category *cat, int tag)
         case 1: area_lot(&cat->lot, tag);
         case 2: area_lot(&cat->lot, tag);
         case 3: area_lot(&cat->lot, tag);
-        case 4: area_house(&cat->house);
+//        case 4: area_house(&cat->house);
         default: return;
     }
 }

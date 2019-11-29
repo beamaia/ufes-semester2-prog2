@@ -8,11 +8,11 @@ file(REMOVE_RECURSE
   "CMakeFiles/trab2en.dir/main.c.o"
   "CMakeFiles/trab2en.dir/properties.c.o"
   "CMakeFiles/trab2en.dir/rectangle.c.o"
-  "CMakeFiles/trab2en.dir/spec.c.o"
   "CMakeFiles/trab2en.dir/trapezoid.c.o"
   "CMakeFiles/trab2en.dir/triangle.c.o"
-  "trab2en"
+  "CMakeFiles/trab2en.dir/spec.c.o"
   "trab2en.pdb"
+  "trab2en"
 )
 
 # Per-language clean rules from dependency scanning.

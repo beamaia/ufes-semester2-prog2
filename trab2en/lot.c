@@ -11,7 +11,7 @@
  */
 void read_lot(Lot *lot, int tag, FILE *arc)
 {
-    scanf("%c %u", &lot->soil_type,
+    fscanf(arc, "%c%u", &lot->soil_type,
                    &lot->price_m2);
 
     read_lot_union(&lot->lot, tag, arc);

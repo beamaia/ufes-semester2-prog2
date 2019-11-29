@@ -2,12 +2,12 @@
 #include "rectangle.h"
 
 /*
- * EN: Reads sides (lenght and height) of the rectangle from a file.
+ * EN: Reads sides (length and height) of the rectangle from a file.
  * PT: Le lados (comprimento e altura) do retangulo de um arquivo.
  */
 void read_rectangle(Rectangle * rec, FILE *arc)
 {
-    fscanf(arc, "%f%f", &rec->side1, &rec->side2);
+    fscanf(arc, "%f%*c%f%*c%*c", &rec->side1, &rec->side2);
 }
 
 /*

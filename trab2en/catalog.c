@@ -22,9 +22,23 @@ struct catalog{
 Catalog initialize_catalog()
 {
     Catalog c = (Catalog) malloc(sizeof(struct catalog));
+
+    if(c == NULL)
+    {
+        printf("Erro na alocação de memoria, abortando programa");
+        exit(1);
+    }
+
     c->qt_prop = 0;
     c->max_prop = MAX_PROP;
     c->properties = (Property *) malloc(sizeof(Property) * c->max_prop);
+
+    if(c->properties == NULL)
+    {
+        printf("Erro na alocação de memoria, abortando programa");
+        exit(1);
+    }
+
     return c;
 }
 
@@ -33,10 +47,15 @@ void expand_catalog(Catalog c)
     c->max_prop += MAX_PROP;
     Property *aux = (Property *) malloc(sizeof(Property) * c->max_prop);
 
+    if(aux == NULL)
+    {
+        printf("Erro na alocação de memoria, abortando programa");
+        exit(1);
+    }
+
     for(int i = 0; i < c->qt_prop; i++)
     {
         aux[i] = c->properties[i];
-        free_property(c->properties[i]);
     }
 
     free(c->properties);
@@ -56,35 +75,41 @@ void read_catalog(Catalog c, FILE * arc)
     }
 }
 
-void include_in_catalog(Catalog c, Property aux)
+void include_in_catalog(Catalog c, FILE * arc)
 {
+    Property aux = initialize_property();
+    read_property(aux, arc);
     if(c->qt_prop < c->max_prop)
-    {
-        c->properties[c->qt_prop] = initialize_property();
         c->properties[c->qt_prop++] = aux;
-    }
 }
 
-void modify_in_catalog(Catalog c, Property aux)
+void modify_in_catalog(Catalog c, FILE * arc)
 {
+    Property aux = initialize_property();
+    read_property(aux, arc);
+
     for(int i = 0; i < c->qt_prop; i++)
     {
         if(compare_id_property(c->properties[i], aux) == 2)
         {
-            change_property_info(c->properties[i], aux);
+            free(c->properties[i]);
+            c->properties[i] = aux;
             return;
         }
     }
 }
 
-void remove_from_catalog(Catalog c, Property aux)
+void remove_from_catalog(Catalog c, FILE *arc)
 {
-    for(int i = 0; i < c->qt_prop - 1 && c->max_prop; i++)
+    Property aux = initialize_property();
+    read_property_to_be_removed(aux, arc);
+
+    for(int i = 0; i < c->qt_prop && c->max_prop; i++)
     {
         if(compare_id_property(c->properties[i], aux) == 2)
         {
             free_property(c->properties[i]);
-            free_property(aux);
+            free(aux);
             for(int j = i; j < c->qt_prop - 1 && j < c->max_prop; j++)
             {
                 c->properties[j] = c->properties[j + 1];
@@ -97,27 +122,22 @@ void remove_from_catalog(Catalog c, Property aux)
 
 void read_current(Catalog c, FILE * arc)
 {
-    Property aux = initialize_property();
     char action;
     int id;
 
     for(int i = 0; i < c->max_prop && !feof(arc); i++)
     {
-        fscanf(arc, "%c", &action);
+        fscanf(arc, "%c%*c", &action);
         if(c->qt_prop == c->max_prop)
             expand_catalog(c);
 
         switch(action)
         {
-            case 'i': read_property(aux, arc);
-                      include_in_catalog(c, aux);
+            case 'i': include_in_catalog(c, arc);
                       break;
-            case 'a': read_property(aux, arc);
-                      modify_in_catalog(c, aux);
+            case 'a': modify_in_catalog(c, arc);
                       break;
-            case 'e': fscanf(arc, "%d", &id);
-                      put_id(aux, id);
-                      remove_from_catalog(c, aux);
+            case 'e': remove_from_catalog(c, arc);
                       break;
             default: return;
         }
@@ -262,7 +282,8 @@ void print_id_catalogs(Catalog cat, Catalog clayey, Catalog house, Spec * spec, 
         exit(1);
     }
 
-    fprintf(arc_output, "%d\n", id->i + id->j + id->k);
+    int sum = (int)(id->i + id->j + id->k);
+    fprintf(arc_output, "%d\n", sum);
     print_id_expensive_or_clayey_properties(cat, properties_catalog_quantity(cat, spec), arc_output);
     print_id_expensive_or_clayey_properties(clayey, clayey_catalog_quantity(clayey, spec), arc_output);
     print_limit_houses(house, arc_output);
@@ -274,9 +295,11 @@ void free_properties_informed(Catalog c)
 {
     for(int i = 0; i < c->qt_prop; i++)
         free_property(c->properties[i]);
+
 }
 
 void free_catalog(Catalog c)
 {
+    free(c->properties);
     free(c);
 }

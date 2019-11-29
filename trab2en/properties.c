@@ -57,31 +57,25 @@ int read_property(Property prop, FILE *arc)
 {
     char aux[7];        
     char aux_name[MAX_NAME];
+    fscanf(arc, "%s%*c", aux);
+    prop->tag = (char *) malloc(sizeof(char) * (strlen(aux) + 1));
+    strcpy(prop->tag, aux);
+    fscanf(arc, "%u%*c", &prop->id);
+    fscanf(arc, "%[^\n]%*c", aux_name);
+    prop->property_owner = (char *) malloc(sizeof(char) * (strlen(aux_name) + 1));
+    strcpy(prop->property_owner, aux_name);
+    return read_category(&prop->cat, identify_category(prop), arc);
 
-    if(fscanf(arc, "%s", aux))
-    {
-        prop->tag = (char *) malloc(sizeof(char) * (strlen(aux) + 1));
-        strcpy(prop->tag, aux);
+}
 
-        if(fscanf(arc, "%u", &prop->id))
-        {
-            fscanf(arc, "%[^\n]", aux_name);
-            prop->property_owner = (char *) malloc(sizeof(char) * (strlen(aux_name) + 1));
-            prop->property_owner = aux_name;
-            read_category(&prop->cat, identify_category(prop), arc);
-            return 1;
-        }
-    }
-
-    return 0;
+void read_property_to_be_removed(Property prop, FILE * arc)
+{
+    fscanf(arc, "%u", &prop->id);
 }
 
 void change_property_info(Property prop1, Property prop2)
 {
-    if(identify_category(prop1))
-        free_property(prop1);
-    else
-        free(prop1);
+    free_property(prop1);
     prop1 = prop2;
 }
 

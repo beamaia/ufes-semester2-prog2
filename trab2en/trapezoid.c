@@ -7,7 +7,7 @@
  */
 void read_trapezoid(Trapezoid * tra, FILE * arc)
 {
-    fscanf(arc, "%f%f%f", &tra->base1, &tra->base2, &tra->height);
+    fscanf(arc, "%f%*c%f%*c%f%*c%*c", &tra->base1, &tra->base2, &tra->height);
 }
 
 /*

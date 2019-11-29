@@ -15,7 +15,7 @@
         Apartment apt;
     } Category;
 
-    void read_category(Category *, int, FILE *);
+    int read_category(Category *, int, FILE *);
     void area_category(Category *, int);
     float price_category(Category *, int);
     int check_if_clayey_category(Category *, int);
