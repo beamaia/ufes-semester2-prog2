@@ -24,6 +24,7 @@ Catalog initialize_catalog()
     Catalog c = (Catalog) malloc(sizeof(struct catalog));
     c->qt_prop = 0;
     c->max_prop = MAX_PROP;
+    c->properties = (Property *) malloc(sizeof(Property) * c->max_prop);
     return c;
 }
 
@@ -112,7 +113,7 @@ void read_current(Catalog c, FILE * arc)
                       include_in_catalog(c, aux);
                       break;
             case 'a': read_property(aux, arc);
-                      modify_in_catalog(c, arc);
+                      modify_in_catalog(c, aux);
                       break;
             case 'e': fscanf(arc, "%d", &id);
                       put_id(aux, id);

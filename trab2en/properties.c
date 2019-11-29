@@ -55,7 +55,7 @@ void free_property(Property prop)
 
 int read_property(Property prop, FILE *arc)
 {
-    char aux[7];
+    char aux[7];        
     char aux_name[MAX_NAME];
 
     if(fscanf(arc, "%s", aux))
@@ -67,7 +67,7 @@ int read_property(Property prop, FILE *arc)
         {
             fscanf(arc, "%[^\n]", aux_name);
             prop->property_owner = (char *) malloc(sizeof(char) * (strlen(aux_name) + 1));
-            strcpy(prop->property_owner, aux_name);
+            prop->property_owner = aux_name;
             read_category(&prop->cat, identify_category(prop), arc);
             return 1;
         }
