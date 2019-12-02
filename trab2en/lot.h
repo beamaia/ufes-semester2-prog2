@@ -22,7 +22,6 @@
         float area;
     } Lot;
 
-
     void read_lot(Lot *, int, FILE *);
     void area_lot(Lot *, int);
     float price_lot(Lot *);

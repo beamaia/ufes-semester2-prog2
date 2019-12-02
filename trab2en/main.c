@@ -2,17 +2,6 @@
 #include <stdlib.h>
 #include "spec.h"
 #include "catalog.h"
-#include "properties.h"
-#include "category.h"
-#include "house.h"
-#include "apt.h"
-#include "lot.h"
-#include "lot_category.h"
-#include "triangle.h"
-#include "rectangle.h"
-#include "trapezoid.h"
-
-///home/2019107651/ufes/semester-2/prog2b/trab1/validacao/1
 
 int main()
 {
@@ -26,9 +15,9 @@ int main()
 
     if(arc_cat == NULL || arc_current == NULL || arc_spec == NULL)
     {
-        printf("Um dos arquivos não foi encontrado\n");
+        printf("One of the files were not found\n");
         exit(1);
-    };
+    }
 
     Catalog properties, clayey, houses;
     Spec spec;
@@ -45,17 +34,13 @@ int main()
     {
         clayey = initialize_catalog();
         houses = initialize_catalog();
-        area_catalog(properties);
-        price_catalog(properties);
-        sort_most_expensive_catalog(properties, &spec, &id);
-        sort_creat_clayey_catalog(properties, clayey, &spec, &id);
-        sort_create_houses_catalog(properties, houses, &spec, &id);
+        calculate_properties_information(properties);
+        sort_create_all_catalogs(properties, clayey, houses, &spec, &id);
         print_id_catalogs(properties, clayey, houses, &spec, &id);
-        free_properties_informed(properties);
-        free_catalog(clayey);
-        free_catalog(houses);
+        free_catalogs_and_properties_used(properties, clayey, houses);
     }
-
+    else
+        printf("0");
     free_catalog(properties);
 
     fclose(arc_cat);
@@ -63,3 +48,8 @@ int main()
     fclose(arc_spec);
     return 0;
 }
+/*
+/home/bea/ufes/semestre-2/prog2b/trab1/validacao/10/catalogo.txt
+/home/bea/ufes/semestre-2/prog2b/trab1/validacao/10/atual.txt
+/home/bea/ufes/semestre-2/prog2b/trab1/validacao/10/espec.txt
+ */

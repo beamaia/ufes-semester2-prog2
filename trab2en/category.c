@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include "category.h"
 #include "lot.h"
-#include "lot_category.h"
-#include "triangle.h"
-#include "rectangle.h"
-#include "trapezoid.h"
 #include "house.h"
 #include "apt.h"
 
+/*
+ * EN: Reads the property after being informed its tag. Returns 1 if the property type exists.
+ * PT: Le o imovel apos ser informado o seu tag. Retorna 1 caso o tipo do imovel existe.
+ */
 int read_category(Category *cat, int tag, FILE *arc)
 {
     switch (tag)
@@ -26,6 +26,10 @@ int read_category(Category *cat, int tag, FILE *arc)
     }
 }
 
+/*
+ * EN: Calculates the area (if not informed during read_category) of the property based on ints tag.
+ * PT: Calcula a area (caso não foi informado durante a leitura do arquivo) do imovel baseada no seu tag.
+ */
 void area_category(Category *cat, int tag)
 {
     switch (tag)
@@ -33,11 +37,14 @@ void area_category(Category *cat, int tag)
         case 1: area_lot(&cat->lot, tag);
         case 2: area_lot(&cat->lot, tag);
         case 3: area_lot(&cat->lot, tag);
-//        case 4: area_house(&cat->house);
         default: return;
     }
 }
 
+/*
+ * EN: Calculates the price of the property based on ints tag and then afterwards return the value.
+ * PT: Calcula o preco do imovel baseada no seu tag e depois retorna o valor.
+  */
 float price_category(Category *cat, int tag)
 {
     switch (tag)
@@ -51,6 +58,10 @@ float price_category(Category *cat, int tag)
     }
 }
 
+/*
+ * EN: Checks if the property is clayey or not based on its tag.
+ * PT: Verifica se um imovel e argilosa baseada no seu tag.
+ */
 int check_if_clayey_category(Category *cat, int tag)
 {
     if(tag == 1 || tag == 2 || tag == 3)
@@ -58,6 +69,10 @@ int check_if_clayey_category(Category *cat, int tag)
     return 0;
 }
 
+/*
+ * EN: If the property is a house, returns 1 or 0 if the house is above a certain area limit, otherwise returns 0.
+ * PT: Se o imovel for uma casa, retorna 1 ou 0 se a casa e acima dum certo limite de area, se nao retorna 0.
+ */
 int check_if_house_limit_category(Category *cat, int tag, float limit)
 {
     if(tag == 4)
@@ -65,6 +80,10 @@ int check_if_house_limit_category(Category *cat, int tag, float limit)
     return 0;
 }
 
+/*
+ * EN: If the property is a house, return the value of the comparison of the function compare_room_quantity_house.
+ * PT: Se um imovel for uma casa, retorna o valor da comparacao da funcao compare_room_quantity_house.
+ */
 int compare_room_quantity_category(Category *cat1, Category *cat2, int tag1, int tag2)
 {
     if(tag1 == 4 && tag2 == 4)
@@ -72,6 +91,10 @@ int compare_room_quantity_category(Category *cat1, Category *cat2, int tag1, int
     return 0;
 }
 
+/*
+ * EN: If the property is a lot, return the value of the comparison of the compare_area_lot.
+ * PT: Se o imovel for um terreno, retorna o valor da comparacao da funcao compare_area_lot.
+ */
 int compare_area_category(Category *cat1, Category *cat2, int tag1, int tag2)
 {
     if((tag1 == 1 || tag1 == 2 || tag1 == 3) && (tag2 == 1 || tag2 == 2 || tag2 == 3))

@@ -1,5 +1,5 @@
-/opt/jetbrains/pro/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/2019107651/ufes/semester-2/prog2b/trab2en
--- The C compiler identification is GNU 5.4.0
+/opt/clion-2019.2.5/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/bea/ufes/semestre-2/prog2b/trab2en
+-- The C compiler identification is GNU 7.4.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
 -- Detecting C compiler ABI info
@@ -8,4 +8,4 @@
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/2019107651/ufes/semester-2/prog2b/trab2en/cmake-build-debug
+-- Build files have been written to: /home/bea/ufes/semestre-2/prog2b/trab2en/cmake-build-debug
