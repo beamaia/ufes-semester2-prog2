@@ -1,0 +1,58 @@
+1. Operacao
+Credito
+Debito
+Total
+
+> le_operacao(): return Operacao;
+> adiciona_operacao(Operacao *, Aux *):void
+> mais_credito(Operacao*, Operacao*):int
+> menos_debito(Operacao *, Operacao *):int
+> maior_saldo(Operacao *, Operacao *):int
+
+2. Correntista
+Cod
+Opercao
+
+> mesmo_correntista(Correntista, Aux *); int
+> inicializa_correntista(Aux *): Correntista
+> libera_correntista(Correntista *):void
+> mais_creditos_correntista(Correntista, Correntista): int
+
+3. Agencia
+Cod
+Correntistas
+Operacao
+Qtd de correntista
+Max
+
+> mesma_agencia(Agencia, Aux *): int
+> inicializa_agencia(Aux *): Agencia
+> libera_agencia(Agencia): void
+> menos_debit_agencia(Agencia, Agencia): int
+> encontre_correntista(Agencia, Aux *): void
+> encontre_mais_creditos(Agencia, Aux *): void
+
+4. Banco
+Cod
+Agencias
+Operacao
+Qtd de agencias
+Max
+
+> mesma_banco(Banco, Aux *): int
+> inicializa_banco()
+
+5. TodosBancos
+Bancos
+Qtd de bancos
+Max
+6. TAD cursos 
+Codigo curso
+catalogo de disciplina do curso
+CR
+
+9. TAD leitura
+int banco
+int agencia
+int correntista
+float operacao;

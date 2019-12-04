@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include "lot.h"
 #include "lot_category.h"
-#include "triangle.h"
-#include "rectangle.h"
-#include "trapezoid.h"
 
 /*
  * EN: Read lot's information from a file.

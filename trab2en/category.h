@@ -1,3 +1,8 @@
+/*********************************************************************
+ * CATEGORY.H
+ * EN: Library with functions and struct related to the various types of properties(lots, houses or apartment).
+ * PT: Biblioteca com funcoes e estruturas relacionada ao varios tipos de propriedades(terrenos, casas e apartamentos);
+ *********************************************************************/
 #ifndef _CATEGORY
     #define _CATEGORY
     #include <stdio.h>
@@ -9,6 +14,10 @@
     #include "house.h"
     #include "apt.h"
 
+    /*
+     * EN: Union with types of properties. Includes lots, houses and apartments.
+     * PT: União com tipos de propriedades. Inclui terrenos, casas e apartamentos.
+     */
     typedef union{
         Lot lot;
         House house;

@@ -16,7 +16,6 @@
     } House;
 
     void read_house(House *, FILE *);
-    void area_house(House *);
     float price_house(House *);
     int check_house_area(House *, float);
     int compare_room_quantity_house(House *, House *);
