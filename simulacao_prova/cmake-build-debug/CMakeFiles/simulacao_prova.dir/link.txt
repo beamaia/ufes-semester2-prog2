@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/simulacao_prova.dir/quest1.c.o  -o simulacao_prova 

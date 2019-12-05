@@ -16,6 +16,7 @@ Matrix initialize_matrix()
     m->line = m->col = 0;
     m->max_line = m->max_col = MAX;
     m->mat = (int **) malloc(sizeof(int *) * m->max_line);
+
     for(int i = 0; i < m->max_line; i++)
     {
         m->mat[i] = (int *) malloc(sizeof(int) * m->max_col);
@@ -47,18 +48,17 @@ void expand_column(Matrix m)
     m->max_col += MAX;
     int **aux = (int **)malloc(sizeof(int *) * m->max_line);
 
-    for(int i = 0; i < m->line; i++)
+    for(int i = 0; i < m->max_line; i++)
     {
         aux[i] = (int *)malloc(sizeof(int) * m->max_col);
+    }
+
+    for(int i = 0; i < m->line; i++)
+    {
         for(int j = 0; j < m->col; j++)
         {
             aux[i][j] = m->mat[i][j];
         }
-    }
-
-    for(int i = m->line; i < m->max_line; i++)
-    {
-        aux[i] = (int *) malloc(sizeof(int) * m->max_col);
     }
 
     for (int i = 0; i < m->max_line; i++)
@@ -70,6 +70,16 @@ void expand_column(Matrix m)
     m->mat = aux;
 }
 
+void free_matrix(Matrix m)
+{
+    for(int i = 0; i < m->max_line; i++)
+    {
+        free(m->mat[i]);
+    }
+    free(m->mat);
+    free(m);
+}
+
 void read_matrix(Matrix m)
 {
     int aux, j = 0;
@@ -79,20 +89,23 @@ void read_matrix(Matrix m)
     {
         if(m->line == m->max_line)
             expand_line(m);
-        if(m->col == m->max_col)
+        if(j == m->max_col)
             expand_column(m);
 
-        m->mat[m->line][j % m->col] = aux;
+        m->mat[m->line][j] = aux;
 
         if(enter == '\n')
         {
             m->line++;
-            j++;
             if(m->line == 1)
-                m->col = j;
+                m->col = j + 1;
+            j = 0;
+
         }
         else if(enter == ' ')
             j++;
+        else
+            return;
     }
 }
 
@@ -101,5 +114,6 @@ int main()
     Matrix m = initialize_matrix();
     read_matrix(m);
     printf("%d %d", m->col, m->line);
+    free_matrix(m);
     return 0;
 }

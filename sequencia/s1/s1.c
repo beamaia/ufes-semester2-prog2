@@ -2,7 +2,7 @@
 
 int main()
 {
-    int num, aux1, aux2, cont = 1, aux_cont = 1;
+    int num, aux1, aux2, cont = 2, aux_cont = 1;
     int maior_seq = 0;
     char esp;
 
@@ -14,15 +14,10 @@ int main()
         aux2 = num;
         while (scanf("%d%c", &num, &esp) == 2)
         {
-            if (cont == 1)
-            {
-                    cont++;
-            }
-
             if(aux1 + aux2 == num)
                 cont++;
             else {
-                cont = 1;
+                cont = 2;
             }
 
             aux1 = aux2;
@@ -37,7 +32,7 @@ int main()
         }
     }
 
-    if(maior_seq > 2)
+    if(maior_seq)
         printf("%d", maior_seq);
     else
         printf("0");
