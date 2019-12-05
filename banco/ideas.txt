@@ -14,8 +14,8 @@ Cod
 Opercao
 
 > mesmo_correntista(Correntista, Aux *); int
-> inicializa_correntista(Aux *): Correntista
-> libera_correntista(Correntista *):void
+//> inicializa_correntista(Aux *): Correntista
+//> libera_correntista(Correntista *):void
 > mais_creditos_correntista(Correntista, Correntista): int
 
 3. Agencia
