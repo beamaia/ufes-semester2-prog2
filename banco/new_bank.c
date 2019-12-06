@@ -24,6 +24,11 @@ typedef struct{
     float cred, deb, saldo;
 } Operacao;
 
+void inicializa_operacao(Operacao *op)
+{
+    op->cred = op->deb = op->saldo = 0;
+}
+
 void adiciona_operacao(Operacao *op, Leitura *l)
 {
     if(l->operacao >= 0)
@@ -73,10 +78,21 @@ typedef struct{
     Operacao operacao;
 } Correntista;
 
+Correntista inicializa_correntista()
+{
+    Correntista c;
+    c.cod = 0;
+}
 
 int mesmo_correntista(Correntista *c, Leitura *l)
 {
     return c->cod == l->correntista;
+}
+
+void adiciona_correntista(Correntista *c, Leitura *l)
+{
+    c->cod = l->correntista;
+    adiciona_operacao(&c->operacao, l);
 }
 
 void coloca_correntista(Correntista *c, Leitura *l, int i)
@@ -91,6 +107,13 @@ void coloca_correntista(Correntista *c, Leitura *l, int i)
         case 3: coloca_saldo(&c->operacao, l);
                 break;
     }
+}
+
+void soma_correntista(Correntista *c, Operacao *op)
+{
+    op->cred += c->operacao.cred;
+    op->deb += c->operacao.deb;
+    op->saldo += c->operacao.saldo;
 }
 
 typedef struct{
@@ -114,6 +137,22 @@ int mesma_agencia(Agencia *a, Leitura *l)
    return a->cod == l->agencia;
 }
 
+void soma_operacao_agencia(Agencia *a)
+{
+    Operacao op;
+    for(int i = 0; i < a->qtd; i++)
+    {
+        soma_correntista(&a->correntistas[i], &a->op);
+    }
+}
+
+void adiciona_agencia(Agencia *a, Leitura *l)
+{
+    a->cod = l->agencia;
+    a->qtd = 1;
+    adiciona_correntista(&a->correntistas[0], l);
+}
+
 int encontra(Agencia *a, Leitura *l, int (*func(Correntista *, Leitura *)), int escolha)
 {
     int mod = 0;
@@ -126,6 +165,13 @@ int encontra(Agencia *a, Leitura *l, int (*func(Correntista *, Leitura *)), int 
         }
     }
     return mod;
+}
+
+void soma_agencias(Agencia *a, Operacao *op)
+{
+    op->cred += a->op.cred;
+    op->deb += a->op.deb;
+    op->saldo += a->op.saldo; 
 }
 
 int encontra_agencia(Agencia *a, Leitura *l)
@@ -233,11 +279,20 @@ int encontra_banco(Banco *b, Leitura *l)
         expande_banco(b);
     if(i == b->qtd)
     {
-        b->agencias[b->qtd] = inicializa_banco();
+        b->agencias[b->qtd] = inicializa_agencia();
         adiciona_agencia(&b->agencias[b->qtd], l);
         b->qtd++;         
     }
     return 1;
+}
+
+void soma_operacao_banco(Banco *b)
+{
+    for(int i = 0; i < b->qtd; i++)
+    {
+        soma_operacao_agencia(&b->agencias[i]);
+        soma_agencias(&b->agencias[i], &b->operacao);
+    }
 }
 
 int mesmo_banco(Banco *b, Leitura *l)
@@ -247,7 +302,15 @@ int mesmo_banco(Banco *b, Leitura *l)
 
 void adiciona_banco(Banco *b, Leitura *l)
 {
-    b->qtd = 0;
+    b->cod = l->banco;
+    b->agencias[0].cod = l->agencia;
+    b->agencias[0].correntistas[0].cod = l->correntista;
+    b->qtd = 1;
+}
+
+void modifica_banco(Banco *b, Leitura *l)
+{
+    b->agencias;
 }
 
 void libera_banco(Banco *b)
@@ -285,7 +348,7 @@ void expande_todos_bancos(Todos_Bancos *tb)
 
 void le_todos_bancos(Todos_Bancos *tb)
 {
-    int i = 0;
+    int i = 0, pos;
     Leitura aux;
     inicializa_leitura(&aux);
     while(leitura_banco(&aux))
@@ -311,6 +374,14 @@ void le_todos_bancos(Todos_Bancos *tb)
     }
 }
 
+void soma_todos_bancos(Todos_Bancos *tb)
+{
+    for(int i = 0; i < tb->qtd; i++)
+    {
+        soma_operacao_banco(&tb->bancos[i]);
+    }
+}
+
 void libera_todos_bancos(Todos_Bancos *tb)
 {
     for(int i = 0; i < tb->qtd; i++)
@@ -320,3 +391,10 @@ void libera_todos_bancos(Todos_Bancos *tb)
     free(tb->bancos);
 }
 
+int main()
+{
+    Todos_Bancos bancos = inicializa_todos_bancos();
+    le_todos_bancos(&bancos);
+    soma_todos_bancos(&bancos);
+    return 0;
+}
